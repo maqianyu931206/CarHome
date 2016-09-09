@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:layout_height="match_parent">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <ImageView
+           android:id="@+id/img"
+           android:layout_width="30dp"
+           android:layout_margin="10sp"
+           android:background="@mipmap/car"
+           android:layout_height="30dp" />
+       <TextView
+           android:id="@+id/tv"
+           android:layout_width="wrap_content"
+           android:text="车系论坛"
+           android:layout_toRightOf="@id/img"
+           android:textSize="18sp"
+           android:layout_marginTop="5dp"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:id="@+id/tv2"
+           android:layout_width="wrap_content"
+           android:text="为你爱的车找打队伍"
+           android:layout_below="@id/tv"
+           android:layout_toRightOf="@id/img"
+           android:textSize="10sp"
+           android:layout_height="wrap_content" />
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="0.5dp"
+           android:layout_below="@id/tv2"
+           android:background="#ded8d8"/>
+
+   </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="30dp"
+            android:layout_margin="10sp"
+            android:background="@mipmap/gps"
+            android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:text="地区论坛"
+            android:layout_toRightOf="@id/img1"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:text="老乡见老乡,两眼泪汪汪"
+            android:layout_below="@id/tv3"
+            android:layout_toRightOf="@id/img1"
+            android:textSize="10sp"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/tv4"
+            android:background="#ded8d8"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="30dp"
+            android:layout_margin="10sp"
+            android:background="@mipmap/qizi"
+            android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/tv6"
+            android:layout_width="wrap_content"
+            android:text="主题论坛"
+            android:layout_toRightOf="@id/img3"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:text="兴趣爱好的聚集地"
+            android:layout_below="@id/tv6"
+            android:layout_toRightOf="@id/img3"
+            android:textSize="10sp"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/tv5"
+            android:background="#ded8d8"/>
+
+    </RelativeLayout>
+</LinearLayout>
