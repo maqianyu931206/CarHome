@@ -1,4 +1,4 @@
-package com.maqianyu.carhome.ui.fragment;
+package com.maqianyu.carhome.ui.fragment.forum;
 
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.adapter.VpAdapter;
+import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

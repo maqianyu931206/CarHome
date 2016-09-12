@@ -1,25 +1,25 @@
 package com.maqianyu.carhome.ui.activity;
 
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TableLayout;
 
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.ui.fragment.ArticleFragment;
-import com.maqianyu.carhome.ui.fragment.FinderFragment;
-import com.maqianyu.carhome.ui.fragment.ForumFragment;
-import com.maqianyu.carhome.ui.fragment.MyFragment;
-import com.maqianyu.carhome.ui.fragment.SaleFragment;
+import com.maqianyu.carhome.ui.fragment.article.ArticleFragment;
+import com.maqianyu.carhome.ui.fragment.findercar.FinderFragment;
+import com.maqianyu.carhome.ui.fragment.forum.ForumFragment;
+import com.maqianyu.carhome.ui.fragment.my.MyFragment;
+import com.maqianyu.carhome.ui.fragment.sale.SaleFragment;
 
 public class MainActivity extends AbsBaseActivity {
     private FrameLayout frameLayout;
     private RadioGroup radioGroup;
     private TableLayout tableLayout;
+    private Context context;
     private ViewPager viewPager;
 
     @Override
@@ -31,12 +31,10 @@ public class MainActivity extends AbsBaseActivity {
     protected void initViews() {
         radioGroup = byView(R.id.radioGroup);
         frameLayout = byView(R.id.frameLayout);
-
     }
 
     @Override
     protected void initDatas() {
-
        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
            @Override
            public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -63,5 +61,8 @@ public class MainActivity extends AbsBaseActivity {
            }
        });
         radioGroup.check(R.id.radio_article_btn);
+
     }
+
+
 }

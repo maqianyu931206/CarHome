@@ -1,4 +1,4 @@
-package com.maqianyu.carhome.ui.fragment;
+package com.maqianyu.carhome.ui.fragment.article;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.adapter.VpAdapter;
+import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,31 +42,31 @@ public class ArticleFragment extends AbsBaseFragment {
             case 1:
                 datas.add(new ArticleUnihubFragment());
             case 2:
-                datas.add(new ArticleNewFragment());
+                datas.add(new ArticleLettersFragment());
             case 3:
-                datas.add(new ArticleUnihubFragment());
+                datas.add(new ArticleMediaFragment());
             case 4:
-                datas.add(new ArticleNewFragment());
+                datas.add(new ArticleCopyFragment());
             case 5:
-                datas.add(new ArticleUnihubFragment());
+                datas.add(new ArticleCopyFragment());
             case 6:
-                datas.add(new ArticleNewFragment());
+                datas.add(new ArticleCopyFragment());
             case 7:
-                datas.add(new ArticleUnihubFragment());
+                datas.add(new ArticleCopyFragment());
             case 8:
-                datas.add(new ArticleNewFragment());
+                datas.add(new ArticleCopyFragment());
             case 9:
-                datas.add(new ArticleNewFragment());
+                datas.add(new ArticleCopyFragment());
             case 10:
-                datas.add(new ArticleUnihubFragment());
+                datas.add(new ArticleCopyFragment());
             case 11:
-                datas.add(new ArticleNewFragment());
+                datas.add(new ArticleCopyFragment());
             case 12:
-                datas.add(new ArticleNewFragment());
+                datas.add(new ArticleCopyFragment());
             case 13:
-                datas.add(new ArticleUnihubFragment());
+                datas.add(new ArticleCopyFragment());
             case 14:
-                datas.add(new ArticleNewFragment());
+                datas.add(new ArticleCopyFragment());
         }
         VpAdapter vpAdapter  =new VpAdapter(getChildFragmentManager(),datas);
         viewPager.setAdapter(vpAdapter);
