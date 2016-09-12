@@ -14,8 +14,9 @@ import com.maqianyu.carhome.ui.fragment.findercar.FinderFragment;
 import com.maqianyu.carhome.ui.fragment.forum.ForumFragment;
 import com.maqianyu.carhome.ui.fragment.my.MyFragment;
 import com.maqianyu.carhome.ui.fragment.sale.SaleFragment;
+import com.maqianyu.carhome.ui.inteface.VolleyResult;
 
-public class MainActivity extends AbsBaseActivity {
+public class MainActivity extends AbsBaseActivity  {
     private FrameLayout frameLayout;
     private RadioGroup radioGroup;
     private TableLayout tableLayout;
@@ -42,19 +43,19 @@ public class MainActivity extends AbsBaseActivity {
                FragmentTransaction transaction = manager.beginTransaction();
                switch (checkedId) {
                    case R.id.radio_article_btn:
-                       transaction.replace(R.id.frameLayout,new ArticleFragment());
+                       transaction.replace(R.id.frameLayout, ArticleFragment.newInstance());
                        break;
                    case R.id.radio_forum_btn:
-                       transaction.replace(R.id.frameLayout,new ForumFragment());
+                       transaction.replace(R.id.frameLayout,ForumFragment.newInstance());
                        break;
                    case R.id.radio_findCar_btn:
-                       transaction.replace(R.id.frameLayout,new FinderFragment());
+                       transaction.replace(R.id.frameLayout,FinderFragment.newInstance());
                        break;
                    case R.id.radio_sale_btn:
-                       transaction.replace(R.id.frameLayout,new SaleFragment());
+                       transaction.replace(R.id.frameLayout,SaleFragment.newInstance());
                        break;
                    case R.id.radio_my_btn:
-                       transaction.replace(R.id.frameLayout,new MyFragment());
+                       transaction.replace(R.id.frameLayout,MyFragment.newInstance());
                        break;
                }
                transaction.commit();
@@ -63,6 +64,5 @@ public class MainActivity extends AbsBaseActivity {
         radioGroup.check(R.id.radio_article_btn);
 
     }
-
 
 }

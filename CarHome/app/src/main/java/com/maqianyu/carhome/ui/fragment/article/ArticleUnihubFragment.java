@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,17 @@ public class ArticleUnihubFragment extends AbsBaseFragment {
     private ImageView showAll;
     private View viewview;
     private TextView textViewAll;
+    private TextView textView;
+    private  String url;
+
+    public static ArticleUnihubFragment newInstance(String url) {
+        Bundle args = new Bundle();
+        args.putString("url",url);
+        ArticleUnihubFragment fragment = new ArticleUnihubFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     protected int setLayout() {
@@ -36,13 +48,20 @@ public class ArticleUnihubFragment extends AbsBaseFragment {
     protected void initViews() {
         showAll = byView(R.id.article_uniHub_show_all);
         textViewAll = byView(R.id.article_all_tv);
+        textView = byView(R.id.article_tv_wwww);
         viewview = byView(R.id.view);
     }
 
     @Override
     protected void initData() {
+        Bundle bundle = getArguments();
+        url = bundle.getString("url");
+
+        textView.setText(url);
         PopUnihub();// 点击弹出popWindow,选择全部,优选,我的关注
     }
+
+
     private void PopUnihub() {
         textViewAll.setText("优选");
         showAll.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +81,16 @@ public class ArticleUnihubFragment extends AbsBaseFragment {
                 final PopupWindow popupWindow = new PopupWindow(linearLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow.setContentView(view);
                 popupWindow.setFocusable(true);
+                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                       showAll.setImageResource(R.mipmap.ahlib_arrow_gray_down);
+                    }
+                });
                 popupWindow.setBackgroundDrawable(new ColorDrawable(0));
                 popupWindow.showAsDropDown(viewview);
+                showAll.setImageResource(R.mipmap.ahlib_arrow_gray_up);
+
                 yxtv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -101,24 +128,24 @@ public class ArticleUnihubFragment extends AbsBaseFragment {
                     }
                 });
 
-                if (textViewAll.equals("全部")) {
+                if (textViewAll.getText().equals("全部")) {
                     qbtv.setTextColor(Color.BLUE);
                     selectetrue1.setVisibility(View.GONE);
                     selectetrue3.setVisibility(View.GONE);
                     selectetrue2.setVisibility(View.VISIBLE);
                 }
-//                else if (textViewAll.equals("优选")) {
-//                    yxtv.setTextColor(Color.BLUE);
-//                    selectetrue1.setVisibility(View.VISIBLE);
-//                    selectetrue2.setVisibility(View.GONE);
-//                    selectetrue3.setVisibility(View.GONE);
-//                }
-//                else if (textViewAll.equals("我的关注")) {
-//                    wdgztv.setTextColor(Color.BLUE);
-//                    selectetrue1.setVisibility(View.GONE);
-//                    selectetrue2.setVisibility(View.GONE);
-//                    selectetrue3.setVisibility(View.VISIBLE);
-//                }
+                else if (textViewAll.getText().equals("优选")) {
+                    yxtv.setTextColor(Color.BLUE);
+                    selectetrue1.setVisibility(View.VISIBLE);
+                    selectetrue2.setVisibility(View.GONE);
+                    selectetrue3.setVisibility(View.GONE);
+                }
+                else if (textViewAll.getText().equals("我的关注")) {
+                    wdgztv.setTextColor(Color.BLUE);
+                    selectetrue1.setVisibility(View.GONE);
+                    selectetrue2.setVisibility(View.GONE);
+                    selectetrue3.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

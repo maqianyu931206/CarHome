@@ -1,6 +1,7 @@
 package com.maqianyu.carhome.ui.fragment.forum;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,8 +19,15 @@ import java.util.List;
 public class ForumFragment extends AbsBaseFragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private  int i;
-    String str[] = new String[]{"精选推荐","热帖","常用论坛"};
+    private int i;
+    String str[] = new String[]{"精选推荐", "热帖", "常用论坛"};
+
+    public static ForumFragment newInstance() {
+        Bundle args = new Bundle();
+        ForumFragment fragment = new ForumFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Override
     protected int setLayout() {
         return R.layout.fragment_forum;
@@ -34,23 +42,18 @@ public class ForumFragment extends AbsBaseFragment {
     @Override
     protected void initData() {
         List<Fragment> datas = new ArrayList<>();
-        switch (datas.size()) {
-            case 0:
-                datas.add(new ForumAnsleseFragment());
-            case 1:
-                datas.add(new ForumForumFragment());
-            case 2:
-                datas.add(new ForumStockFragment());
-        }
-        VpAdapter vpAdapter  =new VpAdapter(getChildFragmentManager(),datas);
+        datas.add(ForumAnsleseFragment.newInstance("111"));
+        datas.add(ForumForumFragment.newInstance("222"));
+        datas.add(ForumStockFragment.newInstance("333"));
+        VpAdapter vpAdapter = new VpAdapter(getChildFragmentManager(), datas);
         viewPager.setAdapter(vpAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        for ( i = 0; i < 3; i++) {
+        for (i = 0; i < 3; i++) {
             tabLayout.getTabAt(i).setText(str[i]);
         }
 
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabLayout.setTabTextColors(Color.BLACK,Color.BLUE);
+        tabLayout.setTabTextColors(Color.BLACK, Color.BLUE);
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         tabLayout.setSelectedTabIndicatorColor(Color.BLUE);
         tabLayout.setSelectedTabIndicatorHeight(5);

@@ -3,6 +3,7 @@ package com.maqianyu.carhome.ui.fragment.forum;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -42,8 +43,20 @@ public class ForumAnsleseFragment extends AbsBaseFragment {
              "改装有理","养车有道","首发阵容","新车直播","历史选题","挚友天地","蜜月之旅","甜蜜婚礼","摄影课堂","车友聚会","单车部落",
             "杂谈俱乐部","华北游记","西南游记","东北游记","西北游记","华中游记","华南游记","华东游记","港澳台游记","海外游记","沧海遗珠"};
 
+    private  String url;
+    public static ForumAnsleseFragment newInstance(String url) {
+        Bundle args = new Bundle();
+        args.putString("url",url);
+        ForumAnsleseFragment fragment = new ForumAnsleseFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
+
     @Override
     protected int setLayout() {
+
         return R.layout.fragment_forum_anslese;
     }
     @Override
@@ -72,8 +85,14 @@ public class ForumAnsleseFragment extends AbsBaseFragment {
                 Log.d("aaa", "o:" + o);
             }
         });
+        Bundle bundle = getArguments();
+        url =bundle.getString("url");
+
+
         Imgintent();// 弹出PopWindow
     }
+
+
     private void Imgintent() {
         forumIntentImg.setOnClickListener(new View.OnClickListener() {
             @Override

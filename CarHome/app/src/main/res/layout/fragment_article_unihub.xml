@@ -24,8 +24,12 @@
             android:layout_height="10dp"
             android:layout_margin="15dp"
             android:layout_weight="0.3"
-            android:background="@mipmap/ahlib_arrow_gray_down" />
+            android:src="@mipmap/ahlib_arrow_gray_down" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/article_tv_wwww"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"

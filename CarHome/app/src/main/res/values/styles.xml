@@ -35,4 +35,11 @@
         <item name="android:layout_centerInParent">true</item>
 
     </style>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+    </style>
+
+    <style name="AlertDialog.AppCompat." parent="AppBaseTheme">
+    </style>
+
 </resources>
