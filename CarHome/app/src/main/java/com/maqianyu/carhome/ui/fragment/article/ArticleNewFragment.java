@@ -1,6 +1,7 @@
 package com.maqianyu.carhome.ui.fragment.article;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -8,14 +9,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.VolleyInstance;
+import com.maqianyu.carhome.ui.Bean.ListTypeBean;
 import com.maqianyu.carhome.ui.Bean.RotateBean;
+import com.maqianyu.carhome.ui.activity.ArticleNewInfoActivity;
+import com.maqianyu.carhome.ui.adapter.ListTypeAdapter;
 import com.maqianyu.carhome.ui.adapter.RotateArticleAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
@@ -32,11 +39,13 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     private LinearLayout pointLl;// 轮播状态改变的小圆点容器
     private List<RotateBean> datas;
     private RotateArticleAdapter vpAdapter;
+    private ListTypeAdapter listTypeAdapter;
     private Handler handler;
     private boolean isRotate = false;
     private Runnable rotateRunnable;
     private  String url;
-    private TextView textView;
+    private ListView listView;
+
 
     public static ArticleNewFragment newInstance(String url) {
         Bundle args = new Bundle();
@@ -53,21 +62,22 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     }
     @Override
     protected void initViews() {
-        textView = byView(R.id.artical_new_tv);
         viewPager =byView(R.id.rotate_vp);
         pointLl = byView(R.id.rotate_point_container);
+        listView  =byView(R.id.artical_new_lv);
     }
     @Override
     protected void initData() {
         Bundle bundel = getArguments();
         url = bundel.getString("url");
-        textView.setText(this.url);
         //获取网络数据
         VolleyInstance.getInstance().startRequest(url,this);
 
+        listTypeAdapter = new ListTypeAdapter(context);
+        listView.setAdapter(listTypeAdapter);
 
-        buildDatas();//轮播图构造数据
-        vpAdapter = new RotateArticleAdapter(datas, getContext());
+//        buildDatas();//轮播图构造数据
+        vpAdapter = new RotateArticleAdapter(context);
         viewPager.setAdapter(vpAdapter);
         // ViewPager的页数为int最大值,设置当前页多一些,可以上来就向前滑动
         // 为了保证第一页始终为数据的第0条 取余要为0,因此设置数据集合大小的倍数
@@ -85,15 +95,31 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     @Override
     public void success(String resultStr) {
         Log.d("aaa", resultStr);
+        Gson gson = new Gson();
+        ListTypeBean listTypeBean = gson.fromJson(resultStr,ListTypeBean.class);
+        List<ListTypeBean.ResultBean.NewslistBean> datas = listTypeBean.getResult().getNewslist();
+        List<ListTypeBean.ResultBean.FocusimgBean>data= listTypeBean.getResult().getFocusimg();
+        listTypeAdapter.setDatas(datas);
+        vpAdapter.setDatas(data);
+        Log.d("ArticleNewFragment", "datas:" + datas);
+        // 跳转详情
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//               ListTypeBean.ResultBean.NewslistBean bean = (ListTypeBean.ResultBean.NewslistBean) parent.getItemAtPosition(position);
+//                String title =bean.getTitle();
+//                Intent intent  =new Intent(context, ArticleNewInfoActivity.class);
+//                intent.putExtra("title",title);
+//                intent.putExtra("id",bean.getId());
+//                startActivity(intent);
+//            }
+//        });
     }
 
     // 失败
     @Override
     public void failure() {
     }
-
-
-
     private void changePoints() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -121,7 +147,7 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     }
     private void addPoints() {
         // 有多少张图加载多少个小点
-        for (int i = 0; i < datas.size(); i++) {
+        for (int i = 0; i < 6; i++) {
             ImageView pointIv = new ImageView(getContext());
             pointIv.setPadding(5,5,5,5);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(45,45);
@@ -160,7 +186,6 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     }
     private void buildDatas() {
         datas = new ArrayList<>();
-        datas.add(new RotateBean(R.mipmap.lunbo2));
         datas.add(new RotateBean(R.mipmap.lunbophone1));
         datas.add(new RotateBean(R.mipmap.lunbo3));
         datas.add(new RotateBean(R.mipmap.lunbo4));

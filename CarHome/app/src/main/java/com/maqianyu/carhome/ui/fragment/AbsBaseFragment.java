@@ -16,7 +16,7 @@ import com.maqianyu.carhome.ui.activity.AbsBaseActivity;
  */
 public abstract class AbsBaseFragment extends Fragment {
 
-    private  Context context;
+    protected  Context context;
 
     @Override
     public void onAttach(Context context) {

@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.maqianyu.carhome.R;
+import com.maqianyu.carhome.ui.Bean.ListTypeBean;
 import com.maqianyu.carhome.ui.Bean.RotateBean;
 
 import java.util.List;
@@ -18,24 +20,21 @@ import java.util.List;
  */
 public class RotateArticleAdapter extends PagerAdapter {
 
-
-
-    private List<RotateBean> datas;
+    private List<ListTypeBean.ResultBean.FocusimgBean> datas;
     private Context context;
     private LayoutInflater inflater;
 
-    public RotateArticleAdapter(List<RotateBean> datas, Context context) {
+
+    public RotateArticleAdapter(List<ListTypeBean.ResultBean.FocusimgBean> datas) {
         this.datas = datas;
-        this.context = context;
-        inflater = LayoutInflater.from(context);
+         inflater = LayoutInflater.from(context);
     }
 
     public RotateArticleAdapter(Context context) {
-        this.context = context;
-        inflater = LayoutInflater.from(context);
+         this.context = context;
     }
 
-    public void setDatas(List<RotateBean> datas) {
+    public void setDatas(List<ListTypeBean.ResultBean.FocusimgBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
@@ -58,8 +57,9 @@ public class RotateArticleAdapter extends PagerAdapter {
         int newPosition = position % datas.size();
         View convertView = inflater.inflate(R.layout.item_rotate_vp, container, false);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.item_iv);
-        imageView.setImageResource(datas.get(newPosition).getImgId());
         container.addView(convertView);
+        ListTypeBean.ResultBean.FocusimgBean bean = datas.get(newPosition);
+        Glide.with(context).load(bean.getImgurl()).into(imageView);
         return convertView;
     }
 

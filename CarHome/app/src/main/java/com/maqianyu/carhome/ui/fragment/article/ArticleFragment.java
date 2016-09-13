@@ -24,7 +24,7 @@ public class ArticleFragment extends AbsBaseFragment {
     private int i;
     String str[] = new String[]{"最新", "优创+", "快报", "视频", "新闻", "评测", "导购", "行情", "用车", "技术", "文化", "改装", "游记", "原创视频", "说客"};
 
-    private String dataUrl = "http://223.99.255.20/cars.app.autohome.com.cn/carinfo_v6.0.0/cars/seriessummary-pm2-s923-t-c210200.json";
+    private String dataUrl = "http://app.api.autohome.com.cn/autov4.2.5/news/newslist-a2-pm1-v4.2.5-c0-nt0-p1-s30-l0.html";
     private String imgUrl = "http://car3.autoimg.cn/cardfs/product/g8/M08/67/7A/w_autohomecar__wKgH3lceA4uALp8tAAXK-FdTxgU704.jpg";
 
     public static ArticleFragment newInstance() {
@@ -50,19 +50,19 @@ public class ArticleFragment extends AbsBaseFragment {
         List<Fragment> datas = new ArrayList<>();
         datas.add(ArticleNewFragment.newInstance(dataUrl));
         datas.add(ArticleUnihubFragment.newInstance("52645655"));
-        datas.add(ArticleLettersFragment.newInstance("132666"));
+        datas.add(ArticleLettersFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/fastnewslist-pm2-b0-l0-s20-lastid0.json"));
         datas.add(ArticleMediaFragment.newInstance("64513"));
-        datas.add(ArticleCopyFragment.newInstance("111"));
-        datas.add(ArticleCopyFragment.newInstance("222"));
-        datas.add(ArticleCopyFragment.newInstance("333"));
-        datas.add(ArticleCopyFragment.newInstance("444"));
-        datas.add(ArticleCopyFragment.newInstance("555"));
-        datas.add(ArticleCopyFragment.newInstance("666"));
-        datas.add(ArticleCopyFragment.newInstance("777"));
-        datas.add(ArticleCopyFragment.newInstance("888"));
-        datas.add(ArticleCopyFragment.newInstance("999"));
-        datas.add(ArticleCopyFragment.newInstance("110"));
-        datas.add(ArticleCopyFragment.newInstance("120"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt1-p1-s30-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt1-p1-s30-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt1-p1-s30-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt1-p1-s30-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt82-p1-s20-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
+        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
 
         VpAdapter vpAdapter = new VpAdapter(getChildFragmentManager(), datas);
         viewPager.setAdapter(vpAdapter);
