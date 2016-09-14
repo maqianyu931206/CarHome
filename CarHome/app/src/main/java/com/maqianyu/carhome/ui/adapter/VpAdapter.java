@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/9.
+ * 首页使用的适配器
+ * 联动使用
  */
 public class VpAdapter  extends FragmentPagerAdapter{
     private List<Fragment>fragments;

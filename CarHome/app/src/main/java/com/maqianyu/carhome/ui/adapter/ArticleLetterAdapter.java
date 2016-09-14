@@ -52,28 +52,18 @@ public class ArticleLetterAdapter extends BaseAdapter {
         MyViewHolder myViewHolder =null;
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_letter,parent,false);
-            // 加载完行布局设置其高度
-            // 方法1:设置其最小高度
-            // 方法2:通过布局参数修改参数
-//            int height = ScressSizeUtil.getScreenSize(context,1);
-//            int width = ScressSizeUtil.getScreenSize(context,2);
-//            ViewGroup.LayoutParams params = convertView.getLayoutParams();
-//            params.width = width;
-//            params.height = height/2;
-//            convertView.setLayoutParams(params);
             myViewHolder = new MyViewHolder(convertView);
             convertView.setTag(myViewHolder);
         }else {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
-
         ArticleLettersBean.ResultBean.ListBean bean = datas.get(position);
         if (bean != null){
             myViewHolder.titleTv.setText(bean.getTitle());
             Log.d("aaa", bean.getTitle());
             myViewHolder.dateTv.setText(bean.getCreatetime());
             myViewHolder.numTv.setText(bean.getReviewcount()+"人浏览");
-            Glide.with(context).load(bean.getImg()).into(myViewHolder.img);
+            Picasso.with(context).load(bean.getImg()).resize(750,400).into(myViewHolder.img);
         }
         return convertView;
     }

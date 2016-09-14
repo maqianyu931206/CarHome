@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/9.
+ * 论坛-横向recycleView的适配器
  */
 public class ForumRvAdapter extends RecyclerView.Adapter<ForumRvAdapter.MyViewHolder> {
     private Context context;

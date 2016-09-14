@@ -7,13 +7,12 @@ import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 
 /**
  * Created by dllo on 16/9/9.
+ * 我-Fragment
  */
 public class MyFragment extends AbsBaseFragment {
 
     public static MyFragment newInstance() {
-        
         Bundle args = new Bundle();
-        
         MyFragment fragment = new MyFragment();
         fragment.setArguments(args);
         return fragment;

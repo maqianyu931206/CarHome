@@ -7,6 +7,7 @@ import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 
 /**
  * Created by dllo on 16/9/9.
+ * 论坛-常用论坛
  */
 public class ForumStockFragment extends AbsBaseFragment {
     private  String url;

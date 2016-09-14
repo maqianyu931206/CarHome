@@ -14,7 +14,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:background="#f00"
+        android:background="#c2baba"
         android:layout_height="2dp"/>
     <RadioGroup
         android:id="@+id/radioGroup"

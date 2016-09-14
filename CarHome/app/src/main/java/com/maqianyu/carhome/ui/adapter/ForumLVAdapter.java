@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/10.
+ * 论坛-listview 适配器
  */
 public class ForumLVAdapter extends BaseAdapter {
     private Context context;

@@ -44,7 +44,6 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
     /**
      * 简化findViewById
      */
-
     protected <T extends View> T byView(int resId) {
         return (T) findViewById(resId);
 

@@ -17,24 +17,25 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/12.
+ * 轮播图使用的适配器
  */
 public class RotateArticleAdapter extends PagerAdapter {
-
-    private List<ListTypeBean.ResultBean.FocusimgBean> datas;
+    private List<RotateBean>datas;
     private Context context;
     private LayoutInflater inflater;
 
 
-    public RotateArticleAdapter(List<ListTypeBean.ResultBean.FocusimgBean> datas) {
+    public RotateArticleAdapter(List<RotateBean> datas, Context context) {
         this.datas = datas;
-         inflater = LayoutInflater.from(context);
+        this.context = context;
+        inflater = LayoutInflater.from(context);
     }
 
     public RotateArticleAdapter(Context context) {
          this.context = context;
     }
 
-    public void setDatas(List<ListTypeBean.ResultBean.FocusimgBean> datas) {
+    public void setDatas(List<RotateBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
@@ -57,9 +58,9 @@ public class RotateArticleAdapter extends PagerAdapter {
         int newPosition = position % datas.size();
         View convertView = inflater.inflate(R.layout.item_rotate_vp, container, false);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.item_iv);
+        RotateBean bean =datas.get(newPosition);
+        Glide.with(context).load(bean.getImgUrl()).into(imageView);
         container.addView(convertView);
-        ListTypeBean.ResultBean.FocusimgBean bean = datas.get(newPosition);
-        Glide.with(context).load(bean.getImgurl()).into(imageView);
         return convertView;
     }
 

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.maqianyu.carhome.R;
+import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.ui.adapter.VpAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/9.
+ * 推荐
  */
 public class ArticleFragment extends AbsBaseFragment {
     private Context context;
@@ -23,17 +25,12 @@ public class ArticleFragment extends AbsBaseFragment {
     private ViewPager viewPager;
     private int i;
     String str[] = new String[]{"最新", "优创+", "快报", "视频", "新闻", "评测", "导购", "行情", "用车", "技术", "文化", "改装", "游记", "原创视频", "说客"};
-
-    private String dataUrl = "http://app.api.autohome.com.cn/autov4.2.5/news/newslist-a2-pm1-v4.2.5-c0-nt0-p1-s30-l0.html";
-    private String imgUrl = "http://car3.autoimg.cn/cardfs/product/g8/M08/67/7A/w_autohomecar__wKgH3lceA4uALp8tAAXK-FdTxgU704.jpg";
-
     public static ArticleFragment newInstance() {
         Bundle args = new Bundle();
         ArticleFragment fragment = new ArticleFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     protected int setLayout() {
         return R.layout.fragment_article;
@@ -48,22 +45,21 @@ public class ArticleFragment extends AbsBaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         List<Fragment> datas = new ArrayList<>();
-        datas.add(ArticleNewFragment.newInstance(dataUrl));
-        datas.add(ArticleUnihubFragment.newInstance("52645655"));
-        datas.add(ArticleLettersFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/fastnewslist-pm2-b0-l0-s20-lastid0.json"));
-        datas.add(ArticleMediaFragment.newInstance("64513"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt1-p1-s30-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt1-p1-s30-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt1-p1-s30-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt1-p1-s30-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm1-c0-nt82-p1-s20-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
-        datas.add(ArticleCopyFragment.newInstance("http://app.api.autohome.com.cn/autov5.0.0/news/newslist-pm2-c0-nt82-p1-s20-l0.json"));
-
+        datas.add(ArticleNewFragment.newInstance(NetUrl.ARTICLE_NEW));
+        datas.add(ArticleUnihubFragment.newInstance(NetUrl.ARTICLE_UNIHUB));
+        datas.add(ArticleLettersFragment.newInstance(NetUrl.ARTICLE_LETTER));
+        datas.add(ArticleMediaFragment.newInstance(NetUrl.ARTICLE_MEDIA));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_NEWS));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_NEWS));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_NEWS));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_NEWS));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_USECAR));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_USECAR));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_USECAR));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_USECAR));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_USECAR));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_USECAR));
+        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_USECAR));
         VpAdapter vpAdapter = new VpAdapter(getChildFragmentManager(), datas);
         viewPager.setAdapter(vpAdapter);
         tabLayout.setupWithViewPager(viewPager);

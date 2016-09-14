@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="优选"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/select_true1"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="全部"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/select_true2"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="我的关注"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/select_true3"

@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/13.
+ * 推荐-复用的Adapter
  */
 public class ArticleCopyAdapter extends BaseAdapter {
     private  List<ArticleCopyNewsBean.ResultBean.NewslistBean> datas;

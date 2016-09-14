@@ -6,6 +6,7 @@ import android.widget.BaseAdapter;
 
 /**
  * Created by dllo on 16/9/12.
+ *
  */
 public abstract class MyAdapter extends BaseAdapter{
     public  abstract int getPositionForSection(int section);

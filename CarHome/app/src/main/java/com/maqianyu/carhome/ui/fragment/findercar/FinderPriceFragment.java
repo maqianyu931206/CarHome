@@ -9,6 +9,7 @@ import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 
 /**
  * Created by dllo on 16/9/10.
+ * 找车-降价
  */
 public class FinderPriceFragment extends AbsBaseFragment {
     private String url;

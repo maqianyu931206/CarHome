@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/12.
+ * 推荐-复用的
  */
 public class ArticleCopyFragment extends AbsBaseFragment implements VolleyResult {
     private  String url3;

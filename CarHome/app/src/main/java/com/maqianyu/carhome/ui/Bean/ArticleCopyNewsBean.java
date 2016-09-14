@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/13.
+ * 复用的实体类
  */
 public class ArticleCopyNewsBean {
 

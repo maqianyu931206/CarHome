@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.maqianyu.carhome.R;
+import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.ui.adapter.VpAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/9.
+ * 找车
  */
 public class FinderFragment extends AbsBaseFragment {
     private TabLayout tabLayout;
@@ -22,16 +24,13 @@ public class FinderFragment extends AbsBaseFragment {
     private int i;
     String str[] = new String[]{"品牌", "筛选", "降价", "找二手车"};
 
-
     public static FinderFragment newInstance() {
-        
         Bundle args = new Bundle();
-        
         FinderFragment fragment = new FinderFragment();
         fragment.setArguments(args);
         return fragment;
     }
-    
+
     @Override
     protected int setLayout() {
         return R.layout.fragment_findercar;
@@ -46,7 +45,7 @@ public class FinderFragment extends AbsBaseFragment {
     @Override
     protected void initData() {
         List<Fragment> datas = new ArrayList<>();
-        datas.add(FinderBrandFragment.newInstance("111"));
+        datas.add(FinderBrandFragment.newInstance(NetUrl.FINDER_BRAND));
         datas.add(FinderFilterFragment.newInstance("222"));
         datas.add(FinderPriceFragment.newInstance("333"));
         datas.add(FinderUsedcarsFragment.newInstance("444"));

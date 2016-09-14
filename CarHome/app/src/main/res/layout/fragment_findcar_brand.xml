@@ -156,8 +156,8 @@
             android:layout_height="500dp">
 
 
-            <ListView
-                android:id="@+id/listview"
+            <ExpandableListView
+                android:id="@+id/finder_brand_exlistview"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"

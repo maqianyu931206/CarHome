@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by dllo on 16/9/12.
+ * 轮播图使用的实体类
  */
 public class RotateBean implements Serializable{
     private int imgId;
