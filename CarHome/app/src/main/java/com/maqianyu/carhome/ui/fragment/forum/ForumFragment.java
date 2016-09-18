@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.maqianyu.carhome.R;
+import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.ui.adapter.VpAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 
@@ -43,8 +44,8 @@ public class ForumFragment extends AbsBaseFragment {
     @Override
     protected void initData() {
         List<Fragment> datas = new ArrayList<>();
-        datas.add(ForumAnsleseFragment.newInstance("111"));
-        datas.add(ForumForumFragment.newInstance("222"));
+        datas.add(ForumAnsleseFragment.newInstance(NetUrl.FORUM_ALESESE));
+        datas.add(ForumForumFragment.newInstance(NetUrl.FORUM_FORUM));
         datas.add(ForumStockFragment.newInstance("333"));
         VpAdapter vpAdapter = new VpAdapter(getChildFragmentManager(), datas);
         viewPager.setAdapter(vpAdapter);

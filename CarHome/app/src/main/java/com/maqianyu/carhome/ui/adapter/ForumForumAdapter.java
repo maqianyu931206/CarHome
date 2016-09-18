@@ -9,27 +9,28 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.ui.Bean.ArticleLettersBean;
+import com.maqianyu.carhome.ui.Bean.ArticleCopyNewsBean;
+import com.maqianyu.carhome.ui.Bean.ForumForumBean;
 import com.maqianyu.carhome.utils.ScressSizeUtil;
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
+
 /**
- * Created by dllo on 16/9/13.
- * 推荐-快报-适配器
+ * Created by dllo on 16/9/18.
  */
-public class ArticleLetterAdapter extends BaseAdapter {
-    private List<ArticleLettersBean.ResultBean.ListBean>datas;
+public class ForumForumAdapter extends BaseAdapter {
+    private List<ForumForumBean.ResultBean.ListBean> datas;
     private Context context;
 
-    public ArticleLetterAdapter(Context context) {
-        this.context = context;
-    }
-
-    public void setDatas(List<ArticleLettersBean.ResultBean.ListBean> datas) {
+    public void setDatas(List<ForumForumBean.ResultBean.ListBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
+    }
+
+    public ForumForumAdapter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -51,31 +52,30 @@ public class ArticleLetterAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         MyViewHolder myViewHolder =null;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_letter,parent,false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_forum_forum,parent,false);
             myViewHolder = new MyViewHolder(convertView);
             convertView.setTag(myViewHolder);
         }else {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
-        ArticleLettersBean.ResultBean.ListBean bean = datas.get(position);
+        ForumForumBean.ResultBean.ListBean bean = datas.get(position);
         if (bean != null){
             myViewHolder.titleTv.setText(bean.getTitle());
-            myViewHolder.dateTv.setText(bean.getCreatetime());
-            myViewHolder.numTv.setText(bean.getReviewcount()+"人浏览");
-            Picasso.with(context).load(bean.getImg()).resize(750,400).into(myViewHolder.img);
+            myViewHolder.dateTv.setText(bean.getPostdate());
+            myViewHolder.numTv.setText(bean.getReplycounts()+"回帖");
+           myViewHolder.Tv.setText(bean.getBbsname());
         }
         return convertView;
     }
+    // 缓存类
     class MyViewHolder{
-        TextView titleTv,dateTv,numTv;
-        ImageView img;
+        TextView titleTv,dateTv,numTv,Tv;
         public MyViewHolder(View view){
             super();
-            titleTv = (TextView) view.findViewById(R.id.item_letter_title_tv);
-            dateTv = (TextView) view.findViewById(R.id.item_letter_date_tv);
-            numTv = (TextView) view.findViewById(R.id.item_letter_num_tv);
-            img = (ImageView) view.findViewById(R.id.item_letter_img);
-
+            titleTv = (TextView) view.findViewById(R.id.item_forum_forum_title_tv);
+            dateTv = (TextView) view.findViewById(R.id.item_forum_forum_postdate_tv);
+            numTv = (TextView) view.findViewById(R.id.item_forum_forum_num_tv);
+            Tv  = (TextView) view.findViewById(R.id.item_forum_forum_bbsName_tv);
         }
     }
 }

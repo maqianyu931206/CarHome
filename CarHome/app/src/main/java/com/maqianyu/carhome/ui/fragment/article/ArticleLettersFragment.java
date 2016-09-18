@@ -62,8 +62,6 @@ private ListView listView;
         ArticleLettersBean articleLettersBean = gson.fromJson(resultStr,ArticleLettersBean.class);
         List<ArticleLettersBean.ResultBean.ListBean>datas = articleLettersBean.getResult().getList();
         articleLetterAdapter.setDatas(datas);
-        Log.d("aaaaaee", "datas.size():" + datas.size());
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

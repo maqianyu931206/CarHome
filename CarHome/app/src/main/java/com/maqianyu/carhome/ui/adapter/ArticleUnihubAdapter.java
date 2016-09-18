@@ -71,10 +71,8 @@ public class ArticleUnihubAdapter extends BaseAdapter {
         ArticleUnihubBean.ResultBean.NewslistBean bean = datas.get(position);
         if (bean != null){
             myViewHolder.usernameTv.setText(bean.getUsername());
-            Log.d("aaa", bean.getTitle());
             myViewHolder.dateTv.setText(bean.getPublishtime()+ "");
             myViewHolder.titleTv.setText(bean.getTitle());
-            Log.d("qqqq", bean.getTitle());
             myViewHolder.replycountTv.setText(bean.getReplycount()+ "人浏览");
             myViewHolder.praisenumTv.setText(bean.getPraisenum()+"人赞");
             Picasso.with(context).load(bean.getUserpic()).resize(40,32).into(myViewHolder.img);

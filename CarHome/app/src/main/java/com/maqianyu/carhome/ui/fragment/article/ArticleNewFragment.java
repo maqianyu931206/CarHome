@@ -94,7 +94,6 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     // 网络请求成功
     @Override
     public void success(String resultStr) {
-        Log.d("aaa", resultStr);
         Gson gson = new Gson();
         ListTypeBean listTypeBean = gson.fromJson(resultStr,ListTypeBean.class);
         List<ListTypeBean.ResultBean.NewslistBean> datas = listTypeBean.getResult().getNewslist();

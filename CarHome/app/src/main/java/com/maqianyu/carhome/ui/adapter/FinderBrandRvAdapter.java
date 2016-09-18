@@ -6,61 +6,59 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.ui.Bean.ForumLVBean;
+import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
-import com.maqianyu.carhome.utils.T;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by dllo on 16/9/9.
- * 论坛-横向recycleView的适配器
+ * Created by dllo on 16/9/18.
  */
-public class ForumRvAdapter extends RecyclerView.Adapter<ForumRvAdapter.MyViewHolder> {
+public class FinderBrandRvAdapter extends RecyclerView.Adapter<FinderBrandRvAdapter.MyViewHolder> {
     private Context context;
-    private List<String> datas;
-    private int layoutPosition;
+    private List<FinderBrandHotBean.ResultBean.ListBean>datas;
     private ForumIntance forumIntance;
+    private int layoutPosition;
 
-    public ForumRvAdapter(Context context) {
+    public FinderBrandRvAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setDatas(List<FinderBrandHotBean.ResultBean.ListBean> datas) {
+        this.datas = datas;
+        notifyDataSetChanged();
     }
 
     public void setForumIntance(ForumIntance forumIntance) {
         this.forumIntance = forumIntance;
     }
 
-    public void setDatas(List<String> datas) {
-        this.datas = datas;
-        notifyDataSetChanged();
-    }
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_forum, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_finder_brand,null);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.tv.setText(datas.get(position));
+        if (holder != null){
+            holder.tv.setText(datas.get(position).getName());
+            Picasso.with(context).load(datas.get(position).getImg()).into(holder.img);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (forumIntance != null) {
                     layoutPosition = holder.getLayoutPosition();
-                    String str = datas.get(layoutPosition);
+                    FinderBrandHotBean.ResultBean.ListBean str = datas.get(layoutPosition);
                     forumIntance.ForumItemListener(layoutPosition, str);
-                    if (position != holder.getLayoutPosition()) {
-                        holder.tv.setTextColor(Color.BLACK);
-                    } else {
-                        holder.tv.setTextColor(Color.BLUE);
-                    }
+
                 }
             }
         });
@@ -68,15 +66,18 @@ public class ForumRvAdapter extends RecyclerView.Adapter<ForumRvAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return datas != null && datas.size() > 0 ? datas.size() : 0;
+        return datas == null ? 0 : datas.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView tv;
+        private ImageView img;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.item_forum_tv);
+            img = (ImageView) itemView.findViewById(R.id.item_finder_brand_hot_img);
+            tv = (TextView) itemView.findViewById(R.id.item_finder_brand_hot_tv);
         }
     }
+
 }

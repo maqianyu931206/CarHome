@@ -1,6 +1,7 @@
 package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,7 @@ import java.util.List;
 public class ForumLVAdapter extends BaseAdapter {
     private Context context;
     private List<ForumLVBean>datas;
-
+    private int layoutPosition;
     public void setDatas(List<ForumLVBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
@@ -49,7 +50,6 @@ public class ForumLVAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
-
             convertView = LayoutInflater.from(context).inflate(R.layout.item_forum_lv,parent,false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
@@ -58,6 +58,9 @@ public class ForumLVAdapter extends BaseAdapter {
         }
         ForumLVBean myBean = (ForumLVBean) getItem(position);
         viewHolder.nameTv.setText(myBean.getName());
+        if (position  == position) {
+            viewHolder.nameTv.setTextColor(Color.BLUE);
+        }
         return convertView;
     }
     class  ViewHolder{

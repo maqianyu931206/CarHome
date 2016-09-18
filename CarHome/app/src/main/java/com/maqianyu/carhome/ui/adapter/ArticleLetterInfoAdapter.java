@@ -32,7 +32,6 @@ public class ArticleLetterInfoAdapter extends BaseAdapter {
 
     public void setDatas(ArticleLetterInfoBean datas) {
         this.datas = datas;
-        Log.d("fff", "datas:*****" + datas);
     }
 
     @Override
@@ -61,7 +60,6 @@ public class ArticleLetterInfoAdapter extends BaseAdapter {
         }
         Log.d("fff", datas.getResult().getNewsdata().getNewsauthor());
         if (datas != null){
-            Log.d("fff", "datas:" + datas);
             myViewHolder.newsautherTv.setText(datas.getResult().getNewsdata().getNewsauthor());
             myViewHolder.createtimeTv.setText(datas.getResult().getNewsdata().getShowstate());
             myViewHolder.summeryTv.setText(datas.getResult().getNewsdata().getSummary());

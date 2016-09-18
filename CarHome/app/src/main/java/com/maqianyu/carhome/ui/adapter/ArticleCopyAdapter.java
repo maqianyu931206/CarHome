@@ -68,13 +68,11 @@ public class ArticleCopyAdapter extends BaseAdapter {
         }else {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
-
         ArticleCopyNewsBean.ResultBean.NewslistBean bean = datas.get(position);
         if (bean != null){
             myViewHolder.titleTv.setText(bean.getTitle());
-            Log.d("aaa", bean.getTitle());
             myViewHolder.dateTv.setText(bean.getTime());
-            myViewHolder.numTv.setText(bean.getReplycount()+"");
+            myViewHolder.numTv.setText(bean.getReplycount()+"人浏览");
             Picasso.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
         }
         return convertView;

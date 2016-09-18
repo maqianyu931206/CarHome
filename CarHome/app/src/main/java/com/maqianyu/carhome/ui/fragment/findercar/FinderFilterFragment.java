@@ -13,7 +13,6 @@ public class FinderFilterFragment extends AbsBaseFragment {
     private  String url;
 
     public static FinderFilterFragment newInstance(String url) {
-
         Bundle args = new Bundle();
         args.putString("url",url);
         FinderFilterFragment fragment = new FinderFilterFragment();
@@ -24,15 +23,11 @@ public class FinderFilterFragment extends AbsBaseFragment {
     protected int setLayout() {
         return R.layout.fragment_findcar_filter;
     }
-
     @Override
     protected void initViews() {
-
     }
-
     @Override
     protected void initData() {
-
         Bundle bundle = getArguments();
         url= bundle.getString("url");
     }
