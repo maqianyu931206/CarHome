@@ -34,6 +34,10 @@ public class NetUrl {
      * 找车界面
      */
     public static final String FINDER_BRAND = "http://223.99.255.20/cars.app.autohome.com.cn/dealer_v5.7.0/dealer/hotbrands-pm2.json";//品牌-热门品牌
+    public static final String FINDER_BRAND_START = "http://app.api.autohome.com.cn/autov5.0.0/cars/seriesprice-pm1-b";
+    public static final String FINDER_BRAND_END = "-t1.json";
+    public static final String FINDER_BRAND_START_SHOW = "http://app.api.autohome.com.cn/autov5.0.0/cars/seriesprice-pm2-b";
+    public static final String FINDER_BRAND_END_SHOW = "-t2.json";
     /**
      * 轮播图 优创界面
      */
@@ -65,7 +69,7 @@ public class NetUrl {
     public static final String FORUM_ANSLESE_3 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c172-p1-s30.json";// 论坛名人堂
     public static final String FORUM_ANSLESE_4 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c230-p1-s30.json";// 论坛讲师
     public static final String FORUM_ANSLESE_5 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c233-p1-s30.json";//汽车之家十年
-    public static final String FORUM_ANSLESE_6 = " http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c121-p1-s30.json";//精挑细选
+    public static final String FORUM_ANSLESE_6 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c121-p1-s30.json";//精挑细选
     public static final String FORUM_ANSLESE_7 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c106-p1-s30.json";//现身说法
     public static final String FORUM_ANSLESE_8 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c118-p1-s30.json";//高端阵地
     public static final String FORUM_ANSLESE_9 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c210-p1-s30.json";//电动车
@@ -100,4 +104,20 @@ public class NetUrl {
     public static final String FORUM_ANSLESE_38 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c225-p1-s30.json";//港澳台游记
     public static final String FORUM_ANSLESE_39 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c226-p1-s30.json";//海外游记
     public static final String FORUM_ANSLESE_40 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c212-p1-s30.json";//沧海遗珠
+
+    /**
+     * 发现页,轮播图
+     */
+
+    public static final String SALE_LUNBO_1 = "http://app2.autoimg.cn/appdfs/g22/M11/2C/2A/autohomecar__wKjBwVfeJsaAbXOFAAJ6WLXTx94392.jpg";
+    public static final String SALE_LUNBO_2 = "http://app2.autoimg.cn/appdfs/g20/M15/2B/EA/autohomecar__wKjBw1feXkaAfH82AAH_jeiKPEU422.jpg";
+    public static final String SALE_LUNBO_3 = "http://app2.autoimg.cn/appdfs/g10/M0F/4A/26/autohomecar__wKgH0VfeadSAeX9NAAKRGlfYsiQ489.jpg";
+    public static final String SALE_LUNBO_4 = "http://app2.autoimg.cn/appdfs/g6/M0E/48/CE/autohomecar__wKgHzVfeQbOAeCjDAAGUKq5A1lA366.jpg";
+    public static final String SALE_LUNBO_5 = "http://app2.autoimg.cn/appdfs/g13/M05/40/B4/autohomecar__wKgH1FfZDPmAE7W0AAKp8IloxLE758.jpg";
+    /**
+     * 发现页-导航-recyclerView
+     */
+    public static  final  String SALE_DISCOVER = "http://223.99.255.20/mobilenc.app.autohome.com.cn/discover_v5.8.0/mobile/functionlist-a2-pm2-v5.8.5-pid210000-cid210200.json";
+    public static  final  String SALE_DISCOVER_LIKE = "http://223.99.255.20/mobilenc.app.autohome.com.cn/discover_v5.8.0/mall/intelligentrecommend.ashx?a=2&pm=2&v=5.8.5&uid=0&deviceid=99000628573771&g" +
+            "ps=38.889659,121.551063&cityid=210200&pid=210000&pageindex=1&pagesize=20&hid";
 }

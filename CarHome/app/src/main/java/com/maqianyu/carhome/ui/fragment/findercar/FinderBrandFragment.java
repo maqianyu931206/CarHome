@@ -10,16 +10,23 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
+import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.FinderBrandBean;
 //import com.maqianyu.carhome.ui.adapter.FinderBrandAdapter;
+import com.maqianyu.carhome.ui.Bean.FinderBrandDrawerBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
 import com.maqianyu.carhome.ui.adapter.FinderBrandAdapter;
+import com.maqianyu.carhome.ui.adapter.FinderBrandDrawerAdapter;
 import com.maqianyu.carhome.ui.adapter.FinderBrandRvAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
@@ -41,37 +48,56 @@ public class FinderBrandFragment extends AbsBaseFragment {
     private ExpandableListView expandableListView;
     private DrawerLayout drawerLayout;
     private LinearLayout drawerLl;
+    // 抽屉里的listView radioButton
+    private ListView listView;
+    private TextView textViewname;
+    private RadioButton radioButtonshow, radioButtonall;
+    private FinderBrandDrawerAdapter finderBrandDrawerAdapter;
+    private FinderBrandHotBean bean;
+    private String url11;
+
 
     public static FinderBrandFragment newInstance(String url) {
         Bundle args = new Bundle();
-        args.putString("url",url);
+        args.putString("url", url);
         FinderBrandFragment fragment = new FinderBrandFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     protected int setLayout() {
         return R.layout.fragment_findcar_brand;
     }
+
     @Override
     protected void initViews() {
-        finderBrandAdapter  =new FinderBrandAdapter(context);
-        expandableListView =byView(R.id.finder_brand_exlistview);
+        finderBrandAdapter = new FinderBrandAdapter(context);
+        expandableListView = byView(R.id.finder_brand_exlistview);
         recyclerView = byView(R.id.finder_brand_recyclerView);
         drawerLayout = byView(R.id.finder_drawerlayout);
         drawerLl = byView(R.id.drawer_Ll);
         // 热门品牌.recyclerView的加载
         finderBrandRvAdapter = new FinderBrandRvAdapter(context);
         recyclerView.setAdapter(finderBrandRvAdapter);
+        radioButtonshow = byView(R.id.finder_brand_rb_show);
+        radioButtonall = byView(R.id.finder_brand_rb_all);
+        textViewname = byView(R.id.item_finder_drawer_name_tv);
+        // 抽屉ListView数据的初始化
+        listView = byView(R.id.finder_brand_drawer_listView);
+        finderBrandDrawerAdapter = new FinderBrandDrawerAdapter(context);
+        listView.setAdapter(finderBrandDrawerAdapter);
 
     }
+
     @Override
     protected void initData() {
         hotbread();// 热门品牌
     }
 
+    // 热门品牌的数据及抽屉
     private void hotbread() {
-        GridLayoutManager llManager = new GridLayoutManager(context,5);
+        GridLayoutManager llManager = new GridLayoutManager(context, 5);
         recyclerView.setLayoutManager(llManager);
         Bundle bundle = getArguments();
         url = bundle.getString("url");
@@ -80,8 +106,8 @@ public class FinderBrandFragment extends AbsBaseFragment {
         VolleyInstance.getInstance().startRequest(url, new VolleyResult() {
             @Override
             public void success(String resultStr) {
-                Gson gson =new Gson();
-                FinderBrandHotBean bean = gson.fromJson(resultStr,FinderBrandHotBean.class);
+                Gson gson = new Gson();
+                bean = gson.fromJson(resultStr, FinderBrandHotBean.class);
                 List<FinderBrandHotBean.ResultBean.ListBean> datas = bean.getResult().getList();
                 finderBrandRvAdapter.setDatas(datas);
             }
@@ -89,28 +115,69 @@ public class FinderBrandFragment extends AbsBaseFragment {
             public void failure() {
             }
         });
+        // recyclerView点击事件
         finderBrandRvAdapter.setForumIntance(new ForumIntance() {
             @Override
             public void ForumItemListener(int position, Object o) {
                 drawerLayout.openDrawer(drawerLl);
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
-
-                drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+                String middleurl = bean.getResult().getList().get(position).getId() + "";
+                final String allurl = NetUrl.FINDER_BRAND_START + middleurl + NetUrl.FINDER_BRAND_END;
+                final String showurl = NetUrl.FINDER_BRAND_START_SHOW + middleurl + NetUrl.FINDER_BRAND_END_SHOW;
+                Log.d("hhh", showurl);
+                url11 = showurl;
+                radioButtonshow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
-                    public void onDrawerSlide(View drawerView, float slideOffset) {
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked == true) {
+                            url11 = showurl;
+                            buildlistDatas();
+                        }
                     }
+                });
+                radioButtonall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
-                    public void onDrawerOpened(View drawerView) {
-                        drawerLayout.setClickable(true);
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked == true) {
+                            url11 = allurl;
+                            buildlistDatas();
+                        }
+                    }
+                });
+                buildlistDatas();
+            }
+            private void buildlistDatas() {
+                VolleyInstance.getInstance().startRequest(url11, new VolleyResult() {
+                    @Override
+                    public void success(String resultStr) {
+                        Gson gson = new Gson();
+                        FinderBrandDrawerBean bean = gson.fromJson(resultStr, FinderBrandDrawerBean.class);
+                        List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas = bean.getResult().getFctlist();
+                        if (datas.size() == 3) {
+                            Log.d("jjj", "datas.size():" + datas.size());
+                            List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> data1 = bean.getResult().getFctlist().get(0).getSerieslist();
+                            List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> data2 = bean.getResult().getFctlist().get(1).getSerieslist();
+                            List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> data3 = bean.getResult().getFctlist().get(2).getSerieslist();
+                            data1.addAll(data2);
+                            data1.addAll(data3);
+                            finderBrandDrawerAdapter.setDatas(data1);
+                            if (datas.get(0).getName() != datas.get(1).getName()) {
+                                textViewname.setText(datas.get(1).getName());
+                            }
+                            if (datas.get(1).getName() != datas.get(2).getName()) {
+                                textViewname.setText(datas.get(2).getName());
+                            }
+                            Log.d("xxx", "finderBrandDrawerAdapter:" + finderBrandDrawerAdapter);
+                        }
+                        if (datas.size() == 1) {
+                            List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> data1 = bean.getResult().getFctlist().get(0).getSerieslist();
+                            if (data1.size() != 0) {
+                                finderBrandDrawerAdapter.setDatas(data1);
+                            }
+                        }
                     }
 
                     @Override
-                    public void onDrawerClosed(View drawerView) {
-
-                    }
-
-                    @Override
-                    public void onDrawerStateChanged(int newState) {
+                    public void failure() {
 
                     }
                 });
@@ -119,9 +186,10 @@ public class FinderBrandFragment extends AbsBaseFragment {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        LayoutInflater.from(getContext()).inflate(R.menu.main,null);
+        LayoutInflater.from(getContext()).inflate(R.menu.main, null);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

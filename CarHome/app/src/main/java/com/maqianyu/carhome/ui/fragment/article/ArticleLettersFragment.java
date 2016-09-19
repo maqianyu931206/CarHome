@@ -26,12 +26,13 @@ import java.util.List;
  * 推荐-快报
  */
 public class ArticleLettersFragment extends AbsBaseFragment implements VolleyResult {
-   private  String url1;
+    private String url1;
     private ArticleLetterAdapter articleLetterAdapter;
-private ListView listView;
+    private ListView listView;
+
     public static ArticleLettersFragment newInstance(String url1) {
         Bundle args = new Bundle();
-        args.putString("url",url1);
+        args.putString("url", url1);
         ArticleLettersFragment fragment = new ArticleLettersFragment();
         fragment.setArguments(args);
         return fragment;
@@ -44,7 +45,7 @@ private ListView listView;
 
     @Override
     protected void initViews() {
-        articleLetterAdapter  = new ArticleLetterAdapter(context);
+        articleLetterAdapter = new ArticleLetterAdapter(context);
         listView = byView(R.id.article_letters_lv);
         listView.setAdapter(articleLetterAdapter);
     }
@@ -53,23 +54,23 @@ private ListView listView;
     protected void initData() {
         Bundle bundle = getArguments();
         url1 = bundle.getString("url");
-        VolleyInstance.getInstance().startRequest(url1,this);
+        VolleyInstance.getInstance().startRequest(url1, this);
     }
 
     @Override
     public void success(String resultStr) {
         Gson gson = new Gson();
-        ArticleLettersBean articleLettersBean = gson.fromJson(resultStr,ArticleLettersBean.class);
-        List<ArticleLettersBean.ResultBean.ListBean>datas = articleLettersBean.getResult().getList();
+        ArticleLettersBean articleLettersBean = gson.fromJson(resultStr, ArticleLettersBean.class);
+        List<ArticleLettersBean.ResultBean.ListBean> datas = articleLettersBean.getResult().getList();
         articleLetterAdapter.setDatas(datas);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArticleLettersBean.ResultBean.ListBean bean = (ArticleLettersBean.ResultBean.ListBean) parent.getItemAtPosition(position);
                 String title = bean.getTitle();
-                Intent intent  = new Intent(context, ArticleLetterInfoActivity.class);
-                intent.putExtra("title",title);
-                intent.putExtra("id",bean.getId()+"");
+                Intent intent = new Intent(context, ArticleLetterInfoActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("id", bean.getId() + "");
                 startActivity(intent);
             }
         });

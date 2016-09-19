@@ -7,12 +7,15 @@
 
     <ImageView
         android:id="@+id/item_finder_brand_hot_img"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content" />
+        android:layout_margin="3dp"
+        android:layout_height="30dp" />
     <TextView
         android:id="@+id/item_finder_brand_hot_tv"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
+        android:textSize="10sp"
+        android:layout_margin="6dp"
         android:layout_height="wrap_content" />
 </LinearLayout>
