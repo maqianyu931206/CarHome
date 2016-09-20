@@ -8,8 +8,8 @@
     <ImageView
         android:id="@+id/item_finder_brand_hot_img"
         android:layout_width="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="3dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
         android:layout_height="30dp" />
     <TextView
         android:id="@+id/item_finder_brand_hot_tv"

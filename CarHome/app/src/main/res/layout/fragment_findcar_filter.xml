@@ -4,9 +4,13 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="筛选"
-        android:textSize="50sp"
-        android:layout_margin="20dp"
+        android:text="热门车型"
+        android:textSize="13sp"
+        android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <ListView
+        android:id="@+id/finder_chiose_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

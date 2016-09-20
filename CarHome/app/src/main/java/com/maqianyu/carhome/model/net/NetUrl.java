@@ -38,6 +38,8 @@ public class NetUrl {
     public static final String FINDER_BRAND_END = "-t1.json";
     public static final String FINDER_BRAND_START_SHOW = "http://app.api.autohome.com.cn/autov5.0.0/cars/seriesprice-pm2-b";
     public static final String FINDER_BRAND_END_SHOW = "-t2.json";
+    public static final String FINDER_BRAND_CAR_NAME= "http://app.api.autohome.com.cn/autov5.0.0/news/brandsfastnews-pm1-ts0.json";
+    public static final String FINDER_BRAND_CHIOSE = "http://cars.app.autohome.com.cn/cars_v5.8.0/cars/gethotseries-a2-pm2-v6.1.0-p1-s20.json";
     /**
      * 轮播图 优创界面
      */

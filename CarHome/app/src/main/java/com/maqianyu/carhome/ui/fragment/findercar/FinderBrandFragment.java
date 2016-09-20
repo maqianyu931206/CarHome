@@ -1,5 +1,6 @@
 package com.maqianyu.carhome.ui.fragment.findercar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,32 +10,30 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.model.net.VolleyInstance;
-import com.maqianyu.carhome.ui.Bean.FinderBrandBean;
-//import com.maqianyu.carhome.ui.adapter.FinderBrandAdapter;
+import com.maqianyu.carhome.ui.Bean.FinderBrandCarNameBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandDrawerBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
-import com.maqianyu.carhome.ui.adapter.FinderBrandAdapter;
+import com.maqianyu.carhome.ui.adapter.FinderBrandCarNameRvAdapter;
 import com.maqianyu.carhome.ui.adapter.FinderBrandDrawerAdapter;
 import com.maqianyu.carhome.ui.adapter.FinderBrandRvAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
+import com.maqianyu.carhome.view.LetterView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by dllo on 16/9/10.
@@ -42,10 +41,9 @@ import java.util.Map;
  */
 public class FinderBrandFragment extends AbsBaseFragment {
     private String url;
-    private FinderBrandAdapter finderBrandAdapter;
+    private FinderBrandCarNameRvAdapter finderBrandCarNameRvAdapter;
     private FinderBrandRvAdapter finderBrandRvAdapter;
-    private RecyclerView recyclerView;
-    private ExpandableListView expandableListView;
+    private RecyclerView recyclerView, recyclerViewLongName;
     private DrawerLayout drawerLayout;
     private LinearLayout drawerLl;
     // 抽屉里的listView radioButton
@@ -55,7 +53,6 @@ public class FinderBrandFragment extends AbsBaseFragment {
     private FinderBrandDrawerAdapter finderBrandDrawerAdapter;
     private FinderBrandHotBean bean;
     private String url11;
-
 
     public static FinderBrandFragment newInstance(String url) {
         Bundle args = new Bundle();
@@ -72,13 +69,17 @@ public class FinderBrandFragment extends AbsBaseFragment {
 
     @Override
     protected void initViews() {
-        finderBrandAdapter = new FinderBrandAdapter(context);
-        expandableListView = byView(R.id.finder_brand_exlistview);
+        // 所有车的加载
+        finderBrandCarNameRvAdapter = new FinderBrandCarNameRvAdapter(context);
+        recyclerViewLongName = byView(R.id.finder_brand_CarName_recyclerView);
+        recyclerViewLongName.setAdapter(finderBrandCarNameRvAdapter);
+
+        finderBrandRvAdapter = new FinderBrandRvAdapter(context);
         recyclerView = byView(R.id.finder_brand_recyclerView);
         drawerLayout = byView(R.id.finder_drawerlayout);
         drawerLl = byView(R.id.drawer_Ll);
+
         // 热门品牌.recyclerView的加载
-        finderBrandRvAdapter = new FinderBrandRvAdapter(context);
         recyclerView.setAdapter(finderBrandRvAdapter);
         radioButtonshow = byView(R.id.finder_brand_rb_show);
         radioButtonall = byView(R.id.finder_brand_rb_all);
@@ -93,6 +94,39 @@ public class FinderBrandFragment extends AbsBaseFragment {
     @Override
     protected void initData() {
         hotbread();// 热门品牌
+        getCarDatas(); // 找车-车名的列表
+    }
+
+    // 找车-车名的列表
+    private void getCarDatas() {
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recyclerViewLongName.setLayoutManager(manager);
+        VolleyInstance.getInstance().startRequest(NetUrl.FINDER_BRAND_CAR_NAME, new VolleyResult() {
+            @Override
+            public void success(String resultStr) {
+                Gson gson = new Gson();
+                List<FinderBrandCarNameBean.ResultBean.BrandlistBean.ListBean> datas2 = new ArrayList<>();
+                FinderBrandCarNameBean bean2 = gson.fromJson(resultStr, FinderBrandCarNameBean.class);
+                for (int i = 0; i < bean2.getResult().getBrandlist().size(); i++) {
+                    List<FinderBrandCarNameBean.ResultBean.BrandlistBean.ListBean> datas = bean2.getResult().getBrandlist().get(i).getList();
+                    datas2.addAll(datas);
+
+                }
+                finderBrandCarNameRvAdapter.setDatas(datas2);
+            }
+            @Override
+            public void failure() {
+            }
+        });
+
+        finderBrandCarNameRvAdapter.setForumIntance(new ForumIntance() {
+            @Override
+            public void ForumItemListener(int position, Object o) {
+
+                Toast.makeText(context, "第-" + position + "-行", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     // 热门品牌的数据及抽屉
@@ -111,6 +145,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 List<FinderBrandHotBean.ResultBean.ListBean> datas = bean.getResult().getList();
                 finderBrandRvAdapter.setDatas(datas);
             }
+
             @Override
             public void failure() {
             }
@@ -130,6 +165,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked == true) {
                             url11 = showurl;
+                            radioButtonshow.setTextColor(Color.BLUE);
                             buildlistDatas();
                         }
                     }
@@ -145,6 +181,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 });
                 buildlistDatas();
             }
+
             private void buildlistDatas() {
                 VolleyInstance.getInstance().startRequest(url11, new VolleyResult() {
                     @Override
@@ -198,5 +235,6 @@ public class FinderBrandFragment extends AbsBaseFragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }

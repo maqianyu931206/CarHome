@@ -2,6 +2,9 @@ package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +55,10 @@ public class SaleRvLikeAdapter extends RecyclerView.Adapter<SaleRvLikeAdapter.My
             holder.title.setText(datas.get(position).getTitle());
             holder.content.setText(datas.get(position).getShorttitle());
             holder.money.setText(datas.get(position).getPrice());
-            holder.price.setText(datas.get(position).getFctprice());
+//            holder.price.setText(datas.get(position).getFctprice());
+            SpannableString string = new SpannableString(datas.get(position).getFctprice());
+            string.setSpan(new StrikethroughSpan(),0,datas.get(position).getFctprice().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            holder.price.setText(string);
             Glide.with(context).load(datas.get(position).getLogo()).into(holder.img);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
