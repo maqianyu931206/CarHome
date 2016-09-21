@@ -3,10 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/item_forum_lv_tv"
+    <include layout="@layout/include_article"/>
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="wrap_content"
-        android:layout_margin="10dp"
-        android:textSize="14sp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"></WebView>
 </LinearLayout>

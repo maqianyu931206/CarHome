@@ -129,8 +129,8 @@
                     android:layout_marginTop="6dp"
                     android:background="@color/colorview" />
 
-                <com.maqianyu.carhome.view.HomeRecyclerView
-                    android:id="@+id/finder_brand_CarName_recyclerView"
+                <com.maqianyu.carhome.view.HomeListView
+                    android:id="@+id/finder_brand_CarName_listView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -167,6 +167,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:button="@null"
+                android:background="@null"
                 android:gravity="right"
                 android:text="在售" />
 

@@ -99,17 +99,18 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
         List<ListTypeBean.ResultBean.NewslistBean> datas = listTypeBean.getResult().getNewslist();
         listTypeAdapter.setDatas(datas);
         // 跳转详情
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//               ListTypeBean.ResultBean.NewslistBean bean = (ListTypeBean.ResultBean.NewslistBean) parent.getItemAtPosition(position);
-//                String title =bean.getTitle();
-//                Intent intent  =new Intent(context, ArticleNewInfoActivity.class);
-//                intent.putExtra("title",title);
-//                intent.putExtra("id",bean.getId());
-//                startActivity(intent);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ListTypeBean.ResultBean.NewslistBean bean = (ListTypeBean.ResultBean.NewslistBean) parent.getItemAtPosition(position);
+                String title =bean.getTitle();
+                String middle = bean.getId() + "";
+                Intent intent  =new Intent(context, ArticleNewInfoActivity.class);
+                intent.putExtra("title",title);
+                intent.putExtra("id",middle);
+                startActivity(intent);
+            }
+        });
     }
 
     // 失败

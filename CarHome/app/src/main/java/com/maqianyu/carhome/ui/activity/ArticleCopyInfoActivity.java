@@ -1,10 +1,7 @@
 package com.maqianyu.carhome.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -14,16 +11,16 @@ import android.widget.ImageView;
 
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
-import com.maqianyu.carhome.ui.inteface.VolleyResult;
 
 /**
  * Created by dllo on 16/9/13.
- * 推荐-新闻详情页
+ * 推荐-复用的详情页
  */
-public class ArticleNewInfoActivity extends AbsBaseActivity {
+public class ArticleCopyInfoActivity extends AbsBaseActivity {
 
     private WebView webView;
-    private ImageView imageView;
+    private RecyclerView recyclerView;
+    private  ImageView imageView;
     private String middleurl;
 
     @Override
@@ -34,13 +31,12 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
     @Override
     protected void initViews() {
         webView = byView(R.id.webview);
-        imageView = byView(R.id.include_back_img2);
+        imageView  = byView(R.id.include_back_img2);
     }
     @Override
     protected void initDatas() {
         Intent intent = getIntent();
         middleurl = intent.getStringExtra("id");
-
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -60,9 +56,8 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
         settings.setUseWideViewPort(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setDisplayZoomControls(true);
-        settings.setDefaultFontSize(2);
-        webView.loadUrl(NetUrl.ARTICLE_URLSTSART + middleurl + NetUrl.ARTICLE_URLEND);
-
+        settings.setDefaultFontSize(6);
+        webView.loadUrl(NetUrl.ARTICLE_COPY_URLSTART + middleurl + NetUrl.ARTICLE_COPY_URLEND);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

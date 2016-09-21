@@ -18,30 +18,30 @@ import java.util.List;
  */
 public class ArticleLetterInfoAdapter extends BaseAdapter {
 
+    private  List<ArticleLetterInfoBean.ResultBean.MessagelistBean> datas;
     private Context context;
-    private ArticleLetterInfoBean datas;
-
 
     public ArticleLetterInfoAdapter(Context context) {
         this.context = context;
     }
 
-    public ArticleLetterInfoAdapter(ArticleLetterInfoBean datas) {
+    public ArticleLetterInfoAdapter(List<ArticleLetterInfoBean.ResultBean.MessagelistBean> datas) {
         this.datas = datas;
     }
 
-    public void setDatas(ArticleLetterInfoBean datas) {
+    public void setDatas(List<ArticleLetterInfoBean.ResultBean.MessagelistBean> datas) {
         this.datas = datas;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return datas == null ? 0 : 10;
+        return datas == null ? 0 : datas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return datas == null ? null :datas.getResult();
+        return datas == null ? null :datas.get(position);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ArticleLetterInfoAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder myViewHolder =null;
+        MyViewHolder myViewHolder ;
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_letter_info,parent,false);
             myViewHolder = new MyViewHolder(convertView);
@@ -58,22 +58,24 @@ public class ArticleLetterInfoAdapter extends BaseAdapter {
         }else {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
-        Log.d("fff", datas.getResult().getNewsdata().getNewsauthor());
         if (datas != null){
-            myViewHolder.newsautherTv.setText(datas.getResult().getNewsdata().getNewsauthor());
-            myViewHolder.createtimeTv.setText(datas.getResult().getNewsdata().getShowstate());
-            myViewHolder.summeryTv.setText(datas.getResult().getNewsdata().getSummary());
+            myViewHolder.newsautherTv.setText(datas.get(position).getAuthorname());
+//            myViewHolder.createtimeTv.setText(datas.get(position).getPublishtime());
+//            myViewHolder.summeryTv.setText(datas.get(position).getContent());
+//            Picasso.with(context).load(datas.get(position).getHeadimg()).into(myViewHolder.img);
         }
         return convertView;
     }
 
     class MyViewHolder{
         TextView newsautherTv,createtimeTv,summeryTv;
+        ImageView img;
         public MyViewHolder(View view){
             super();
-            newsautherTv = (TextView) view.findViewById(R.id.item_letter_newsauther_tv);
-            createtimeTv = (TextView) view.findViewById(R.id.item_letter_createtime_tv);
-            summeryTv = (TextView) view.findViewById(R.id.item_letter_summary_tv);
+            newsautherTv = (TextView) view.findViewById(R.id.item_article_letter_info_author_list_tv);
+//            createtimeTv = (TextView) view.findViewById(R.id.item_article_letter_info_createtime_list_tv);
+//            summeryTv = (TextView) view.findViewById(R.id.item_article_letter_info_summary_list_tv);
+//            img  = (ImageView) view.findViewById(R.id.item_article_letter_info_heading_list_img);
         }
     }
 

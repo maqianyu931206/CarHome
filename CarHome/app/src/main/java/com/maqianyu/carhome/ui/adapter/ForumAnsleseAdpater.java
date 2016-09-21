@@ -57,7 +57,7 @@ public class ForumAnsleseAdpater extends BaseAdapter {
         forumAnsViewHolder.titleTv.setText(bean.getTitle());
         forumAnsViewHolder.bbsnameTv.setText(bean.getBbsname());
         forumAnsViewHolder.numTv.setText(bean.getReplycounts()+"人浏览");
-        Picasso.with(context).load(bean.getSmallpic()).resize(130,105).into(forumAnsViewHolder.img);
+        Picasso.with(context).load(bean.getSmallpic()).into(forumAnsViewHolder.img);
         return convertView;
     }
     class ForumAnsViewHolder {

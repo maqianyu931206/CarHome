@@ -1,6 +1,5 @@
 package com.maqianyu.carhome.model.net;
 
-import java.security.PublicKey;
 
 /**
  * Created by dllo on 16/9/14.
@@ -25,6 +24,11 @@ public class NetUrl {
     public static final String ARTICLE_ORIGINAL_VIDEO = "http://app.api.autohome.com.cn/autov4.8.8/news/videolist-pm1-vt8-s30-lastid0.json";//原创视频
     public static final String ARTICLE_LOBBYIST = "http://http://app.api.autohome.com.cn/autov4.8.8/news/shuokelist-pm1-s30-lastid0.json";// 说客
 
+    public static final String ARTICLE_URLSTSART = "http://cont.app.autohome.com.cn/autov4.2.5/content/News/newscontent-a2-pm1-v4.2.5-n"; // 最新界面的详情页
+    public static final String ARTICLE_URLEND = "-lz0-sp0-nt0-sa1-p0-c1-fs0-cw320.html";
+
+    public static final String ARTICLE_COPY_URLSTART ="http://cont.app.autohome.com.cn/autov4.2.5/content/News/newscontent-a2-pm1-v4.2.5-n";
+    public static final String ARTICLE_COPY_URLEND ="-lz0-sp0-nt0-sa1-p0-c1-fs0-cw320.html";
     /**
      * 快报界面拼接网址,详情页
      */
@@ -38,8 +42,8 @@ public class NetUrl {
     public static final String FINDER_BRAND_END = "-t1.json";
     public static final String FINDER_BRAND_START_SHOW = "http://app.api.autohome.com.cn/autov5.0.0/cars/seriesprice-pm2-b";
     public static final String FINDER_BRAND_END_SHOW = "-t2.json";
-    public static final String FINDER_BRAND_CAR_NAME= "http://app.api.autohome.com.cn/autov5.0.0/news/brandsfastnews-pm1-ts0.json";
-    public static final String FINDER_BRAND_CHIOSE = "http://cars.app.autohome.com.cn/cars_v5.8.0/cars/gethotseries-a2-pm2-v6.1.0-p1-s20.json";
+    public static final String FINDER_BRAND_CAR_NAME = "http://223.99.255.20/cars.app.autohome.com.cn/cars_v5.7.0/cars/brands-pm2-ts635966571635589297.json";// 所有 车名的网址
+    public static final String FINDER_BRAND_CHIOSE = "http://cars.app.autohome.com.cn/cars_v5.8.0/cars/gethotseries-a2-pm2-v6.1.0-p1-s20.json"; // 筛选
     /**
      * 轮播图 优创界面
      */
@@ -119,7 +123,7 @@ public class NetUrl {
     /**
      * 发现页-导航-recyclerView
      */
-    public static  final  String SALE_DISCOVER = "http://223.99.255.20/mobilenc.app.autohome.com.cn/discover_v5.8.0/mobile/functionlist-a2-pm2-v5.8.5-pid210000-cid210200.json";
-    public static  final  String SALE_DISCOVER_LIKE = "http://223.99.255.20/mobilenc.app.autohome.com.cn/discover_v5.8.0/mall/intelligentrecommend.ashx?a=2&pm=2&v=5.8.5&uid=0&deviceid=99000628573771&g" +
+    public static final String SALE_DISCOVER = "http://223.99.255.20/mobilenc.app.autohome.com.cn/discover_v5.8.0/mobile/functionlist-a2-pm2-v5.8.5-pid210000-cid210200.json";
+    public static final String SALE_DISCOVER_LIKE = "http://223.99.255.20/mobilenc.app.autohome.com.cn/discover_v5.8.0/mall/intelligentrecommend.ashx?a=2&pm=2&v=5.8.5&uid=0&deviceid=99000628573771&g" +
             "ps=38.889659,121.551063&cityid=210200&pid=210000&pageindex=1&pagesize=20&hid";
 }

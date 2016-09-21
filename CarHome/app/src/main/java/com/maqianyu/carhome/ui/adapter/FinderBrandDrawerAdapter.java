@@ -60,7 +60,7 @@ public class FinderBrandDrawerAdapter extends BaseAdapter {
         }
         myViewHolder.nametv.setText(datas.get(position).getName());
         myViewHolder.pricetv.setText(datas.get(position).getPrice());
-        Picasso.with(context).load(datas.get(position).getImgurl()).into(myViewHolder.img);
+        Picasso.with(context).load(datas.get(position).getImgurl()).resize(200,150).into(myViewHolder.img);
         return convertView;
     }
 

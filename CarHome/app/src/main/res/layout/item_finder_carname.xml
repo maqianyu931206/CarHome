@@ -2,28 +2,26 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/item_finder_carname_img"
-        android:layout_width="35dp"
-        android:padding="3dp"
-        android:layout_gravity="center_vertical"
-        android:layout_height="35dp" />
 
     <TextView
         android:id="@+id/item_finder_carname_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:layout_toRightOf="@id/item_finder_carname_img"
-        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
         android:textSize="12sp"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="2dp"
-        android:layout_below="@id/item_finder_carname_img"
-        android:background="#f4f3f3"/>
+        android:layout_height="0.1dp"
+        android:background="#e4e3e3"/>
+
+    <com.maqianyu.carhome.view.HomeGridView
+        android:id="@+id/item_finder_carname_gridView"
+        android:layout_width="match_parent"
+        android:layout_below="@id/item_finder_carname_tv"
+        android:layout_height="match_parent"/>
+
 </RelativeLayout>

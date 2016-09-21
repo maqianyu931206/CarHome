@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".ui.activity.ArticleLetterInfoActivity"/>
         <activity android:name=".ui.activity.ArticleNewInfoActivity"/>
+        <activity android:name=".ui.activity.ArticleCopyInfoActivity"/>
     </application>
 
 </manifest>

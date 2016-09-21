@@ -3,10 +3,15 @@ package com.maqianyu.carhome.ui.fragment.article;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.VolleyInstance;
+import com.maqianyu.carhome.ui.Bean.ArticleMediaBean;
+import com.maqianyu.carhome.ui.adapter.ArticleMediaAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
+
+import java.util.List;
 
 /**
  * Created by dllo on 16/9/12.
@@ -15,6 +20,7 @@ import com.maqianyu.carhome.ui.inteface.VolleyResult;
 public class ArticleMediaFragment extends AbsBaseFragment implements VolleyResult {
     private  String url2;
     private ListView listView;
+    private ArticleMediaAdapter articleMediaAdapter;
 
     public static ArticleMediaFragment newInstance(String url2) {
         Bundle args = new Bundle();
@@ -32,6 +38,8 @@ public class ArticleMediaFragment extends AbsBaseFragment implements VolleyResul
     @Override
     protected void initViews() {
         listView = byView(R.id.article_media_lv);
+        articleMediaAdapter = new ArticleMediaAdapter(context);
+        listView.setAdapter(articleMediaAdapter);
     }
 
     @Override
@@ -43,7 +51,10 @@ public class ArticleMediaFragment extends AbsBaseFragment implements VolleyResul
 
     @Override
     public void success(String resultStr) {
-
+        Gson gson = new Gson();
+        ArticleMediaBean bean = gson.fromJson(resultStr, ArticleMediaBean.class);
+        List<ArticleMediaBean.ResultBean.ListBean> datas = bean.getResult().getList();
+        articleMediaAdapter.setDatas(datas);
     }
 
     @Override

@@ -5,29 +5,33 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.ArticleCopyNewsBean;
+import com.maqianyu.carhome.ui.Bean.ArticleLobbyistBean;
 import com.maqianyu.carhome.ui.activity.ArticleCopyInfoActivity;
 import com.maqianyu.carhome.ui.adapter.ArticleCopyAdapter;
+import com.maqianyu.carhome.ui.adapter.ArticleLobbyistAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
+
 import java.util.List;
 
 /**
  * Created by dllo on 16/9/12.
- * 推荐-复用的
+ * 推荐-说客
  */
-public class ArticleCopyFragment extends AbsBaseFragment implements VolleyResult {
+public class ArticleLobbyistFragment extends AbsBaseFragment implements VolleyResult {
     private  String url3;
     private ListView listView;
-    private ArticleCopyAdapter articleCopyAdapter;
+    private ArticleLobbyistAdapter articleLobbyistAdapter;
 
-    public static ArticleCopyFragment newInstance(String url3) {
+    public static ArticleLobbyistFragment newInstance(String url3) {
         Bundle args = new Bundle();
         args.putString("url",url3);
-        ArticleCopyFragment fragment = new ArticleCopyFragment();
+        ArticleLobbyistFragment fragment = new ArticleLobbyistFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,20 +51,20 @@ public class ArticleCopyFragment extends AbsBaseFragment implements VolleyResult
         Bundle bundle = getArguments();
         url3 = bundle.getString("url");
         VolleyInstance.getInstance().startRequest(url3,this);
-        articleCopyAdapter  =new ArticleCopyAdapter(context);
-        listView.setAdapter(articleCopyAdapter);
+        articleLobbyistAdapter  =new ArticleLobbyistAdapter(context);
+        listView.setAdapter(articleLobbyistAdapter);
     }
 
     @Override
     public void success(String resultStr) {
         Gson gson =new Gson();
-        ArticleCopyNewsBean articleCopyNewsBean = gson.fromJson(resultStr,ArticleCopyNewsBean.class);
-        List<ArticleCopyNewsBean.ResultBean.NewslistBean>datas =articleCopyNewsBean.getResult().getNewslist();
-        articleCopyAdapter.setDatas(datas);
+        ArticleLobbyistBean articleLobbyistBean = gson.fromJson(resultStr,ArticleLobbyistBean.class);
+        List<ArticleLobbyistBean.ResultBean.ListBean>datas =articleLobbyistBean.getResult().getList();
+        articleLobbyistAdapter.setDatas(datas);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArticleCopyNewsBean.ResultBean.NewslistBean  bean = (ArticleCopyNewsBean.ResultBean.NewslistBean) parent.getItemAtPosition(position);
+                ArticleLobbyistBean.ResultBean.ListBean bean = (ArticleLobbyistBean.ResultBean.ListBean) parent.getItemAtPosition(position);
                 String title =bean.getTitle();
                 String middle = bean.getId() + "";
                 Intent intent  =new Intent(context, ArticleCopyInfoActivity.class);
@@ -70,7 +74,6 @@ public class ArticleCopyFragment extends AbsBaseFragment implements VolleyResult
             }
         });
     }
-
 
     @Override
     public void failure() {
