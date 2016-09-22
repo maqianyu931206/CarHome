@@ -1,19 +1,14 @@
 package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.ui.Bean.ArticleCopyNewsBean;
 import com.maqianyu.carhome.ui.Bean.ForumForumBean;
-import com.maqianyu.carhome.utils.ScressSizeUtil;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

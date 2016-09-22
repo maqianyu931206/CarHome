@@ -1,13 +1,12 @@
 package com.maqianyu.carhome.ui.fragment.forum;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +23,8 @@ import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.ForumAnsleseBean;
-import com.maqianyu.carhome.ui.Bean.ForumLVBean;
+import com.maqianyu.carhome.ui.activity.ForumAnlseseActivity;
 import com.maqianyu.carhome.ui.adapter.ForumAnsleseAdpater;
-import com.maqianyu.carhome.ui.adapter.ForumLVAdapter;
 import com.maqianyu.carhome.ui.adapter.ForumRvAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
@@ -42,11 +40,9 @@ import java.util.List;
 public class ForumAnsleseFragment extends AbsBaseFragment implements VolleyResult {
     private RecyclerView recyclerView;
     private ForumRvAdapter forumRvAdapter;
-    private ForumLVAdapter forumLVAdapter;
     private ImageView forumIntentImg;
     private ForumAnsleseAdpater forumAnsleseAdpater;
     private ListView listView;
-    private List<ForumLVBean> datas;
     private int i;
     String str[] = new String[]{"全部", "媳妇当车模", "美人'记'", "论坛名人堂", "论坛讲师", "汽车之家十年", "精挑细选", "现身说法",
             "高端阵地", "电动车", "汇买车", "行车点评", "超级驾驶员", "海外购车", "经典老车", "妹子选车", "优惠购车", "原创大片", "顶配风采",
@@ -74,7 +70,6 @@ public class ForumAnsleseFragment extends AbsBaseFragment implements VolleyResul
         forumIntentImg = byView(R.id.forum_intent_img);
         listView = byView(R.id.forum_anslese_listview);
         forumRvAdapter = new ForumRvAdapter(getContext());
-        forumLVAdapter = new ForumLVAdapter(getContext());
         forumAnsleseAdpater = new ForumAnsleseAdpater(context);
         listView.setAdapter(forumAnsleseAdpater);
     }
@@ -105,8 +100,12 @@ public class ForumAnsleseFragment extends AbsBaseFragment implements VolleyResul
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.forum_pop_anslese, null);
                 RelativeLayout relativeLayout;
                 TextView textView;
-                final ListView listView;
-                listView = (ListView) view.findViewById(R.id.forum_pop_listView);
+                // 竖向的recyclerView
+                RecyclerView recyclerView1;
+                recyclerView1 = (RecyclerView) view.findViewById(R.id.forum_pop_listView);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
+                recyclerView1.setLayoutManager(linearLayoutManager);
+
                 relativeLayout = (RelativeLayout) view.findViewById(R.id.forum_pop_rellay);
                 textView = (TextView) view.findViewById(R.id.back);
                 WindowManager windowManger = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -127,162 +126,44 @@ public class ForumAnsleseFragment extends AbsBaseFragment implements VolleyResul
                         pw.dismiss();
                     }
                 });
-                buildDatas();
-                forumLVAdapter.setDatas(datas);
-                listView.setAdapter(forumLVAdapter);
+                List<String> datas = new ArrayList<>();
+                for (i = 0; i < str.length; i++) {
+                    datas.add(str[i]);
+                }
+                forumRvAdapter.setDatas(datas);
+                recyclerView1.setAdapter(forumRvAdapter);
                 //点击事件
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                forumRvAdapter.setForumIntance(new ForumIntance() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        listviewclick(position);
+                    public void ForumItemListener(int position, Object o) {
                         pw.dismiss();
+                        recyclerView.smoothScrollToPosition(position);
+                        reviewclick();
                     }
                 });
-            }
-            private void listviewclick(int position) {
-                switch (position) {
-                    case 0:
-                        url = NetUrl.FORUM_ANSLESE_0;
-                        break;
-                    case 1:
-                        url = NetUrl.FORUM_ANSLESE_1;
-                        break;
-                    case 2:
-                        url = NetUrl.FORUM_ANSLESE_2;
-                        break;
-                    case 3:
-                        url = NetUrl.FORUM_ANSLESE_3;
-                        break;
-                    case 4:
-                        url = NetUrl.FORUM_ANSLESE_4;
-                        break;
-                    case 5:
-                        url = NetUrl.FORUM_ANSLESE_5;
-                        break;
-                    case 6:
-                        url = NetUrl.FORUM_ANSLESE_6;
-                        break;
-                    case 7:
-                        url = NetUrl.FORUM_ANSLESE_7;
-                        break;
-                    case 8:
-                        url = NetUrl.FORUM_ANSLESE_8;
-                        break;
-                    case 9:
-                        url = NetUrl.FORUM_ANSLESE_9;
-                        break;
-                    case 10:
-                        url = NetUrl.FORUM_ANSLESE_10;
-                        break;
-                    case 11:
-                        url = NetUrl.FORUM_ANSLESE_11;
-                        break;
-                    case 12:
-                        url = NetUrl.FORUM_ANSLESE_12;
-                        break;
-                    case 13:
-                        url = NetUrl.FORUM_ANSLESE_13;
-                        break;
-                    case 14:
-                        url = NetUrl.FORUM_ANSLESE_14;
-                        break;
-                    case 15:
-                        url = NetUrl.FORUM_ANSLESE_15;
-                        break;
-                    case 16:
-                        url = NetUrl.FORUM_ANSLESE_16;
-                        break;
-                    case 17:
-                        url = NetUrl.FORUM_ANSLESE_17;
-                        break;
-                    case 18:
-                        url = NetUrl.FORUM_ANSLESE_18;
-                        break;
-                    case 19:
-                        url = NetUrl.FORUM_ANSLESE_19;
-                        break;
-                    case 20:
-                        url = NetUrl.FORUM_ANSLESE_20;
-                        break;
-                    case 21:
-                        url = NetUrl.FORUM_ANSLESE_21;
-                        break;
-                    case 22:
-                        url = NetUrl.FORUM_ANSLESE_22;
-                        break;
-                    case 23:
-                        url = NetUrl.FORUM_ANSLESE_23;
-                        break;
-                    case 24:
-                        url = NetUrl.FORUM_ANSLESE_24;
-                        break;
-                    case 25:
-                        url = NetUrl.FORUM_ANSLESE_25;
-                        break;
-                    case 26:
-                        url = NetUrl.FORUM_ANSLESE_26;
-                        break;
-                    case 27:
-                        url = NetUrl.FORUM_ANSLESE_27;
-                        break;
-                    case 28:
-                        url = NetUrl.FORUM_ANSLESE_28;
-                        break;
-                    case 29:
-                        url = NetUrl.FORUM_ANSLESE_29;
-                        break;
-                    case 30:
-                        url = NetUrl.FORUM_ANSLESE_30;
-                        break;
-                    case 31:
-                        url = NetUrl.FORUM_ANSLESE_31;
-                        break;
-                    case 32:
-                        url = NetUrl.FORUM_ANSLESE_32;
-                        break;
-                    case 33:
-                        url = NetUrl.FORUM_ANSLESE_33;
-                        break;
-                    case 34:
-                        url = NetUrl.FORUM_ANSLESE_34;
-                        break;
-                    case 35:
-                        url = NetUrl.FORUM_ANSLESE_35;
-                        break;
-                    case 36:
-                        url = NetUrl.FORUM_ANSLESE_36;
-                        break;
-                    case 37:
-                        url = NetUrl.FORUM_ANSLESE_37;
-                        break;
-                    case 38:
-                        url = NetUrl.FORUM_ANSLESE_38;
-                        break;
-                    case 39:
-                        url = NetUrl.FORUM_ANSLESE_39;
-                        break;
-                    case 40:
-                        url = NetUrl.FORUM_ANSLESE_40;
-                        break;
-                }
-                VolleyInstance.getInstance().startRequest(url, ForumAnsleseFragment.this);
+
             }
 
-            private void buildDatas() {
-                datas = new ArrayList<>();
-                for (i = 0; i < str.length; i++) {
-                    datas.add(new ForumLVBean(str[i]));
-                }
-            }
         });
     }
 
     @Override
     public void success(String resultStr) {
         Gson gson = new Gson();
-        ForumAnsleseBean bean = gson.fromJson(resultStr, ForumAnsleseBean.class);
+        final ForumAnsleseBean bean = gson.fromJson(resultStr, ForumAnsleseBean.class);
         List<ForumAnsleseBean.ResultBean.ListBean> datas = bean.getResult().getList();
         forumAnsleseAdpater.setDatas(datas);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent  = new Intent(context, ForumAnlseseActivity.class);
+                String strid = bean.getResult().getList().get(position).getTopicid()+"";
+                intent.putExtra("id",strid);
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override

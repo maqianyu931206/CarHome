@@ -9,11 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.ui.Bean.ForumLVBean;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
-import com.maqianyu.carhome.utils.T;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,29 +51,38 @@ public class ForumRvAdapter extends RecyclerView.Adapter<ForumRvAdapter.MyViewHo
             public void onClick(View v) {
                 if (forumIntance != null) {
                     layoutPosition = holder.getLayoutPosition();
+                    notifyDataSetChanged();
                     String str = datas.get(layoutPosition);
                     forumIntance.ForumItemListener(layoutPosition, str);
-                    if (position != holder.getLayoutPosition()) {
-                        holder.tv.setTextColor(Color.BLACK);
-                    } else {
-                        holder.tv.setTextColor(Color.BLUE);
-                    }
                 }
             }
         });
-    }
+        if (position == 0) {
+            if (position == layoutPosition) {
+                holder.tv.setTextColor(Color.BLUE);
+            } else {
+                holder.tv.setTextColor(Color.parseColor("#454545"));
+            }
+        }else
+            if (position == layoutPosition) {
+                holder.tv.setTextColor(Color.BLUE);
+            } else {
+                holder.tv.setTextColor(Color.parseColor("#454545"));
 
-    @Override
-    public int getItemCount() {
-        return datas != null && datas.size() > 0 ? datas.size() : 0;
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.item_forum_tv);
         }
     }
-}
+
+        @Override
+        public int getItemCount () {
+            return datas != null && datas.size() > 0 ? datas.size() : 0;
+        }
+
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            private TextView tv;
+
+            public MyViewHolder(View itemView) {
+                super(itemView);
+                tv = (TextView) itemView.findViewById(R.id.item_forum_tv);
+            }
+        }
+    }

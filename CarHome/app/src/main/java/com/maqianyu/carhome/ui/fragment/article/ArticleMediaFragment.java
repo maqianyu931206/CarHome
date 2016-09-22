@@ -1,12 +1,17 @@
 package com.maqianyu.carhome.ui.fragment.article;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.ArticleMediaBean;
+import com.maqianyu.carhome.ui.activity.ArticleMediaActivity;
+import com.maqianyu.carhome.ui.activity.ForumForumActivity;
 import com.maqianyu.carhome.ui.adapter.ArticleMediaAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
@@ -52,9 +57,19 @@ public class ArticleMediaFragment extends AbsBaseFragment implements VolleyResul
     @Override
     public void success(String resultStr) {
         Gson gson = new Gson();
-        ArticleMediaBean bean = gson.fromJson(resultStr, ArticleMediaBean.class);
+        final ArticleMediaBean bean = gson.fromJson(resultStr, ArticleMediaBean.class);
         List<ArticleMediaBean.ResultBean.ListBean> datas = bean.getResult().getList();
         articleMediaAdapter.setDatas(datas);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent  = new Intent(context, ArticleMediaActivity.class);
+                String strid = bean.getResult().getList().get(position).getId() + "";
+                intent.putExtra("id",strid);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

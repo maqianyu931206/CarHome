@@ -1,14 +1,25 @@
 package com.maqianyu.carhome.ui.fragment.sale;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -21,6 +32,7 @@ import com.maqianyu.carhome.ui.adapter.SaleRvAdapter;
 import com.maqianyu.carhome.ui.adapter.SaleRvLikeAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +40,7 @@ import java.util.List;
 /**
  * Created by dllo on 16/9/9.
  */
-public class SaleFragment extends AbsBaseFragment {
+public class SaleFragment extends AbsBaseFragment  {
     // 轮播图
     private static final int TIME = 3000;
     private ViewPager viewPager;
@@ -42,6 +54,8 @@ public class SaleFragment extends AbsBaseFragment {
     private RecyclerView recyclerView,recyclerViewLike;
     private SaleRvAdapter saleRvAdapter;
     private SaleRvLikeAdapter saleRvLikeAdapter;
+    private String url ;
+    private  RequestQueue requestQueue;
 
     public static SaleFragment newInstance() {
         Bundle args = new Bundle();
@@ -65,6 +79,7 @@ public class SaleFragment extends AbsBaseFragment {
         recyclerView.setAdapter(saleRvAdapter);
         saleRvLikeAdapter = new SaleRvLikeAdapter(context);
         recyclerViewLike.setAdapter(saleRvLikeAdapter);
+        requestQueue  = Volley.newRequestQueue(context);
     }
 
     @Override
@@ -101,6 +116,70 @@ public class SaleFragment extends AbsBaseFragment {
             }
         });
         dsalelunbo();//加载轮播图
+        lunboinfo(); // 轮播图点击事件,进入详情
+    }
+
+    private void lunboinfo() {
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+             switch (position){
+                 case 0:
+                     url = NetUrl.SALE_LUNBO_1;
+                     break;
+                 case 1:
+                     url = NetUrl.SALE_LUNBO_2;
+                     break;
+                 case 2:
+                     url = NetUrl.SALE_LUNBO_3;
+                     break;
+                 case 3:
+                     url = NetUrl.SALE_LUNBO_4;
+                     break;
+                 case 4:
+                     url = NetUrl.SALE_LUNBO_5;
+                     break;
+
+             }
+                PopupWindow popupWindow= new PopupWindow();
+                final View view = LayoutInflater.from(context).inflate(R.layout.sale_pw,null);
+                popupWindow.setContentView(view);
+                popupWindow.setFocusable(true);
+                popupWindow.setBackgroundDrawable(new ColorDrawable(0));
+//                popupWindow.showAtLocation(view, Gravity.LEFT, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                final ImageView imageView;
+                imageView = (ImageView) view.findViewById(R.id.sale_pw_img);
+                StringRequest ss = new StringRequest(url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                     Gson gson = new Gson();
+                        RotateBean bean= gson.fromJson(response,RotateBean.class);
+                        Picasso.with(context).load(bean.getImgUrl()).into(imageView);
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+                requestQueue.add(ss);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                Log.d("SaleFragment", "state:" + state);
+            }
+        });
+
+
     }
 
     private void dsalelunbo() {
@@ -189,5 +268,6 @@ public class SaleFragment extends AbsBaseFragment {
         datas.add(new RotateBean(NetUrl.SALE_LUNBO_4));
         datas.add(new RotateBean(NetUrl.SALE_LUNBO_5));
     }
+
 
 }

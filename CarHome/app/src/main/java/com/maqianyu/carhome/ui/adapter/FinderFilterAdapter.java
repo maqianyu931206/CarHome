@@ -9,9 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.ui.Bean.ArticleCopyNewsBean;
 import com.maqianyu.carhome.ui.Bean.FinderchioceBean;
-import com.maqianyu.carhome.utils.ScressSizeUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

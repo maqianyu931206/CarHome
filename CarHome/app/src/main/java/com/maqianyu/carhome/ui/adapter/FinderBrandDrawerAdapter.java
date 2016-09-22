@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,14 +22,14 @@ import java.util.List;
  */
 public class FinderBrandDrawerAdapter extends BaseAdapter {
 
-    List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean>datas;
+    List<FinderBrandDrawerBean.ResultBean.FctlistBean>datas;
     private Context context;
 
     public FinderBrandDrawerAdapter(Context context) {
         this.context = context;
     }
 
-    public void setDatas(List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> datas) {
+    public void setDatas(List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
@@ -52,26 +53,26 @@ public class FinderBrandDrawerAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         MyViewHolder myViewHolder;
         if (convertView == null){
-            convertView= LayoutInflater.from(context).inflate(R.layout.item_finder_drawer,null);
+            convertView= LayoutInflater.from(context).inflate(R.layout.item_finder_drawer_all,null);
             myViewHolder = new MyViewHolder(convertView);
             convertView.setTag(myViewHolder);
         }else {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
         myViewHolder.nametv.setText(datas.get(position).getName());
-        myViewHolder.pricetv.setText(datas.get(position).getPrice());
-        Picasso.with(context).load(datas.get(position).getImgurl()).resize(200,150).into(myViewHolder.img);
+        FinderDrawerGridViewAdapter finderDrawerGridViewAdapter = new FinderDrawerGridViewAdapter(context);
+        myViewHolder.gridView.setAdapter(finderDrawerGridViewAdapter);
+        finderDrawerGridViewAdapter.setDatas(datas.get(position).getSerieslist());
         return convertView;
     }
 
     class  MyViewHolder {
-        TextView nametv,pricetv;
-        ImageView img;
+        TextView nametv;
+       GridView gridView;
 
         public  MyViewHolder(View view){
-            nametv = (TextView) view.findViewById(R.id.item_finder_drawer_nametv);
-            pricetv = (TextView) view.findViewById(R.id.item_finder_drawer_pricetv);
-            img = (ImageView) view.findViewById(R.id.item_finder_drawer_img);
+            nametv = (TextView) view.findViewById(R.id.item_finder_drawer_all_tv);
+            gridView = (GridView) view.findViewById(R.id.item_finder_drawer_all_gridView);
         }
     }
 

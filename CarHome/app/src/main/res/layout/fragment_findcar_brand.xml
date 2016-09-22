@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/finder_drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-     >
+        android:layout_height="match_parent">
 
         <ScrollView
             android:layout_width="360dp"
@@ -129,18 +129,35 @@
                     android:layout_marginTop="6dp"
                     android:background="@color/colorview" />
 
-                <com.maqianyu.carhome.view.HomeListView
+                <ListView
                     android:id="@+id/finder_brand_CarName_listView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
         </ScrollView>
 
-        <com.maqianyu.carhome.view.LetterView
-            android:id="@+id/letter_view"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/float_letter"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="#F88701"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:visibility="gone" />
+            <com.maqianyu.carhome.view.SlideBar
+                android:id="@+id/slideBar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|bottom" />
+
+        </FrameLayout>
+
+
 
     </RelativeLayout>
 
@@ -152,8 +169,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="right"
         android:background="#fff"
-        android:clickable="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:touchscreenBlocksFocus="true"
+        android:focusableInTouchMode="true"
+        >
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -189,7 +208,8 @@
         <ListView
             android:id="@+id/finder_brand_drawer_listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            />
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

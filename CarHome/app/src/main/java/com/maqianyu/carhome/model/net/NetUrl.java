@@ -29,6 +29,9 @@ public class NetUrl {
 
     public static final String ARTICLE_COPY_URLSTART ="http://cont.app.autohome.com.cn/autov4.2.5/content/News/newscontent-a2-pm1-v4.2.5-n";
     public static final String ARTICLE_COPY_URLEND ="-lz0-sp0-nt0-sa1-p0-c1-fs0-cw320.html";
+
+    public static final String ARTICLE_MEDIA_START = "http://v.autohome.com.cn/v-";
+    public static final String ARTICLE_MEDIA_END =".html";
     /**
      * 快报界面拼接网址,详情页
      */
@@ -110,6 +113,16 @@ public class NetUrl {
     public static final String FORUM_ANSLESE_38 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c225-p1-s30.json";//港澳台游记
     public static final String FORUM_ANSLESE_39 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c226-p1-s30.json";//海外游记
     public static final String FORUM_ANSLESE_40 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c212-p1-s30.json";//沧海遗珠
+
+    /**
+     *  论坛 精选推荐 网址拼接
+     */
+    public  static  final  String FORUM_ANSLESE_START = "http://forum.app.autohome.com.cn/autov5.0.0/forum/club/topiccontent-a2-pm2-v5.0.0-t";
+    public  static  final  String FORUM_ANSLESE_END = "-o0-p1-s20-c1-nt0-fs0-sp0-al0-cw320.json";
+
+    public  static  final  String FORUM_ANSLESE_START_FORUM = "http://forum.app.autohome.com.cn/autov5.0.0/forum/club/topiccontent-a2-pm2-v5.0.0-t";
+    public  static  final  String FORUM_ANSLESE_END_FORUM = "-o0-p1-s20-c1-nt0-fs0-sp0-al0-cw320.json";
+
 
     /**
      * 发现页,轮播图

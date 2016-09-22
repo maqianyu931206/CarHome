@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +32,7 @@ import com.maqianyu.carhome.ui.adapter.FinderBrandRvAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
+import com.maqianyu.carhome.view.SlideBar;
 
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
     private FinderBrandCarNameLvAdapter finderBrandCarNameLvAdapter;
     private FinderBrandRvAdapter finderBrandRvAdapter;
     private RecyclerView recyclerView;
-    private  ListView recyclerViewLongName;
+    private ListView listViewLongName;
     private DrawerLayout drawerLayout;
     private LinearLayout drawerLl;
     // 抽屉里的listView radioButton
@@ -52,6 +55,9 @@ public class FinderBrandFragment extends AbsBaseFragment {
     private FinderBrandDrawerAdapter finderBrandDrawerAdapter;
     private FinderBrandHotBean bean;
     private String url11;
+
+    private SlideBar slideBar;
+    private TextView float_letter;
 
     public static FinderBrandFragment newInstance(String url) {
         Bundle args = new Bundle();
@@ -70,8 +76,8 @@ public class FinderBrandFragment extends AbsBaseFragment {
     protected void initViews() {
         // 所有车的加载
         finderBrandCarNameLvAdapter = new FinderBrandCarNameLvAdapter(context);
-        recyclerViewLongName = byView(R.id.finder_brand_CarName_listView);
-        recyclerViewLongName.setAdapter(finderBrandCarNameLvAdapter);
+        listViewLongName = byView(R.id.finder_brand_CarName_listView);
+        listViewLongName.setAdapter(finderBrandCarNameLvAdapter);
 
         finderBrandRvAdapter = new FinderBrandRvAdapter(context);
         recyclerView = byView(R.id.finder_brand_recyclerView);
@@ -88,12 +94,46 @@ public class FinderBrandFragment extends AbsBaseFragment {
         finderBrandDrawerAdapter = new FinderBrandDrawerAdapter(context);
         listView.setAdapter(finderBrandDrawerAdapter);
 
+        slideBar = byView(R.id.slideBar);
+        float_letter = byView(R.id.float_letter);
     }
 
     @Override
     protected void initData() {
         hotbread();// 热门品牌
         getCarDatas(); // 找车-车名的列表
+        slidebar(); // 实现联动
+    }
+
+    private void slidebar() {
+        slideBar.setOnTouchLetterChangeListenner(new SlideBar.OnTouchLetterChangeListenner() {
+            @Override
+            public void onTouchLetterChange(MotionEvent event, String s) {
+                float_letter.setText(s);
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                        float_letter.setVisibility(View.VISIBLE);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                    default:
+                        float_letter.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                float_letter.setVisibility(View.GONE);
+                            }
+                        }, 100);
+                        break;
+                }
+                int position = finderBrandCarNameLvAdapter.indexOf(s);//这个array就是传给自定义Adapter的
+                listViewLongName.smoothScrollToPosition(position);//调用ListView的setSelection()方法就可实现了
+                finderBrandCarNameLvAdapter.notifyDataSetChanged();
+                Log.d("pppp", "position:==" + position);
+
+            }
+        });
     }
 
     // 找车-车名的列表
@@ -102,14 +142,11 @@ public class FinderBrandFragment extends AbsBaseFragment {
             @Override
             public void success(String resultStr) {
                 Gson gson = new Gson();
-//                List<FinderBrandCarNameBean.ResultBean.BrandlistBean.ListBean> datas2 = new ArrayList<>();
                 FinderBrandCarNameBean bean2 = gson.fromJson(resultStr, FinderBrandCarNameBean.class);
-//                for (int i = 0; i < bean2.getResult().getBrandlist().size(); i++) {
-                    List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas = bean2.getResult().getBrandlist();
-//                    datas2.addAll(datas);
-//                }
+                List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas = bean2.getResult().getBrandlist();
                 finderBrandCarNameLvAdapter.setDatas(datas);
             }
+
             @Override
             public void failure() {
             }
@@ -144,10 +181,10 @@ public class FinderBrandFragment extends AbsBaseFragment {
             @Override
             public void ForumItemListener(int position, Object o) {
                 drawerLayout.openDrawer(drawerLl);
+                drawerLl.setFocusable(true);
                 String middleurl = bean.getResult().getList().get(position).getId() + "";
-                final String allurl = NetUrl.FINDER_BRAND_START + middleurl + NetUrl.FINDER_BRAND_END;
-                final String showurl = NetUrl.FINDER_BRAND_START_SHOW + middleurl + NetUrl.FINDER_BRAND_END_SHOW;
-                Log.d("hhh", showurl);
+                final String showurl = NetUrl.FINDER_BRAND_START + middleurl + NetUrl.FINDER_BRAND_END;
+                final String allurl = NetUrl.FINDER_BRAND_START_SHOW + middleurl + NetUrl.FINDER_BRAND_END_SHOW;
                 url11 = showurl;
                 radioButtonshow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -171,7 +208,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
                         }
                     }
                 });
-                buildlistDatas();
+                buildlistDatas(); // 抽屉数据的加载
             }
 
             private void buildlistDatas() {
@@ -181,28 +218,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
                         Gson gson = new Gson();
                         FinderBrandDrawerBean bean = gson.fromJson(resultStr, FinderBrandDrawerBean.class);
                         List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas = bean.getResult().getFctlist();
-                        if (datas.size() == 3) {
-                            Log.d("jjj", "datas.size():" + datas.size());
-                            List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> data1 = bean.getResult().getFctlist().get(0).getSerieslist();
-                            List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> data2 = bean.getResult().getFctlist().get(1).getSerieslist();
-                            List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> data3 = bean.getResult().getFctlist().get(2).getSerieslist();
-                            data1.addAll(data2);
-                            data1.addAll(data3);
-                            finderBrandDrawerAdapter.setDatas(data1);
-                            if (datas.get(0).getName() != datas.get(1).getName()) {
-                                textViewname.setText(datas.get(1).getName());
-                            }
-                            if (datas.get(1).getName() != datas.get(2).getName()) {
-                                textViewname.setText(datas.get(2).getName());
-                            }
-                            Log.d("xxx", "finderBrandDrawerAdapter:" + finderBrandDrawerAdapter);
-                        }
-                        if (datas.size() == 1) {
-                            List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> data1 = bean.getResult().getFctlist().get(0).getSerieslist();
-                            if (data1.size() != 0) {
-                                finderBrandDrawerAdapter.setDatas(data1);
-                            }
-                        }
+                        finderBrandDrawerAdapter.setDatas(datas);
                     }
 
                     @Override

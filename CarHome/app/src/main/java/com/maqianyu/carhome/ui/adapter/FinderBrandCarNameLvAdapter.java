@@ -2,35 +2,18 @@ package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.ui.Bean.ArticleCopyNewsBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandCarNameBean;
-import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
-import com.maqianyu.carhome.ui.inteface.ForumIntance;
-import com.maqianyu.carhome.utils.Contact;
-import com.maqianyu.carhome.utils.ContactComparator;
-import com.maqianyu.carhome.utils.ScressSizeUtil;
-import com.maqianyu.carhome.utils.Utils;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.zip.Inflater;
 
 /**
  * Created by dllo on 16/9/18.
@@ -38,9 +21,16 @@ import java.util.zip.Inflater;
 public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     private Context context;
     private List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas;
+    private List<FinderBrandCarNameBean.ResultBean>datas2;
+    private  int a;
+    private int position;
 
     public FinderBrandCarNameLvAdapter(Context context) {
         this.context = context;
+    }
+
+    public FinderBrandCarNameLvAdapter(int position) {
+        this.position = position;
     }
 
     public void setDatas(List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas) {
@@ -80,6 +70,16 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
         return convertView;
 
     }
+
+    public int indexOf(String s) {
+        for (int i = 0; i < 21; i++) {
+            if ( datas.get(i).getLetter().equals(s) ) {
+                a = i;
+            }
+        }
+        return a;
+    }
+
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleTv;

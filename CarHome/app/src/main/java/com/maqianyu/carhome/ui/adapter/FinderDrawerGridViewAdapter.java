@@ -1,8 +1,6 @@
 package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +9,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.ui.Bean.ForumLVBean;
+import com.maqianyu.carhome.ui.Bean.FinderBrandDrawerBean;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 /**
- * Created by dllo on 16/9/10.
- * 论坛-listview 适配器
+ * Created by dllo on 16/9/22.
  */
-public class ForumLVAdapter extends BaseAdapter {
+public class FinderDrawerGridViewAdapter extends BaseAdapter {
+    List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean>datas;
     private Context context;
-    private List<ForumLVBean>datas;
-    private int layoutPosition;
-    public void setDatas(List<ForumLVBean> datas) {
-        this.datas = datas;
-        notifyDataSetChanged();
+
+
+    public FinderDrawerGridViewAdapter(Context context) {
+        this.context = context;
     }
 
-    public ForumLVAdapter(Context context) {
-        this.context = context;
+    public void setDatas(List<FinderBrandDrawerBean.ResultBean.FctlistBean.SerieslistBean> datas) {
+        this.datas = datas;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -47,26 +46,28 @@ public class ForumLVAdapter extends BaseAdapter {
         return position;
     }
 
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_forum_lv,parent,false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_finder_drawer,parent,false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        ForumLVBean myBean = (ForumLVBean) getItem(position);
-        viewHolder.nameTv.setText(myBean.getName());
-//        if (position  == position) {
-//            viewHolder.nameTv.setTextColor(Color.BLUE);
-//        }
+        viewHolder.pricetv.setText(datas.get(position).getPrice());
+        viewHolder.nameTv.setText(datas.get(position).getName());
+        Picasso.with(context).load(datas.get(position).getImgurl()).resize(200,160).into(viewHolder.img);
         return convertView;
     }
     class  ViewHolder{
-        TextView nameTv;
+        TextView nameTv,pricetv;
+        ImageView img;
         public  ViewHolder(View v){
-            nameTv = (TextView) v.findViewById(R.id.item_forum_lv_tv);
+            nameTv = (TextView) v.findViewById(R.id.item_finder_drawer_nametv);
+            pricetv = (TextView) v.findViewById(R.id.item_finder_drawer_pricetv);
+            img = (ImageView) v.findViewById(R.id.item_finder_drawer_img);
         }
     }
 }

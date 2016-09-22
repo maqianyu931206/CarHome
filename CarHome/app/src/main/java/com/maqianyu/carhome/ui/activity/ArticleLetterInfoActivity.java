@@ -31,7 +31,6 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
     private  String middle ;
     private ArticleLetterInfoAdapter articleLetterInfoAdapter;
     private ListView listView;
-    private Context context;
     private TextView authernametv,timetv,summerytv,authornametv2,numtv,titletv;
     private ImageView img , headingimg;
     @Override
@@ -58,8 +57,8 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
         middle = intent.getStringExtra("id");
         String url = NetUrl.ARTICLE_LETTER_INFO_START+ middle +NetUrl.ARTICLE_LETTER_INFO_END;
         VolleyInstance.getInstance().startRequest(url,this);
-//        articleLetterInfoAdapter = new ArticleLetterInfoAdapter(context);
-//        listView.setAdapter(articleLetterInfoAdapter);
+        articleLetterInfoAdapter = new ArticleLetterInfoAdapter(this);
+        listView.setAdapter(articleLetterInfoAdapter);
     }
     @Override
     public void success(String resultStr) {
@@ -68,7 +67,7 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
         ArticleLetterInfoBean articleLetterInfoBean = gson.fromJson(resultStr,ArticleLetterInfoBean.class);
         List<ArticleLetterInfoBean.ResultBean.MessagelistBean> datas = articleLetterInfoBean.getResult().getMessagelist();
         ArticleLetterInfoBean.ResultBean newsdataBean = articleLetterInfoBean.getResult();
-//        articleLetterInfoAdapter.setDatas(datas);
+        articleLetterInfoAdapter.setDatas(datas);
 
         authernametv.setText(newsdataBean.getNewsdata().getNewsauthor());
         timetv.setText(newsdataBean.getNewsdata().getCreatetime());
@@ -76,12 +75,12 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
         titletv.setText(newsdataBean.getNewsdata().getTitle());
         numtv.setText(newsdataBean.getNewsdata().getReviewcount() + "人浏览");
         authornametv2.setText("编辑:" + newsdataBean.getNewsdata().getNewsauthor());
-        Picasso.with(context).load(newsdataBean.getNewsdata().getImg()).resize(440,200).config(Bitmap.Config.ALPHA_8).into(img);
-        Picasso.with(context).load(newsdataBean.getNewsdata().getHeadimg()).into(headingimg);
+        Picasso.with(this).load(newsdataBean.getNewsdata().getImg()).resize(440,200).config(Bitmap.Config.ALPHA_8).into(img);
+        Picasso.with(this).load(newsdataBean.getNewsdata().getHeadimg()).into(headingimg);
     }
 
     @Override
     public void failure() {
-        Toast.makeText(context, "sss", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "sss", Toast.LENGTH_SHORT).show();
     }
 }

@@ -3,7 +3,7 @@
     android:id="@+id/forum_pop_rellay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dfdddd"
+    android:background="#f2f2f2"
     android:orientation="vertical">
     <TextView
         android:id="@+id/tv"
@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:padding="10dp"
         android:text="栏目分类"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/back"
@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:padding="10dp"
+        android:textSize="12sp"
         android:text="关闭" />
 
     <View
@@ -29,10 +30,11 @@
         android:layout_below="@id/tv"
         android:background="@color/colorview" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginLeft="20dp"
         android:id="@+id/forum_pop_listView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/view" />
 
 </RelativeLayout>

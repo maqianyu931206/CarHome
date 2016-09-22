@@ -1,13 +1,18 @@
 package com.maqianyu.carhome.ui.fragment.forum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.ForumForumBean;
+import com.maqianyu.carhome.ui.activity.ForumAnlseseActivity;
+import com.maqianyu.carhome.ui.activity.ForumForumActivity;
 import com.maqianyu.carhome.ui.adapter.ForumForumAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
@@ -53,9 +58,20 @@ public class ForumForumFragment extends AbsBaseFragment implements VolleyResult 
     @Override
     public void success(String resultStr) {
         Gson gson = new Gson();
-        ForumForumBean bean = gson.fromJson(resultStr, ForumForumBean.class);
+        final ForumForumBean bean = gson.fromJson(resultStr, ForumForumBean.class);
         List<ForumForumBean.ResultBean.ListBean> datas = bean.getResult().getList();
         forumForumAdapter.setDatas(datas);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent  = new Intent(context, ForumForumActivity.class);
+                String strid = bean.getResult().getList().get(position).getTopicid() + "";
+                intent.putExtra("id",strid);
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override

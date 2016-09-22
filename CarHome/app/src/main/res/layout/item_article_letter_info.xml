@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/item_article_letter_info_heading_list_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <TextView
+        android:id="@+id/item_article_letter_info_author_list_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/item_article_letter_info_heading_list_img"
+        android:padding="3dp" />
+
+    <TextView
+        android:id="@+id/item_article_letter_info_createtime_list_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_article_letter_info_author_list_tv"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/item_article_letter_info_heading_list_img"
+        android:padding="3dp" />
+
+    <TextView
+        android:id="@+id/item_article_letter_info_summary_list_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_article_letter_info_heading_list_img"
+        android:layout_margin="5dp"
+        android:padding="5dp" />
+
+    <com.maqianyu.carhome.view.HomeGridView
+        android:id="@+id/article_letter_info_img_gridView"
+        android:layout_width="match_parent"
+        android:layout_below="@id/item_article_letter_info_summary_list_tv"
+        android:layout_height="match_parent" />
+
+    <com.maqianyu.carhome.view.HomeGridView
+        android:id="@+id/article_letters_info_tv_gridView"
+        android:layout_width="match_parent"
+        android:layout_below="@id/article_letter_info_img_gridView"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
+

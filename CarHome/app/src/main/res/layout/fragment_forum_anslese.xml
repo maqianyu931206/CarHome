@@ -4,29 +4,26 @@
     android:background="#fff"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="#efecec"
-        android:orientation="horizontal">
+        android:background="#efecec">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/forum_rv"
-            android:layout_weight="9"
             android:background="#efecec"
-            android:layout_width="0dp"
-            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
             android:layout_height="38dp"/>
-
         <ImageView
             android:id="@+id/forum_intent_img"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_margin="8dp"
+            android:layout_alignParentRight="true"
             android:background="#efecec"
             android:src="@mipmap/sort"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/forum_anslese_listview"
