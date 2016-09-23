@@ -74,37 +74,41 @@ public class FinderBrandFragment extends AbsBaseFragment {
 
     @Override
     protected void initViews() {
+
         // 所有车的加载
         finderBrandCarNameLvAdapter = new FinderBrandCarNameLvAdapter(context);
         listViewLongName = byView(R.id.finder_brand_CarName_listView);
         listViewLongName.setAdapter(finderBrandCarNameLvAdapter);
-
-        finderBrandRvAdapter = new FinderBrandRvAdapter(context);
-        recyclerView = byView(R.id.finder_brand_recyclerView);
+        // 抽屉ListView数据的初始化
         drawerLayout = byView(R.id.finder_drawerlayout);
         drawerLl = byView(R.id.drawer_Ll);
-
-        // 热门品牌.recyclerView的加载
-        recyclerView.setAdapter(finderBrandRvAdapter);
-        radioButtonshow = byView(R.id.finder_brand_rb_show);
-        radioButtonall = byView(R.id.finder_brand_rb_all);
-        textViewname = byView(R.id.item_finder_drawer_name_tv);
-        // 抽屉ListView数据的初始化
         listView = byView(R.id.finder_brand_drawer_listView);
+        textViewname = byView(R.id.item_finder_drawer_name_tv);
+        radioButtonshow = byView(R.id.finder_brand_rb_show);
+        radioButtonall =  byView(R.id.finder_brand_rb_all);
         finderBrandDrawerAdapter = new FinderBrandDrawerAdapter(context);
         listView.setAdapter(finderBrandDrawerAdapter);
-
+        // 联动数据初始化
         slideBar = byView(R.id.slideBar);
         float_letter = byView(R.id.float_letter);
     }
 
     @Override
     protected void initData() {
+        // 热门品牌.recyclerView的加载 ,加载头布局
+        View view = LayoutInflater.from(context).inflate(R.layout.finder_header_rv,null);
+        Log.d("ttt", "view:" + view);
+        finderBrandRvAdapter = new FinderBrandRvAdapter(context);
+        recyclerView = (RecyclerView) view.findViewById(R.id.finder_brand_recyclerView);
+        recyclerView.setAdapter(finderBrandRvAdapter);
         hotbread();// 热门品牌
+        listViewLongName.addHeaderView(view);
+
         getCarDatas(); // 找车-车名的列表
         slidebar(); // 实现联动
     }
 
+    // 联动效果的实现
     private void slidebar() {
         slideBar.setOnTouchLetterChangeListenner(new SlideBar.OnTouchLetterChangeListenner() {
             @Override
@@ -128,7 +132,8 @@ public class FinderBrandFragment extends AbsBaseFragment {
                         break;
                 }
                 int position = finderBrandCarNameLvAdapter.indexOf(s);//这个array就是传给自定义Adapter的
-                listViewLongName.smoothScrollToPosition(position);//调用ListView的setSelection()方法就可实现了
+                int position2 = position + 1;
+                listViewLongName.smoothScrollToPositionFromTop(position2,0);//调用ListView的setSelection()方法就可实现了
                 finderBrandCarNameLvAdapter.notifyDataSetChanged();
                 Log.d("pppp", "position:==" + position);
 
@@ -186,6 +191,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 final String showurl = NetUrl.FINDER_BRAND_START + middleurl + NetUrl.FINDER_BRAND_END;
                 final String allurl = NetUrl.FINDER_BRAND_START_SHOW + middleurl + NetUrl.FINDER_BRAND_END_SHOW;
                 url11 = showurl;
+                Log.d("ttt", "radioButtonshow:" + radioButtonshow);
                 radioButtonshow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -229,20 +235,5 @@ public class FinderBrandFragment extends AbsBaseFragment {
             }
         });
     }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        LayoutInflater.from(getContext()).inflate(R.menu.main, null);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
 }

@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
@@ -23,11 +25,14 @@ import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.ListTypeBean;
 import com.maqianyu.carhome.ui.Bean.RotateBean;
+import com.maqianyu.carhome.ui.Bean.TextBean;
 import com.maqianyu.carhome.ui.activity.ArticleNewInfoActivity;
+import com.maqianyu.carhome.ui.activity.MainActivity;
 import com.maqianyu.carhome.ui.adapter.ListTypeAdapter;
 import com.maqianyu.carhome.ui.adapter.RotateArticleAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
+import com.maqianyu.carhome.view.ReFlashListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +41,7 @@ import java.util.List;
  * Created by dllo on 16/9/9.
  * 推荐-新闻
  */
-public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResult{
+public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult, ReFlashListView.IReflashListener {
     private static final int TIME = 3000;
     private ViewPager viewPager;
     private LinearLayout pointLl;// 轮播状态改变的小圆点容器
@@ -46,12 +51,13 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     private Handler handler;
     private boolean isRotate = false;
     private Runnable rotateRunnable;
-    private  String url;
-    private ListView listView;
+    private String url;
+    private ReFlashListView listView;
+
 
     public static ArticleNewFragment newInstance(String url) {
         Bundle args = new Bundle();
-        args.putString("url",url);
+        args.putString("url", url);
         ArticleNewFragment fragment = new ArticleNewFragment();
         fragment.setArguments(args);
         return fragment;
@@ -61,23 +67,27 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     protected int setLayout() {
         return R.layout.fragment_article_new;
     }
+
     @Override
     protected void initViews() {
-        viewPager =byView(R.id.rotate_vp);
-        pointLl = byView(R.id.rotate_point_container);
-        listView  =byView(R.id.artical_new_lv);
+        listView = byView(R.id.artical_new_lv);
     }
+
     @Override
     protected void initData() {
         Bundle bundel = getArguments();
         url = bundel.getString("url");
         //获取网络数据
-        VolleyInstance.getInstance().startRequest(url,this);
+        VolleyInstance.getInstance().startRequest(url, this);
         listTypeAdapter = new ListTypeAdapter(context);
         listView.setAdapter(listTypeAdapter);
 
+        // 轮播图加载头布局
+        View view = LayoutInflater.from(context).inflate(R.layout.lunbophone_header, null);
+        viewPager = (ViewPager) view.findViewById(R.id.rotate_vp);
+        pointLl = (LinearLayout) view.findViewById(R.id.rotate_point_container);
         buildDatas();//轮播图构造数据
-        vpAdapter = new RotateArticleAdapter(datas,context);
+        vpAdapter = new RotateArticleAdapter(datas, context);
         viewPager.setAdapter(vpAdapter);
         // ViewPager的页数为int最大值,设置当前页多一些,可以上来就向前滑动
         // 为了保证第一页始终为数据的第0条 取余要为0,因此设置数据集合大小的倍数
@@ -89,13 +99,16 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
         addPoints();
         // 随着轮播改变小点
         changePoints();
+        listView.addHeaderView(view);
+
+        listView.setInterface(this);  //接口回调
     }
 
     // 网络请求成功
     @Override
     public void success(String resultStr) {
         Gson gson = new Gson();
-        ListTypeBean listTypeBean = gson.fromJson(resultStr,ListTypeBean.class);
+        ListTypeBean listTypeBean = gson.fromJson(resultStr, ListTypeBean.class);
         List<ListTypeBean.ResultBean.NewslistBean> datas = listTypeBean.getResult().getNewslist();
         listTypeAdapter.setDatas(datas);
         // 跳转详情
@@ -103,11 +116,11 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListTypeBean.ResultBean.NewslistBean bean = (ListTypeBean.ResultBean.NewslistBean) parent.getItemAtPosition(position);
-                String title =bean.getTitle();
+                String title = bean.getTitle();
                 String middle = bean.getId() + "";
-                Intent intent  =new Intent(context, ArticleNewInfoActivity.class);
-                intent.putExtra("title",title);
-                intent.putExtra("id",middle);
+                Intent intent = new Intent(context, ArticleNewInfoActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("id", middle);
                 startActivity(intent);
             }
         });
@@ -117,11 +130,13 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
     @Override
     public void failure() {
     }
+
     private void changePoints() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int position) {
                 if (isRotate) {
@@ -135,17 +150,19 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
                     iv.setImageResource(R.mipmap.point_grey);
                 }
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
     }
+
     private void addPoints() {
         // 有多少张图加载多少个小点
         for (int i = 0; i < datas.size(); i++) {
             ImageView pointIv = new ImageView(getContext());
-            pointIv.setPadding(5,5,5,5);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(45,45);
+            pointIv.setPadding(5, 5, 5, 5);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(45, 45);
             pointIv.setLayoutParams(params);
             // 设置第0页小点的为灰色
             if (i == 0) {
@@ -156,6 +173,7 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
             pointLl.addView(pointIv);
         }
     }
+
     private void startRotate() {
         rotateRunnable = new Runnable() {
             @Override
@@ -169,16 +187,19 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
         };
         handler.postDelayed(rotateRunnable, TIME);
     }
+
     @Override
     public void onResume() {
         super.onResume();
         isRotate = true;
     }
+
     @Override
     public void onPause() {
         super.onPause();
         isRotate = false;
     }
+
     private void buildDatas() {
         datas = new ArrayList<>();
         datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_1));
@@ -188,5 +209,32 @@ public class ArticleNewFragment extends AbsBaseFragment  implements  VolleyResul
         datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_5));
         datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_6));
     }
+
+    @Override
+    public void onReflash() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                VolleyInstance.getInstance().startRequest(NetUrl.ARTICLE_NEW_NEW, new VolleyResult() {
+                    @Override
+                    public void success(String resultStr) {
+                        Gson gson = new Gson();
+                        ListTypeBean listTypeBean = gson.fromJson(resultStr, ListTypeBean.class);
+                        List<ListTypeBean.ResultBean.NewslistBean> datas = listTypeBean.getResult().getNewslist();
+                        listTypeAdapter.setDatas(datas);
+                        listTypeAdapter.notifyDataSetChanged();
+                        listView.reflshComplete();
+                    }
+                    @Override
+                    public void failure() {
+                    }
+                });
+            }
+        }, 2000);
+        // 获取最新数据
+
+    } //下拉刷新接口回调
+
 
 }

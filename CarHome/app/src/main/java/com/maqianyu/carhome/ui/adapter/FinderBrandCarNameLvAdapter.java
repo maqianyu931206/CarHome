@@ -23,14 +23,9 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     private List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas;
     private List<FinderBrandCarNameBean.ResultBean>datas2;
     private  int a;
-    private int position;
 
     public FinderBrandCarNameLvAdapter(Context context) {
         this.context = context;
-    }
-
-    public FinderBrandCarNameLvAdapter(int position) {
-        this.position = position;
     }
 
     public void setDatas(List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas) {

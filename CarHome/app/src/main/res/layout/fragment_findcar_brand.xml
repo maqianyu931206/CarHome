@@ -5,162 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/finder_brand_CarName_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:layout_width="360dp"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/float_letter"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:background="#F88701"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:visibility="gone" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <com.maqianyu.carhome.view.SlideBar
+            android:id="@+id/slideBar"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|bottom" />
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/img1"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
-                            android:background="@mipmap/save" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img1"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="我的收藏" />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/img2"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
-                            android:background="@mipmap/see_history" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img2"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="浏览历史" />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/img3"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
-                            android:background="@mipmap/one_two_three" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img3"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="热销排行" />
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/colorview" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="热门品牌"
-                    android:textSize="14sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorview" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/finder_brand_recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:layout_marginTop="6dp"
-                    android:background="@color/colorview" />
-
-                <ListView
-                    android:id="@+id/finder_brand_CarName_listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-        </ScrollView>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/float_letter"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:background="#F88701"
-                android:gravity="center"
-                android:textSize="40sp"
-                android:visibility="gone" />
-            <com.maqianyu.carhome.view.SlideBar
-                android:id="@+id/slideBar"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="right|bottom" />
-
-        </FrameLayout>
-
-
-
-    </RelativeLayout>
-
+    </FrameLayout>
 
     <!--抽屉的内容-->
     <LinearLayout
@@ -169,10 +46,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="right"
         android:background="#fff"
-        android:orientation="vertical"
-        android:touchscreenBlocksFocus="true"
         android:focusableInTouchMode="true"
-        >
+        android:orientation="vertical"
+        android:touchscreenBlocksFocus="true">
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -185,8 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:button="@null"
                 android:background="@null"
+                android:button="@null"
                 android:gravity="right"
                 android:text="在售" />
 
@@ -208,8 +84,7 @@
         <ListView
             android:id="@+id/finder_brand_drawer_listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

@@ -27,11 +27,14 @@ public class NetUrl {
     public static final String ARTICLE_URLSTSART = "http://cont.app.autohome.com.cn/autov4.2.5/content/News/newscontent-a2-pm1-v4.2.5-n"; // 最新界面的详情页
     public static final String ARTICLE_URLEND = "-lz0-sp0-nt0-sa1-p0-c1-fs0-cw320.html";
 
-    public static final String ARTICLE_COPY_URLSTART ="http://cont.app.autohome.com.cn/autov4.2.5/content/News/newscontent-a2-pm1-v4.2.5-n";
-    public static final String ARTICLE_COPY_URLEND ="-lz0-sp0-nt0-sa1-p0-c1-fs0-cw320.html";
+    public static final String ARTICLE_COPY_URLSTART = "http://cont.app.autohome.com.cn/autov4.2.5/content/News/newscontent-a2-pm1-v4.2.5-n";
+    public static final String ARTICLE_COPY_URLEND = "-lz0-sp0-nt0-sa1-p0-c1-fs0-cw320.html";
 
     public static final String ARTICLE_MEDIA_START = "http://v.autohome.com.cn/v-";
-    public static final String ARTICLE_MEDIA_END =".html";
+    public static final String ARTICLE_MEDIA_END = ".html";
+
+    public static final String ARTICLE_NEW_NEW = "http://app.api.autohome.com.cn/autov4.8.8/news/newslist-pm1-c0-nt0-p1-s30-l890560.json";
+
     /**
      * 快报界面拼接网址,详情页
      */
@@ -115,13 +118,13 @@ public class NetUrl {
     public static final String FORUM_ANSLESE_40 = "http://app.api.autohome.com.cn/autov4.8.8/club/jingxuantopic-pm1-c212-p1-s30.json";//沧海遗珠
 
     /**
-     *  论坛 精选推荐 网址拼接
+     * 论坛 精选推荐 网址拼接
      */
-    public  static  final  String FORUM_ANSLESE_START = "http://forum.app.autohome.com.cn/autov5.0.0/forum/club/topiccontent-a2-pm2-v5.0.0-t";
-    public  static  final  String FORUM_ANSLESE_END = "-o0-p1-s20-c1-nt0-fs0-sp0-al0-cw320.json";
+    public static final String FORUM_ANSLESE_START = "http://forum.app.autohome.com.cn/autov5.0.0/forum/club/topiccontent-a2-pm2-v5.0.0-t";
+    public static final String FORUM_ANSLESE_END = "-o0-p1-s20-c1-nt0-fs0-sp0-al0-cw320.json";
 
-    public  static  final  String FORUM_ANSLESE_START_FORUM = "http://forum.app.autohome.com.cn/autov5.0.0/forum/club/topiccontent-a2-pm2-v5.0.0-t";
-    public  static  final  String FORUM_ANSLESE_END_FORUM = "-o0-p1-s20-c1-nt0-fs0-sp0-al0-cw320.json";
+    public static final String FORUM_ANSLESE_START_FORUM = "http://forum.app.autohome.com.cn/autov5.0.0/forum/club/topiccontent-a2-pm2-v5.0.0-t";
+    public static final String FORUM_ANSLESE_END_FORUM = "-o0-p1-s20-c1-nt0-fs0-sp0-al0-cw320.json";
 
 
     /**
@@ -133,6 +136,11 @@ public class NetUrl {
     public static final String SALE_LUNBO_3 = "http://app2.autoimg.cn/appdfs/g10/M0F/4A/26/autohomecar__wKgH0VfeadSAeX9NAAKRGlfYsiQ489.jpg";
     public static final String SALE_LUNBO_4 = "http://app2.autoimg.cn/appdfs/g6/M0E/48/CE/autohomecar__wKgHzVfeQbOAeCjDAAGUKq5A1lA366.jpg";
     public static final String SALE_LUNBO_5 = "http://app2.autoimg.cn/appdfs/g13/M05/40/B4/autohomecar__wKgH1FfZDPmAE7W0AAKp8IloxLE758.jpg";
+    public static final String SALE_LUNBO_11 = "http://m.mall.autohome.com.cn/topic/2016/9/921/#pvareaid=104735";
+    public static final String SALE_LUNBO_22 = "http://m.mall.autohome.com.cn/topic/2016/9/921/#pvareaid=104735";
+    public static final String SALE_LUNBO_33 = "http://m.1111.autohome.com.cn/#pvareaid=104735";
+    public static final String SALE_LUNBO_44 = "http://hd.j.autohome.com.cn/loan/loan/sqty?type=ty#pvareaid=106574";
+    public static final String SALE_LUNBO_55 = "http://m.mall.autohome.com.cn/topic/2016/9/gcj/?isapp=1#pvareaid=104735";
     /**
      * 发现页-导航-recyclerView
      */

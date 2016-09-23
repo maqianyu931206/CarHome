@@ -1,7 +1,9 @@
 package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.Bean.ListTypeBean;
 import com.maqianyu.carhome.ui.Bean.RotateBean;
+import com.maqianyu.carhome.ui.activity.LunBoInfoActivity;
 
 import java.util.List;
 
@@ -53,13 +56,21 @@ public class RotateArticleAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         // position是int最大值所以这里可能是几百甚至上千,因此取余避免数组越界
-        int newPosition = position % datas.size();
+        final int newPosition = position % datas.size();
         View convertView = inflater.inflate(R.layout.item_rotate_vp, container, false);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.item_iv);
         RotateBean bean =datas.get(newPosition);
         Glide.with(context).load(bean.getImgUrl()).into(imageView);
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, LunBoInfoActivity.class);
+                intent.putExtra("ps",newPosition);
+                context.startActivity(intent);
+            }
+        });
         container.addView(convertView);
         return convertView;
     }
