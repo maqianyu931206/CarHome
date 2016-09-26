@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.maqianyu.carhome.R;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -19,6 +16,7 @@ import java.net.URL;
 
 /**
  * Created by dllo on 16/9/23.
+ * 欢迎页
  */
 public class WelcomeActivity extends AbsBaseActivity {
     private TextView welcomeTimeTv;

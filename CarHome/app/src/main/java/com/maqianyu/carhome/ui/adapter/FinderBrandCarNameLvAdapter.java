@@ -76,12 +76,12 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     }
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder {
         TextView titleTv;
         GridView gridView;
 
         public MyViewHolder(View itemView) {
-            super(itemView);
+
             titleTv = (TextView) itemView.findViewById(R.id.item_finder_carname_tv);
             gridView = (GridView) itemView.findViewById(R.id.item_finder_carname_gridView);
         }

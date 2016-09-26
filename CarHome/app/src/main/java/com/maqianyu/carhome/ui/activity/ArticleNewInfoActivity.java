@@ -1,6 +1,8 @@
 package com.maqianyu.carhome.ui.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import com.maqianyu.carhome.R;
+import com.maqianyu.carhome.model.db.SQHelper;
 import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
 
@@ -25,6 +28,9 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
     private WebView webView;
     private ImageView imageView;
     private String middleurl;
+    private  ImageView imageViewsave;
+    private SQLiteDatabase sqLiteDatabase;
+    private SQHelper sqHelper;
 
     @Override
     protected int setLayout() {
@@ -35,6 +41,7 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
     protected void initViews() {
         webView = byView(R.id.webview);
         imageView = byView(R.id.include_back_img2);
+        imageViewsave = byView(R.id.save);
     }
     @Override
     protected void initDatas() {
@@ -62,12 +69,21 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
         settings.setDisplayZoomControls(true);
         settings.setDefaultFontSize(2);
         webView.loadUrl(NetUrl.ARTICLE_URLSTSART + middleurl + NetUrl.ARTICLE_URLEND);
-
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                finish();
+            }
+        });
+        imageViewsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContentValues cv = new ContentValues();
+                cv.put("name","qqq654651");
+                sqHelper = new SQHelper(ArticleNewInfoActivity.this,"carhome.dp",null,1);
+                sqLiteDatabase = sqHelper.getReadableDatabase();
+                sqLiteDatabase.insert("carHome",null,cv);
+                imageViewsave.setImageResource(R.mipmap.save2);
             }
         });
 

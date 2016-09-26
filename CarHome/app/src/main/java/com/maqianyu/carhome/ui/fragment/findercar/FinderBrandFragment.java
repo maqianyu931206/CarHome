@@ -74,7 +74,6 @@ public class FinderBrandFragment extends AbsBaseFragment {
 
     @Override
     protected void initViews() {
-
         // 所有车的加载
         finderBrandCarNameLvAdapter = new FinderBrandCarNameLvAdapter(context);
         listViewLongName = byView(R.id.finder_brand_CarName_listView);
@@ -97,12 +96,11 @@ public class FinderBrandFragment extends AbsBaseFragment {
     protected void initData() {
         // 热门品牌.recyclerView的加载 ,加载头布局
         View view = LayoutInflater.from(context).inflate(R.layout.finder_header_rv,null);
-        Log.d("ttt", "view:" + view);
-        finderBrandRvAdapter = new FinderBrandRvAdapter(context);
         recyclerView = (RecyclerView) view.findViewById(R.id.finder_brand_recyclerView);
-        recyclerView.setAdapter(finderBrandRvAdapter);
+        finderBrandRvAdapter = new FinderBrandRvAdapter(context);
         hotbread();// 热门品牌
         listViewLongName.addHeaderView(view);
+        recyclerView.setAdapter(finderBrandRvAdapter);
 
         getCarDatas(); // 找车-车名的列表
         slidebar(); // 实现联动
@@ -116,6 +114,8 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 float_letter.setText(s);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+
+                        break;
                     case MotionEvent.ACTION_MOVE:
                         float_letter.setVisibility(View.VISIBLE);
                         break;
@@ -135,8 +135,6 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 int position2 = position + 1;
                 listViewLongName.smoothScrollToPositionFromTop(position2,0);//调用ListView的setSelection()方法就可实现了
                 finderBrandCarNameLvAdapter.notifyDataSetChanged();
-                Log.d("pppp", "position:==" + position);
-
             }
         });
     }
@@ -151,7 +149,6 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas = bean2.getResult().getBrandlist();
                 finderBrandCarNameLvAdapter.setDatas(datas);
             }
-
             @Override
             public void failure() {
             }

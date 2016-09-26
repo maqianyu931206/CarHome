@@ -81,7 +81,6 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
         VolleyInstance.getInstance().startRequest(url, this);
         listTypeAdapter = new ListTypeAdapter(context);
         listView.setAdapter(listTypeAdapter);
-
         // 轮播图加载头布局
         View view = LayoutInflater.from(context).inflate(R.layout.lunbophone_header, null);
         viewPager = (ViewPager) view.findViewById(R.id.rotate_vp);
@@ -100,9 +99,8 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
         // 随着轮播改变小点
         changePoints();
         listView.addHeaderView(view);
-
         listView.setInterface(this);  //接口回调
-    }
+}
 
     // 网络请求成功
     @Override
@@ -234,7 +232,7 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
         }, 2000);
         // 获取最新数据
 
-    } //下拉刷新接口回调
+    }
 
 
 }

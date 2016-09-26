@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.Bean.ArticleCopyNewsBean;
 import com.maqianyu.carhome.utils.ScressSizeUtil;
@@ -71,7 +72,7 @@ public class ArticleCopyAdapter extends BaseAdapter {
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getTime());
             myViewHolder.numTv.setText(bean.getReplycount()+"人浏览");
-            Picasso.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
+            Glide.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
         }
         return convertView;
     }

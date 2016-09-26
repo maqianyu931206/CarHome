@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="发现"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:src="@mipmap/ahlib_searchbar_icon_search" />
+    </RelativeLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/rotate_vp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:id="@+id/rotate_point_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal" />
+            </FrameLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/sale_recyclereView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/colorview"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="猜你喜欢"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content" />
+            <com.maqianyu.carhome.view.HomeRecyclerView
+                android:id="@+id/sale_like_recyclereView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/colorview"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="为我推荐"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content" />
+            <com.maqianyu.carhome.view.HomeRecyclerView
+                android:id="@+id/sale_like_recyclereView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:text="商品列表"
+        android:textSize="12sp"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

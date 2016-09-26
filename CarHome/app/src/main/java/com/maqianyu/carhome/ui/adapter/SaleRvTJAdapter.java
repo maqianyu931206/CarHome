@@ -14,22 +14,20 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.Bean.SaleLikeBean;
-import com.maqianyu.carhome.ui.Bean.SaleRvBean;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 /**
  * Created by dllo on 16/9/18.
  */
-public class SaleRvLikeAdapter extends RecyclerView.Adapter<SaleRvLikeAdapter.MyViewHolder> {
+public class SaleRvTJAdapter extends RecyclerView.Adapter<SaleRvTJAdapter.MyViewHolder> {
     private Context context;
     private List<SaleLikeBean.ResultBean.ModulelistBean.ListBean>datas;
     private ForumIntance forumIntance;
     private int layoutPosition;
 
-    public SaleRvLikeAdapter(Context context) {
+    public SaleRvTJAdapter(Context context) {
         this.context = context;
     }
 
@@ -55,6 +53,7 @@ public class SaleRvLikeAdapter extends RecyclerView.Adapter<SaleRvLikeAdapter.My
             holder.title.setText(datas.get(position).getTitle());
             holder.content.setText(datas.get(position).getShorttitle());
             holder.money.setText(datas.get(position).getPrice());
+//            holder.price.setText(datas.get(position).getFctprice());
             SpannableString string = new SpannableString(datas.get(position).getFctprice());
             string.setSpan(new StrikethroughSpan(),0,datas.get(position).getFctprice().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
             holder.price.setText(string);

@@ -15,12 +15,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:text="我"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
             android:src="@mipmap/ahlib_searchbar_icon_search" />
@@ -40,7 +41,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:layout_height="150dp"
             android:text="立即登录,体验更多"/>
@@ -59,8 +60,8 @@
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/zhanghao" />
@@ -72,6 +73,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
+                    android:textSize="12sp"
                     android:text="账号登录" />
             </RelativeLayout>
             <RelativeLayout
@@ -81,8 +83,8 @@
 
                 <ImageView
                     android:id="@+id/img2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/qqtouxiang" />
@@ -93,6 +95,7 @@
                     android:layout_below="@id/img2"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:text="QQ登录" />
             </RelativeLayout>
@@ -103,8 +106,8 @@
 
                 <ImageView
                     android:id="@+id/img3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/weibo" />
@@ -116,7 +119,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:text="微博登录" />
+                    android:text="微博登录"
+                    android:textSize="12sp" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -125,8 +129,8 @@
 
                 <ImageView
                     android:id="@+id/img4"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/weixin" />
@@ -138,7 +142,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:text="微信登录" />
+                    android:text="微信登录"
+                    android:textSize="12sp" />
             </RelativeLayout>
 
 
@@ -155,13 +160,14 @@
         android:layout_height="50dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="30dp"
+            android:layout_width="20dp"
             android:layout_margin="10dp"
-            android:background="@mipmap/zhanghao"
-            android:layout_height="30dp" />
+            android:background="@mipmap/duihuan"
+            android:layout_gravity="center_vertical"
+            android:layout_height="20dp" />
         <TextView
             android:text="兑换商城"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -172,30 +178,32 @@
             android:layout_height="50dp"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_margin="10dp"
-                android:background="@mipmap/zhanghao"
-                android:layout_height="30dp" />
+                android:background="@mipmap/youhuiquan"
+                android:layout_gravity="center_vertical"
+                android:layout_height="20dp" />
             <TextView
                 android:text="我的优惠券"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_margin="10dp"
-                android:background="@mipmap/zhanghao"
-                android:layout_height="30dp" />
+                android:background="@mipmap/save"
+                android:layout_height="20dp" />
             <TextView
                 android:text="我的收藏"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -206,13 +214,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_margin="10dp"
-                android:background="@mipmap/zhanghao"
-                android:layout_height="30dp" />
+                android:background="@mipmap/liulanlishi"
+                android:layout_height="20dp" />
             <TextView
                 android:text="浏览历史"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -223,13 +231,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_margin="10dp"
-                android:background="@mipmap/zhanghao"
-                android:layout_height="30dp" />
+                android:background="@mipmap/caogao"
+                android:layout_height="20dp" />
             <TextView
                 android:text="草稿箱"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -237,7 +245,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="7dp"
+            android:layout_height="10dp"
             android:background="@color/colorview"/>
 
         <LinearLayout
@@ -245,13 +253,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_margin="10dp"
-                android:background="@mipmap/zhanghao"
-                android:layout_height="30dp" />
+                android:background="@mipmap/shezhi"
+                android:layout_height="20dp" />
             <TextView
                 android:text="设置"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
