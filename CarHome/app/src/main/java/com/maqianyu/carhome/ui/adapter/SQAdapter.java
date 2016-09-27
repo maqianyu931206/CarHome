@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maqianyu.carhome.R;
@@ -18,11 +19,6 @@ import java.util.List;
 public class SQAdapter extends BaseAdapter {
     private Context context;
     private List<SQBean> datas;
-
-
-    public SQAdapter(List<SQBean> datas) {
-        this.datas = datas;
-    }
 
     public SQAdapter(Context context) {
         this.context = context;
@@ -58,16 +54,19 @@ public class SQAdapter extends BaseAdapter {
         } else {
             viewHodler = (ViewHodler) convertView.getTag();
         }
-        viewHodler.nameTv.setText(datas.get(position).getUrl());
+        viewHodler.nameTv.setText(datas.get(position).getTitle());
+        viewHodler.priceTv.setText(datas.get(position).getPrice());
 
         return convertView;
     }
-
     class ViewHodler {
-        TextView nameTv;
+        TextView nameTv,priceTv;
+
 
         public ViewHodler(View view) {
             nameTv = (TextView) view.findViewById(R.id.item_save_tv);
+            priceTv = (TextView) view.findViewById(R.id.item_save_dadteTv);
+
 
         }
 

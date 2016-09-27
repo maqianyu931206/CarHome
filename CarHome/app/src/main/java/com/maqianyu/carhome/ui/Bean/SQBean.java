@@ -4,20 +4,32 @@ package com.maqianyu.carhome.ui.Bean;
  * Created by dllo on 16/9/26.
  */
 public class SQBean {
-    private  String url;
+    private  String title;
+    private String price;
 
-    public SQBean() {
+
+    public SQBean(String title, String price) {
+        this.title = title;
+        this.price = price;
+
     }
 
-    public SQBean(String url) {
-        this.url = url;
+
+
+    public String getTitle() {
+        return title;
     }
 
-    public String getUrl() {
-        return url;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public String getPrice() {
+        return price;
     }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
 }

@@ -48,6 +48,11 @@ public class NetUrl {
     public static final String FINDER_BRAND_END = "-t1.json";
     public static final String FINDER_BRAND_START_SHOW = "http://app.api.autohome.com.cn/autov5.0.0/cars/seriesprice-pm2-b";
     public static final String FINDER_BRAND_END_SHOW = "-t2.json";
+
+    public  static  final  String FINDER_BRAND_LV_ALL_START = "http://cars.app.autohome.com.cn/cars_v5.8.0/cars/seriesprice-pm2-b"; // 车名的popWindow数据
+    public  static  final  String FINDER_BRAND_LV_ALL_END ="-t2.json";
+    public static final String FINDER_BRAND_LV_SHOW_START = "http://cars.app.autohome.com.cn/cars_v5.8.0/cars/seriesprice-pm2-b";
+    public  static  final  String FINDER_BRAND_LV_SHOW_END ="-t1.json";
     public static final String FINDER_BRAND_CAR_NAME = "http://223.99.255.20/cars.app.autohome.com.cn/cars_v5.7.0/cars/brands-pm2-ts635966571635589297.json";// 所有 车名的网址
     public static final String FINDER_BRAND_CHIOSE = "http://cars.app.autohome.com.cn/cars_v5.8.0/cars/gethotseries-a2-pm2-v6.1.0-p1-s20.json"; // 筛选
     /**
@@ -131,6 +136,7 @@ public class NetUrl {
      * 发现页,轮播图
      */
 
+    public static final String SALE_LUNBO = "http://app.api.autohome.com.cn/autov5.0.0/mobile/appadvert-a2-pm1-v5.0.1-sid2-pid340000-cid0-lat0.000000-lng0.000000.json";
     public static final String SALE_LUNBO_1 = "http://app2.autoimg.cn/appdfs/g22/M11/2C/2A/autohomecar__wKjBwVfeJsaAbXOFAAJ6WLXTx94392.jpg";
     public static final String SALE_LUNBO_2 = "http://app2.autoimg.cn/appdfs/g20/M15/2B/EA/autohomecar__wKjBw1feXkaAfH82AAH_jeiKPEU422.jpg";
     public static final String SALE_LUNBO_3 = "http://app2.autoimg.cn/appdfs/g10/M0F/4A/26/autohomecar__wKgH0VfeadSAeX9NAAKRGlfYsiQ489.jpg";

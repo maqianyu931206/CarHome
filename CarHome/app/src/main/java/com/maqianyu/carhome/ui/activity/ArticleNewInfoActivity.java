@@ -31,6 +31,7 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
     private  ImageView imageViewsave;
     private SQLiteDatabase sqLiteDatabase;
     private SQHelper sqHelper;
+    private boolean is =false;
 
     @Override
     protected int setLayout() {
@@ -45,7 +46,7 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
     }
     @Override
     protected void initDatas() {
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         middleurl = intent.getStringExtra("id");
 
         webView.setWebViewClient(new WebViewClient() {
@@ -79,11 +80,19 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
             @Override
             public void onClick(View v) {
                 ContentValues cv = new ContentValues();
-                cv.put("name","qqq654651");
+                cv.put("name",intent.getStringExtra("title"));
+                cv.put("name2",intent.getStringExtra("price"));
                 sqHelper = new SQHelper(ArticleNewInfoActivity.this,"carhome.dp",null,1);
                 sqLiteDatabase = sqHelper.getReadableDatabase();
                 sqLiteDatabase.insert("carHome",null,cv);
-                imageViewsave.setImageResource(R.mipmap.save2);
+                cv.clear();
+                if (is = false) {
+                    imageViewsave.setImageResource(R.mipmap.save2);
+                    is =true;
+                }else {
+                    imageViewsave.setImageResource(R.mipmap.save);
+                    is =false;
+                }
             }
         });
 

@@ -39,7 +39,7 @@
         android:id="@+id/save"
         android:layout_width="20dp"
         android:layout_centerVertical="true"
-        android:background="@mipmap/save2"
+        android:background="@mipmap/save"
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/share"
         android:layout_height="20dp" />

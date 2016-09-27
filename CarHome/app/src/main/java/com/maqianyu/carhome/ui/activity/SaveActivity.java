@@ -4,10 +4,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.db.SQHelper;
+import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.SQBean;
 import com.maqianyu.carhome.ui.adapter.SQAdapter;
+import com.maqianyu.carhome.ui.inteface.VolleyResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +43,9 @@ public class SaveActivity extends AbsBaseActivity {
     protected void initDatas() {
         Cursor cursor = sqLiteDatabase.query("carHome",null,null,null,null,null,null);
         while (cursor.moveToNext()) {
-            String name = cursor.getString(cursor.getColumnIndex("name"));
-            SQBean sqBean = new SQBean(name);
+            String title = cursor.getString(cursor.getColumnIndex("name"));
+            String price = cursor.getString(cursor.getColumnIndex("name2"));
+            SQBean sqBean = new SQBean(title,price);
             datas.add(sqBean);
         }
         cursor.close();

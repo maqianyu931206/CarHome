@@ -53,15 +53,6 @@ public class ArticleUnihubAdapter extends BaseAdapter {
         MyViewHolder myViewHolder =null;
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_unihub,parent,false);
-            // 加载完行布局设置其高度
-            // 方法1:设置其最小高度
-            // 方法2:通过布局参数修改参数
-            int height = ScressSizeUtil.getScreenSize(context,1);
-            int width = ScressSizeUtil.getScreenSize(context,2);
-            ViewGroup.LayoutParams params = convertView.getLayoutParams();
-            params.width = width;
-            params.height = height / 2;
-            convertView.setLayoutParams(params);
             myViewHolder = new MyViewHolder(convertView);
             convertView.setTag(myViewHolder);
         }else {
@@ -72,8 +63,8 @@ public class ArticleUnihubAdapter extends BaseAdapter {
             myViewHolder.usernameTv.setText(bean.getUsername());
             myViewHolder.dateTv.setText(bean.getPublishtime()+ "");
             myViewHolder.titleTv.setText(bean.getTitle());
-            myViewHolder.replycountTv.setText(bean.getReplycount()+ "人浏览");
-            myViewHolder.praisenumTv.setText(bean.getPraisenum()+"人赞");
+            myViewHolder.replycountTv.setText(bean.getReplycount()+"");
+            myViewHolder.praisenumTv.setText(bean.getPraisenum()+"");
             Picasso.with(context).load(bean.getUserpic()).resize(40,32).into(myViewHolder.img);
             Picasso.with(context).load(bean.getThumbnailpics().get(0)).resize(200,180).into(myViewHolder.img2);
         }

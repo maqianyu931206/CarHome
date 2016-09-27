@@ -21,14 +21,13 @@
         <activity android:name=".ui.activity.ArticleLetterInfoActivity" />
         <activity android:name=".ui.activity.ArticleNewInfoActivity" />
         <activity android:name=".ui.activity.ArticleCopyInfoActivity" />
-        <activity android:name=".ui.activity.ForumAnlseseActivity"/>
-        <activity android:name=".ui.activity.ForumForumActivity"/>
-        <activity android:name=".ui.activity.ArticleMediaActivity"/>
-        <activity android:name=".ui.activity.LunBoInfoActivity"/>
-        <activity android:name=".ui.activity.WelcomeActivity">
-        </activity>
-        <activity android:name=".ui.activity.SaveActivity"/>
-
+        <activity android:name=".ui.activity.ForumAnlseseActivity" />
+        <activity android:name=".ui.activity.ForumForumActivity" />
+        <activity android:name=".ui.activity.ArticleMediaActivity" />
+        <activity android:name=".ui.activity.LunBoInfoActivity" />
+        <activity android:name=".ui.activity.WelcomeActivity" />
+        <activity android:name=".ui.activity.SaveActivity" />
+        <activity android:name=".ui.activity.LoginActivity"/>
     </application>
 
 </manifest>

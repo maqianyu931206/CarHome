@@ -1,17 +1,36 @@
 package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
+import com.maqianyu.carhome.model.net.NetUrl;
+import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.FinderBrandCarNameBean;
+import com.maqianyu.carhome.ui.Bean.FinderBrandDrawerBean;
+import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
+import com.maqianyu.carhome.ui.inteface.VolleyResult;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -21,8 +40,13 @@ import java.util.List;
 public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     private Context context;
     private List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas;
-    private List<FinderBrandCarNameBean.ResultBean>datas2;
     private  int a;
+    private ListView listView1;
+    private RadioButton radioButtonshow1, radioButtonall1;
+    private FinderBrandDrawerAdapter finderBrandDrawerAdapter;
+    private RelativeLayout drawerLayout1;
+    private String url11;
+
 
     public FinderBrandCarNameLvAdapter(Context context) {
         this.context = context;
@@ -49,7 +73,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         MyViewHolder myViewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_finder_carname, null);
@@ -62,6 +86,77 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
         FinderCarGridViewAdapter finderCarGridViewAdapter = new FinderCarGridViewAdapter(context);
         myViewHolder.gridView.setAdapter(finderCarGridViewAdapter);
         finderCarGridViewAdapter.setDatas(datas.get(position).getList());
+
+
+        myViewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position2, long id) {
+                View view1 = LayoutInflater.from(context).inflate(R.layout.drawe,null);
+                RelativeLayout drawerLayout1;
+                drawerLayout1 = (RelativeLayout) view1.findViewById(R.id.finder_drawerlayout2);
+                listView1 = (ListView) view1.findViewById(R.id.finder_brand_drawer_listView2);
+                radioButtonshow1 = (RadioButton) view1.findViewById(R.id.finder_brand_rb_show2);
+                radioButtonall1 = (RadioButton) view1.findViewById(R.id.finder_brand_rb_all2);
+                finderBrandDrawerAdapter = new FinderBrandDrawerAdapter(context);
+                WindowManager windowManger = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                DisplayMetrics metrics = new DisplayMetrics();
+                windowManger.getDefaultDisplay().getMetrics(metrics);
+                int screenWidth = metrics.widthPixels * 3 / 4;
+                int screeHeight = metrics.heightPixels ;
+                drawerLayout1.setMinimumWidth(screenWidth);
+                drawerLayout1.setMinimumHeight(screeHeight);
+                PopupWindow popupWindow = new PopupWindow(drawerLayout1, screenWidth,screeHeight);
+                popupWindow.setContentView(view1);
+                popupWindow.setFocusable(true);
+                popupWindow.setBackgroundDrawable(new ColorDrawable(0));
+                popupWindow.showAtLocation(drawerLayout1, Gravity.LEFT,screenWidth, ViewGroup.LayoutParams.MATCH_PARENT);
+                listView1.setAdapter(finderBrandDrawerAdapter);
+                String middleurl = datas.get(position).getList().get(position2).getId()+"";
+                final String showurl = NetUrl.FINDER_BRAND_LV_SHOW_START + middleurl + NetUrl.FINDER_BRAND_LV_SHOW_END;
+                final String allurl = NetUrl.FINDER_BRAND_LV_ALL_START + middleurl + NetUrl.FINDER_BRAND_LV_ALL_END;
+                url11 = showurl;
+                radioButtonshow1.setTextColor(Color.BLUE);
+                radioButtonshow1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked == true) {
+                            url11 = showurl;
+                            radioButtonshow1.setTextColor(Color.BLUE);
+                            radioButtonall1.setTextColor(Color.BLACK);
+                            buildlistDatas();
+                        }
+                    }
+                });
+                radioButtonall1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked == true) {
+                            url11 = allurl;
+                            radioButtonall1.setTextColor(Color.BLUE);
+                            radioButtonshow1.setTextColor(Color.BLACK);
+                            buildlistDatas();
+                        }
+                    }
+                });
+                buildlistDatas(); // 抽屉数据的加载
+            }
+            private void buildlistDatas() {
+                VolleyInstance.getInstance().startRequest(url11, new VolleyResult() {
+                    @Override
+                    public void success(String resultStr) {
+                        Gson gson = new Gson();
+                        FinderBrandDrawerBean bean = gson.fromJson(resultStr, FinderBrandDrawerBean.class);
+                        List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas = bean.getResult().getFctlist();
+                        finderBrandDrawerAdapter.setDatas(datas);
+
+                    }
+
+                    @Override
+                    public void failure() {
+                    }
+                });
+            }
+        });
         return convertView;
 
     }

@@ -24,6 +24,7 @@ import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.ArticleUnihubBean;
+import com.maqianyu.carhome.ui.Bean.ListTypeBean;
 import com.maqianyu.carhome.ui.Bean.RotateBean;
 import com.maqianyu.carhome.ui.adapter.ArticleUnihubAdapter;
 import com.maqianyu.carhome.ui.adapter.RotateArticleAdapter;
@@ -80,8 +81,6 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
         articleUnihubAdapter = new ArticleUnihubAdapter(context);
         listView.setAdapter(articleUnihubAdapter);
 
-        viewPager =byView(R.id.rotate_unihub_vp);
-        pointLl = byView(R.id.rotate_unihub_point_container);
     }
 
     @Override
@@ -91,20 +90,11 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
         PopUnihub();// 点击弹出popWindow,选择全部,优选,我的关注
         VolleyInstance.getInstance().startRequest(url,this);
 
-
+        View view = LayoutInflater.from(context).inflate(R.layout.lunbophone_header, null);
+        viewPager = (ViewPager) view.findViewById(R.id.rotate_vp);
+        pointLl = (LinearLayout) view.findViewById(R.id.rotate_point_container);
         buildDatas();//轮播图构造数据
-        vpAdapter = new RotateArticleAdapter(datas,context);
-        viewPager.setAdapter(vpAdapter);
-        // ViewPager的页数为int最大值,设置当前页多一些,可以上来就向前滑动
-        // 为了保证第一页始终为数据的第0条 取余要为0,因此设置数据集合大小的倍数
-        viewPager.setCurrentItem(datas.size() * 100);
-        // 开始轮播
-        handler = new Handler();
-        startRotate();
-        // 添加轮播小点
-        addPoints();
-        // 随着轮播改变小点
-        changePoints();
+        listView.addHeaderView(view);
     }
     private void PopUnihub() {
         textViewAll.setText("优选");
@@ -207,11 +197,41 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
     public void failure() {
     }
 
+    private void buildDatas() {
+        VolleyInstance.getInstance().startRequest(NetUrl.ARTICLE_UNIHUB, new VolleyResult() {
+            @Override
+            public void success(String resultStr) {
+                Gson gson = new Gson();
+                ArticleUnihubBean listTypeBean = gson.fromJson(resultStr, ArticleUnihubBean.class);
+                final List<ArticleUnihubBean.ResultBean.FocusimgsBean> datas2 = listTypeBean.getResult().getFocusimgs();
+                datas = new ArrayList<>();
+                for (int i = 0; i < datas2.size(); i++) {
+                    datas.add(new RotateBean(datas2.get(i).getImgurl()));
+                }
+                vpAdapter = new RotateArticleAdapter(context);
+                vpAdapter.setDatas(datas);
+                addPoints();
+                changePoints();
+                viewPager.setAdapter(vpAdapter);
+                viewPager.setCurrentItem(datas.size() * 100);
+                handler = new Handler();
+                startRotate();
+            }
+
+            @Override
+            public void failure() {
+
+            }
+        });
+    }
+
+
     private void changePoints() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int position) {
                 if (isRotate) {
@@ -225,17 +245,19 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
                     iv.setImageResource(R.mipmap.point_grey);
                 }
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
     }
+
     private void addPoints() {
         // 有多少张图加载多少个小点
         for (int i = 0; i < datas.size(); i++) {
-            ImageView pointIv = new ImageView(getContext());
-            pointIv.setPadding(5,5,5,5);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(45,45);
+            ImageView pointIv = new ImageView(context);
+            pointIv.setPadding(5, 5, 5, 5);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(45, 45);
             pointIv.setLayoutParams(params);
             // 设置第0页小点的为灰色
             if (i == 0) {
@@ -246,6 +268,7 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
             pointLl.addView(pointIv);
         }
     }
+
     private void startRotate() {
         rotateRunnable = new Runnable() {
             @Override
@@ -259,22 +282,18 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
         };
         handler.postDelayed(rotateRunnable, TIME);
     }
+
     @Override
     public void onResume() {
         super.onResume();
         isRotate = true;
     }
+
     @Override
     public void onPause() {
         super.onPause();
         isRotate = false;
     }
-    private void buildDatas() {
-        datas = new ArrayList<>();
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_1));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_2));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_3));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_4));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_5));
-    }
+
+
 }

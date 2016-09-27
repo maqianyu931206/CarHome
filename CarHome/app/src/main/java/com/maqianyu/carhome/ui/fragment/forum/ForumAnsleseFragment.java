@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -112,14 +113,14 @@ public class ForumAnsleseFragment extends AbsBaseFragment implements VolleyResul
                 DisplayMetrics metrics = new DisplayMetrics();
                 windowManger.getDefaultDisplay().getMetrics(metrics);
                 int screenWidth = metrics.widthPixels * 3 / 4;
-                int screeHeight = metrics.heightPixels;
+                int screeHeight = metrics.heightPixels * 3 / 4;
                 relativeLayout.setMinimumWidth(screenWidth);
                 relativeLayout.setMinimumHeight(screeHeight);
                 final PopupWindow pw = new PopupWindow(relativeLayout, screenWidth, screeHeight);
                 pw.setContentView(view);
                 pw.setFocusable(true);
                 pw.setBackgroundDrawable(new ColorDrawable(0));
-                pw.showAtLocation(relativeLayout, Gravity.LEFT, screenWidth, screeHeight);
+                pw.showAtLocation(relativeLayout, Gravity.CENTER_VERTICAL, screenWidth, screeHeight);
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

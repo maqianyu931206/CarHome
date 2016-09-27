@@ -76,7 +76,7 @@
             android:id="@+id/img3"
             android:layout_width="30dp"
             android:layout_margin="10sp"
-            android:background="@mipmap/qizi"
+            android:background="@mipmap/qizi2"
             android:layout_height="30dp" />
         <TextView
             android:id="@+id/tv6"

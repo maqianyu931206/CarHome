@@ -25,7 +25,9 @@ import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.model.net.VolleyInstance;
+import com.maqianyu.carhome.ui.Bean.ListTypeBean;
 import com.maqianyu.carhome.ui.Bean.RotateBean;
+import com.maqianyu.carhome.ui.Bean.SaleLBBean;
 import com.maqianyu.carhome.ui.Bean.SaleLikeBean;
 import com.maqianyu.carhome.ui.Bean.SaleRvBean;
 import com.maqianyu.carhome.ui.adapter.RotateArticleAdapter;
@@ -86,15 +88,19 @@ public class SaleFragment extends AbsBaseFragment {
     @Override
     protected void initData() {
         View view = LayoutInflater.from(context).inflate(R.layout.sale_headerview, null);
-        viewPager = (ViewPager) view.findViewById(R.id.rotate_vp);
-        pointLl = (LinearLayout) view.findViewById(R.id.rotate_point_container);
+        View view2 = LayoutInflater.from(context).inflate(R.layout.lunbophone_header, null);
+        viewPager = (ViewPager) view2.findViewById(R.id.rotate_vp);
+        pointLl = (LinearLayout) view2.findViewById(R.id.rotate_point_container);
+        buildDatas();//轮播图构造数据
         recyclerView = (RecyclerView) view.findViewById(R.id.sale_recyclereView);
         recyclerViewLike = (RecyclerView) view.findViewById(R.id.sale_like_recyclereView);
         recyclerViewLike2 = (RecyclerView) view.findViewById(R.id.sale_like_recyclereView2);
         saleRvAdapter = new SaleRvAdapter(context);
         saleRvLikeAdapter = new SaleRvLikeAdapter(context);
         saleRvTJAdapter = new SaleRvTJAdapter(context);
+        listView.addHeaderView(view2);
         listView.addHeaderView(view);
+
         recyclerViewLike2.setAdapter(saleRvTJAdapter);
         recyclerViewLike.setAdapter(saleRvLikeAdapter);
         recyclerView.setAdapter(saleRvAdapter);
@@ -135,87 +141,36 @@ public class SaleFragment extends AbsBaseFragment {
 
             }
         });
-        dsalelunbo();//加载轮播图
-        lunboinfo(); // 轮播图点击事件,进入详情
+
     }
 
-    private void lunboinfo() {
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+    private void buildDatas() {
+        VolleyInstance.getInstance().startRequest(NetUrl.SALE_LUNBO, new VolleyResult() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                switch (position) {
-                    case 0:
-                        url = NetUrl.SALE_LUNBO_1;
-                        break;
-                    case 1:
-                        url = NetUrl.SALE_LUNBO_2;
-                        break;
-                    case 2:
-                        url = NetUrl.SALE_LUNBO_3;
-                        break;
-                    case 3:
-                        url = NetUrl.SALE_LUNBO_4;
-                        break;
-                    case 4:
-                        url = NetUrl.SALE_LUNBO_5;
-                        break;
-
+            public void success(String resultStr) {
+                Gson gson = new Gson();
+                SaleLBBean saleLBBean = gson.fromJson(resultStr, SaleLBBean.class);
+                final List<SaleLBBean.ResultBean.ListBean> datas2 = saleLBBean.getResult().getList();
+                datas = new ArrayList<>();
+                for (int i = 0; i < datas2.size(); i++) {
+                    datas.add(new RotateBean(datas2.get(i).getImgurl()));
                 }
-                PopupWindow popupWindow = new PopupWindow();
-                final View view = LayoutInflater.from(context).inflate(R.layout.sale_pw, null);
-                popupWindow.setContentView(view);
-                popupWindow.setFocusable(true);
-                popupWindow.setBackgroundDrawable(new ColorDrawable(0));
-//                popupWindow.showAtLocation(view, Gravity.LEFT, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                final ImageView imageView;
-                imageView = (ImageView) view.findViewById(R.id.sale_pw_img);
-                StringRequest ss = new StringRequest(url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Gson gson = new Gson();
-                        RotateBean bean = gson.fromJson(response, RotateBean.class);
-                        Picasso.with(context).load(bean.getImgUrl()).into(imageView);
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-
-                requestQueue.add(ss);
+                vpAdapter = new RotateArticleAdapter(context);
+                vpAdapter.setDatas(datas);
+                addPoints();
+                changePoints();
+                viewPager.setAdapter(vpAdapter);
+                viewPager.setCurrentItem(datas.size() * 100);
+                handler = new Handler();
+                startRotate();
             }
-
             @Override
-            public void onPageScrollStateChanged(int state) {
-                Log.d("SaleFragment", "state:" + state);
+            public void failure() {
+
             }
         });
-
-
     }
 
-    private void dsalelunbo() {
-        buildDatas();//轮播图构造数据
-        vpAdapter = new RotateArticleAdapter(datas, context);
-        viewPager.setAdapter(vpAdapter);
-        // ViewPager的页数为int最大值,设置当前页多一些,可以上来就向前滑动
-        // 为了保证第一页始终为数据的第0条 取余要为0,因此设置数据集合大小的倍数
-        viewPager.setCurrentItem(datas.size() * 100);
-        // 开始轮播
-        handler = new Handler();
-        startRotate();
-        // 添加轮播小点
-        addPoints();
-        // 随着轮播改变小点
-        changePoints();
-    }
 
     private void changePoints() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -246,7 +201,7 @@ public class SaleFragment extends AbsBaseFragment {
     private void addPoints() {
         // 有多少张图加载多少个小点
         for (int i = 0; i < datas.size(); i++) {
-            ImageView pointIv = new ImageView(getContext());
+            ImageView pointIv = new ImageView(context);
             pointIv.setPadding(5, 5, 5, 5);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(45, 45);
             pointIv.setLayoutParams(params);
@@ -285,15 +240,4 @@ public class SaleFragment extends AbsBaseFragment {
         super.onPause();
         isRotate = false;
     }
-
-    private void buildDatas() {
-        datas = new ArrayList<>();
-        datas.add(new RotateBean(NetUrl.SALE_LUNBO_1));
-        datas.add(new RotateBean(NetUrl.SALE_LUNBO_2));
-        datas.add(new RotateBean(NetUrl.SALE_LUNBO_3));
-        datas.add(new RotateBean(NetUrl.SALE_LUNBO_4));
-        datas.add(new RotateBean(NetUrl.SALE_LUNBO_5));
-    }
-
-
 }

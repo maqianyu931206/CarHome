@@ -4,12 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -17,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -33,7 +28,6 @@ import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
 import com.maqianyu.carhome.view.SlideBar;
-
 import java.util.List;
 
 /**
@@ -46,16 +40,15 @@ public class FinderBrandFragment extends AbsBaseFragment {
     private FinderBrandRvAdapter finderBrandRvAdapter;
     private RecyclerView recyclerView;
     private ListView listViewLongName;
+    // 抽屉里的listView radioButton
     private DrawerLayout drawerLayout;
     private LinearLayout drawerLl;
-    // 抽屉里的listView radioButton
     private ListView listView;
     private TextView textViewname;
     private RadioButton radioButtonshow, radioButtonall;
     private FinderBrandDrawerAdapter finderBrandDrawerAdapter;
     private FinderBrandHotBean bean;
     private String url11;
-
     private SlideBar slideBar;
     private TextView float_letter;
 
@@ -104,6 +97,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
 
         getCarDatas(); // 找车-车名的列表
         slidebar(); // 实现联动
+
     }
 
     // 联动效果的实现
@@ -114,16 +108,14 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 float_letter.setText(s);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-
+                        float_letter.setVisibility(View.GONE);
                         break;
                     case MotionEvent.ACTION_MOVE:
                         float_letter.setVisibility(View.VISIBLE);
                         break;
-
                     case MotionEvent.ACTION_UP:
                     default:
                         float_letter.postDelayed(new Runnable() {
-
                             @Override
                             public void run() {
                                 float_letter.setVisibility(View.GONE);
@@ -153,7 +145,6 @@ public class FinderBrandFragment extends AbsBaseFragment {
             public void failure() {
             }
         });
-
 
     }
 
@@ -214,23 +205,24 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 buildlistDatas(); // 抽屉数据的加载
             }
 
-            private void buildlistDatas() {
-                VolleyInstance.getInstance().startRequest(url11, new VolleyResult() {
-                    @Override
-                    public void success(String resultStr) {
-                        Gson gson = new Gson();
-                        FinderBrandDrawerBean bean = gson.fromJson(resultStr, FinderBrandDrawerBean.class);
-                        List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas = bean.getResult().getFctlist();
-                        finderBrandDrawerAdapter.setDatas(datas);
-                    }
 
-                    @Override
-                    public void failure() {
-
-                    }
-                });
-            }
         });
     }
+    private void buildlistDatas() {
+        VolleyInstance.getInstance().startRequest(url11, new VolleyResult() {
+            @Override
+            public void success(String resultStr) {
+                Gson gson = new Gson();
+                FinderBrandDrawerBean bean = gson.fromJson(resultStr, FinderBrandDrawerBean.class);
+                List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas = bean.getResult().getFctlist();
+                finderBrandDrawerAdapter.setDatas(datas);
+            }
+
+            @Override
+            public void failure() {
+
+            }
+        });
+    }  // 抽屉加载数据
 
 }

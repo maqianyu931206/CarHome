@@ -26,16 +26,12 @@ public class RotateArticleAdapter extends PagerAdapter {
     private List<RotateBean>datas;
     private Context context;
     private LayoutInflater inflater;
+    private int newPosition;
 
-
-    public RotateArticleAdapter(List<RotateBean> datas, Context context) {
-        this.datas = datas;
-        this.context = context;
-        inflater = LayoutInflater.from(context);
-    }
 
     public RotateArticleAdapter(Context context) {
          this.context = context;
+        inflater = LayoutInflater.from(context);
     }
 
     public void setDatas(List<RotateBean> datas) {
@@ -58,7 +54,7 @@ public class RotateArticleAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         // position是int最大值所以这里可能是几百甚至上千,因此取余避免数组越界
-        final int newPosition = position % datas.size();
+        newPosition = position % datas.size();
         View convertView = inflater.inflate(R.layout.item_rotate_vp, container, false);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.item_iv);
         RotateBean bean =datas.get(newPosition);
@@ -67,7 +63,7 @@ public class RotateArticleAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, LunBoInfoActivity.class);
-                intent.putExtra("ps",newPosition);
+                intent.putExtra("ps", newPosition);
                 context.startActivity(intent);
             }
         });

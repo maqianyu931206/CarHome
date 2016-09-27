@@ -54,7 +54,6 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
     private String url;
     private ReFlashListView listView;
 
-
     public static ArticleNewFragment newInstance(String url) {
         Bundle args = new Bundle();
         args.putString("url", url);
@@ -86,29 +85,18 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
         viewPager = (ViewPager) view.findViewById(R.id.rotate_vp);
         pointLl = (LinearLayout) view.findViewById(R.id.rotate_point_container);
         buildDatas();//轮播图构造数据
-        vpAdapter = new RotateArticleAdapter(datas, context);
-        viewPager.setAdapter(vpAdapter);
-        // ViewPager的页数为int最大值,设置当前页多一些,可以上来就向前滑动
-        // 为了保证第一页始终为数据的第0条 取余要为0,因此设置数据集合大小的倍数
-        viewPager.setCurrentItem(datas.size() * 100);
-        // 开始轮播
-        handler = new Handler();
-        startRotate();
-        // 添加轮播小点
-        addPoints();
-        // 随着轮播改变小点
-        changePoints();
+
         listView.addHeaderView(view);
         listView.setInterface(this);  //接口回调
-}
+    }
 
     // 网络请求成功
     @Override
-    public void success(String resultStr) {
+    public void success(final String resultStr) {
         Gson gson = new Gson();
         ListTypeBean listTypeBean = gson.fromJson(resultStr, ListTypeBean.class);
-        List<ListTypeBean.ResultBean.NewslistBean> datas = listTypeBean.getResult().getNewslist();
-        listTypeAdapter.setDatas(datas);
+        final List<ListTypeBean.ResultBean.NewslistBean> datas22 = listTypeBean.getResult().getNewslist();
+        listTypeAdapter.setDatas(datas22);
         // 跳转详情
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -119,6 +107,8 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
                 Intent intent = new Intent(context, ArticleNewInfoActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("id", middle);
+                intent.putExtra("price",bean.getTime());
+                intent.putExtra("img",bean.getSmallpic());
                 startActivity(intent);
             }
         });
@@ -128,6 +118,37 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
     @Override
     public void failure() {
     }
+
+    private void buildDatas() {
+        VolleyInstance.getInstance().startRequest(NetUrl.ARTICLE_NEW, new VolleyResult() {
+            @Override
+            public void success(String resultStr) {
+                Gson gson = new Gson();
+                ListTypeBean listTypeBean = gson.fromJson(resultStr, ListTypeBean.class);
+                final List<ListTypeBean.ResultBean.FocusimgBean> datas2 = listTypeBean.getResult().getFocusimg();
+                datas = new ArrayList<>();
+                for (int i = 0; i < datas2.size(); i++) {
+                    datas.add(new RotateBean(datas2.get(i).getImgurl()));
+                    Log.d("ahh", "datas2.size():" + datas2.size());
+                }
+                vpAdapter = new RotateArticleAdapter(context);
+                vpAdapter.setDatas(datas);
+                addPoints();
+                changePoints();
+
+                viewPager.setAdapter(vpAdapter);
+                viewPager.setCurrentItem(datas.size() * 100);
+                handler = new Handler();
+                startRotate();
+            }
+
+            @Override
+            public void failure() {
+
+            }
+        });
+    }
+
 
     private void changePoints() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -198,16 +219,6 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
         isRotate = false;
     }
 
-    private void buildDatas() {
-        datas = new ArrayList<>();
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_1));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_2));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_3));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_4));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_5));
-        datas.add(new RotateBean(NetUrl.ARTICLE_LUNBO_NEW_6));
-    }
-
     @Override
     public void onReflash() {
         Handler handler = new Handler();
@@ -224,6 +235,7 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
                         listTypeAdapter.notifyDataSetChanged();
                         listView.reflshComplete();
                     }
+
                     @Override
                     public void failure() {
                     }
@@ -233,6 +245,5 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
         // 获取最新数据
 
     }
-
 
 }
