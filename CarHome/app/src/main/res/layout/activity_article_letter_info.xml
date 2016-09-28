@@ -1,87 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="160dp">
-    <ImageView
-        android:id="@+id/item_article_letter_info_img"
-        android:layout_width="match_parent"
-        android:layout_marginTop="3dp"
-        android:layout_height="match_parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp">
+
+            <ImageView
+                android:id="@+id/item_article_letter_info_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp" />
+
+            <TextView
+                android:id="@+id/item_article_letter_info_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/item_article_letter_info_author2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:textColor="#efeaea" />
+
+            <TextView
+                android:id="@+id/item_article_letter_info_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/item_article_letter_info_author2_tv"
+                android:layout_toRightOf="@id/item_article_letter_info_author2_tv"
+                android:textColor="#f2f0f0" />
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/item_article_letter_info_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textSize="14sp"
-            android:textColor="#fff"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/item_article_letter_info_author2_tv"
-            android:layout_width="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#efeaea"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/item_article_letter_info_num_tv"
-            android:layout_width="wrap_content"
-            android:textColor="#f2f0f0"
-            android:layout_alignTop="@id/item_article_letter_info_author2_tv"
-            android:layout_toRightOf="@id/item_article_letter_info_author2_tv"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:text="快报内容"
-        android:layout_margin="5dp"
-        android:background="#e6e6e6"
-        android:layout_height="wrap_content" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/item_article_letter_info_heading_img"
-            android:layout_width="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_height="wrap_content" />
+            android:background="#e6e6e6"
+            android:text="快报内容" />
 
-        <TextView
-            android:id="@+id/item_article_letter_info_author_tv"
-            android:layout_width="wrap_content"
-            android:layout_toRightOf="@id/item_article_letter_info_heading_img"
-            android:padding="3dp"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/item_article_letter_info_createtime_tv"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/item_article_letter_info_author_tv"
-            android:layout_toRightOf="@id/item_article_letter_info_heading_img"
-            android:padding="3dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/item_article_letter_info_summary_tv"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/item_article_letter_info_heading_img"
-            android:padding="5dp"
-            android:layout_margin="5dp"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/item_article_letter_info_heading_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
 
-    </RelativeLayout>
-    <com.maqianyu.carhome.view.HomeListView
-        android:id="@+id/article_letter_info_lv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
-    </ScrollView>
+            <TextView
+                android:id="@+id/item_article_letter_info_author_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/item_article_letter_info_heading_img"
+                android:padding="3dp" />
+
+            <TextView
+                android:id="@+id/item_article_letter_info_createtime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_article_letter_info_author_tv"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/item_article_letter_info_heading_img"
+                android:padding="3dp" />
+
+            <TextView
+                android:id="@+id/item_article_letter_info_summary_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_article_letter_info_heading_img"
+                android:layout_margin="5dp"
+                android:padding="5dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#e9e9e9"/>
+        <com.maqianyu.carhome.view.HomeListView
+            android:id="@+id/article_letter_info_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</ScrollView>

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.Bean.ArticleMediaBean;
+import com.maqianyu.carhome.ui.Bean.Bean;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

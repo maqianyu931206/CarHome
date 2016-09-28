@@ -59,7 +59,7 @@ public class ArticleLetterAdapter extends BaseAdapter {
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getCreatetime());
             myViewHolder.numTv.setText(bean.getReviewcount()+"人浏览");
-            Picasso.with(context).load(bean.getImg()).resize(750,400).into(myViewHolder.img);
+            Picasso.with(context).load(bean.getImg()).resize(680,400).into(myViewHolder.img);
         }
         return convertView;
     }

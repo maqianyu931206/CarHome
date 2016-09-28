@@ -1,11 +1,14 @@
 package com.maqianyu.carhome.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +31,8 @@ import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.FinderBrandCarNameBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandDrawerBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
+import com.maqianyu.carhome.ui.activity.FinderInfoActivity;
+import com.maqianyu.carhome.ui.app.MyApp;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,15 +41,15 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/18.
+ * 找车-A-Z的listView适配器
  */
 public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     private Context context;
     private List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas;
     private  int a;
     private ListView listView1;
-    private RadioButton radioButtonshow1, radioButtonall1;
+    private RadioButton radioButtonshow1, radioButtonall1,rbback;
     private FinderBrandDrawerAdapter finderBrandDrawerAdapter;
-    private RelativeLayout drawerLayout1;
     private String url11;
 
 
@@ -86,8 +91,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
         FinderCarGridViewAdapter finderCarGridViewAdapter = new FinderCarGridViewAdapter(context);
         myViewHolder.gridView.setAdapter(finderCarGridViewAdapter);
         finderCarGridViewAdapter.setDatas(datas.get(position).getList());
-
-
+        // gridView点击事件
         myViewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position2, long id) {
@@ -97,6 +101,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                 listView1 = (ListView) view1.findViewById(R.id.finder_brand_drawer_listView2);
                 radioButtonshow1 = (RadioButton) view1.findViewById(R.id.finder_brand_rb_show2);
                 radioButtonall1 = (RadioButton) view1.findViewById(R.id.finder_brand_rb_all2);
+                rbback = (RadioButton) view1.findViewById(R.id.finder_brand_rb_back);
                 finderBrandDrawerAdapter = new FinderBrandDrawerAdapter(context);
                 WindowManager windowManger = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
                 DisplayMetrics metrics = new DisplayMetrics();
@@ -105,9 +110,18 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                 int screeHeight = metrics.heightPixels ;
                 drawerLayout1.setMinimumWidth(screenWidth);
                 drawerLayout1.setMinimumHeight(screeHeight);
-                PopupWindow popupWindow = new PopupWindow(drawerLayout1, screenWidth,screeHeight);
+                final PopupWindow popupWindow = new PopupWindow(drawerLayout1, screenWidth,screeHeight);
                 popupWindow.setContentView(view1);
                 popupWindow.setFocusable(true);
+                WindowManager.LayoutParams params2 = ((Activity)context).getWindow().getAttributes();
+                params2.alpha = 0.3f;
+                ((Activity)context).getWindow().setAttributes(params2);
+
+                if (popupWindow.isShowing()){
+                    WindowManager.LayoutParams params = ((Activity)context).getWindow().getAttributes();
+                    params.alpha = 1f;
+                    ((Activity)context).getWindow().setAttributes(params);
+                }
                 popupWindow.setBackgroundDrawable(new ColorDrawable(0));
                 popupWindow.showAtLocation(drawerLayout1, Gravity.LEFT,screenWidth, ViewGroup.LayoutParams.MATCH_PARENT);
                 listView1.setAdapter(finderBrandDrawerAdapter);
@@ -138,6 +152,16 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                         }
                     }
                 });
+                rbback.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        popupWindow.dismiss();
+                        WindowManager.LayoutParams params = ((Activity)context).getWindow().getAttributes();
+                        params.alpha = 1f;
+                        ((Activity)context).getWindow().setAttributes(params);
+                    }
+                });
+
                 buildlistDatas(); // 抽屉数据的加载
             }
             private void buildlistDatas() {
@@ -145,12 +169,10 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                     @Override
                     public void success(String resultStr) {
                         Gson gson = new Gson();
-                        FinderBrandDrawerBean bean = gson.fromJson(resultStr, FinderBrandDrawerBean.class);
-                        List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas = bean.getResult().getFctlist();
+                        final FinderBrandDrawerBean bean = gson.fromJson(resultStr, FinderBrandDrawerBean.class);
+                        final List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas = bean.getResult().getFctlist();
                         finderBrandDrawerAdapter.setDatas(datas);
-
                     }
-
                     @Override
                     public void failure() {
                     }
@@ -158,7 +180,6 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
             }
         });
         return convertView;
-
     }
 
     public int indexOf(String s) {
@@ -174,9 +195,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     class MyViewHolder {
         TextView titleTv;
         GridView gridView;
-
         public MyViewHolder(View itemView) {
-
             titleTv = (TextView) itemView.findViewById(R.id.item_finder_carname_tv);
             gridView = (GridView) itemView.findViewById(R.id.item_finder_carname_gridView);
         }

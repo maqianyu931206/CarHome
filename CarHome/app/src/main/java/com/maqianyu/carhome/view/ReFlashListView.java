@@ -27,7 +27,7 @@ import static com.maqianyu.carhome.R.anim.jiazai;
  * Created by dllo on 16/9/23.
  */
 public class ReFlashListView extends ListView implements AbsListView.OnScrollListener {
-    View header;   // 顶部布局文件
+    View header;
     int headerHeight;  // 顶部布局文件的高度
     int firstVisibleItem; // 当前界面第一个可见item的位置
     int scrollState;   // 当前滚动状态
@@ -39,7 +39,6 @@ public class ReFlashListView extends ListView implements AbsListView.OnScrollLis
     final int RELESE = 2; // 松开可以刷新状态
     final int REFLASHING = 3; // 正在刷新状态
     IReflashListener iReflashListener; // 刷新数据的接口
-
     public ReFlashListView(Context context) {
         super(context);
         initView(context);
@@ -213,5 +212,6 @@ public class ReFlashListView extends ListView implements AbsListView.OnScrollLis
     public interface IReflashListener {
         void onReflash();
     }
+
 
 }

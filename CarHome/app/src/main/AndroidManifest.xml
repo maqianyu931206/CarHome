@@ -28,6 +28,7 @@
         <activity android:name=".ui.activity.WelcomeActivity" />
         <activity android:name=".ui.activity.SaveActivity" />
         <activity android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.FinderInfoActivity"/>
     </application>
 
 </manifest>

@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by dllo on 16/9/14.
  * 推荐-优创+ -- 适配器
@@ -73,7 +75,8 @@ public class ArticleUnihubAdapter extends BaseAdapter {
     // 缓存类
     class MyViewHolder{
         TextView usernameTv,dateTv,titleTv,praisenumTv,replycountTv;
-        ImageView img,img2;
+        ImageView img2;
+        CircleImageView img;
         public MyViewHolder(View view){
             super();
             usernameTv = (TextView) view.findViewById(R.id.item_unihub_title_tv);
@@ -81,7 +84,7 @@ public class ArticleUnihubAdapter extends BaseAdapter {
             praisenumTv = (TextView) view.findViewById(R.id.item_unihub_praisenum_tv);
             titleTv  = (TextView) view.findViewById(R.id.item_unihub_content_tv);
             replycountTv  = (TextView) view.findViewById(R.id.item_unihub_replycount_tv);
-            img = (ImageView) view.findViewById(R.id.item_unihub_small_img);
+            img = (CircleImageView) view.findViewById(R.id.item_unihub_small_img);
             img2 = (ImageView) view.findViewById(R.id.item_unihub_big_img);
         }
     }

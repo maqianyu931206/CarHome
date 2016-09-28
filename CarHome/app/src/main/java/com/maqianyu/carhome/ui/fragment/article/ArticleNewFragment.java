@@ -1,39 +1,27 @@
 package com.maqianyu.carhome.ui.fragment.article;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.ListTypeBean;
 import com.maqianyu.carhome.ui.Bean.RotateBean;
-import com.maqianyu.carhome.ui.Bean.TextBean;
 import com.maqianyu.carhome.ui.activity.ArticleNewInfoActivity;
-import com.maqianyu.carhome.ui.activity.MainActivity;
 import com.maqianyu.carhome.ui.adapter.ListTypeAdapter;
 import com.maqianyu.carhome.ui.adapter.RotateArticleAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
 import com.maqianyu.carhome.view.ReFlashListView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -179,7 +167,7 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
     private void addPoints() {
         // 有多少张图加载多少个小点
         for (int i = 0; i < datas.size(); i++) {
-            ImageView pointIv = new ImageView(getContext());
+            ImageView pointIv = new ImageView(context);
             pointIv.setPadding(5, 5, 5, 5);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(45, 45);
             pointIv.setLayoutParams(params);

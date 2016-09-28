@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -18,6 +20,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
@@ -104,29 +107,43 @@ public class ForumAnsleseFragment extends AbsBaseFragment implements VolleyResul
                 // 竖向的recyclerView
                 RecyclerView recyclerView1;
                 recyclerView1 = (RecyclerView) view.findViewById(R.id.forum_pop_listView);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                 recyclerView1.setLayoutManager(linearLayoutManager);
-
                 relativeLayout = (RelativeLayout) view.findViewById(R.id.forum_pop_rellay);
                 textView = (TextView) view.findViewById(R.id.back);
                 WindowManager windowManger = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
                 DisplayMetrics metrics = new DisplayMetrics();
                 windowManger.getDefaultDisplay().getMetrics(metrics);
                 int screenWidth = metrics.widthPixels * 3 / 4;
-                int screeHeight = metrics.heightPixels * 3 / 4;
+                int screeHeight = metrics.heightPixels;
                 relativeLayout.setMinimumWidth(screenWidth);
                 relativeLayout.setMinimumHeight(screeHeight);
                 final PopupWindow pw = new PopupWindow(relativeLayout, screenWidth, screeHeight);
                 pw.setContentView(view);
                 pw.setFocusable(true);
                 pw.setBackgroundDrawable(new ColorDrawable(0));
+                WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
+                params.alpha = 0.3f;
+                getActivity().getWindow().setAttributes(params);
+                if (pw.isShowing() == false) {
+                    Log.d("fff", "laaaa");
+                }else if (pw.isShowing() == true){
+
+                    WindowManager.LayoutParams params2 = getActivity().getWindow().getAttributes();
+                    params2.alpha = 1f;
+                    getActivity().getWindow().setAttributes(params2);
+                }
                 pw.showAtLocation(relativeLayout, Gravity.CENTER_VERTICAL, screenWidth, screeHeight);
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        WindowManager.LayoutParams params2 = getActivity().getWindow().getAttributes();
+                        params2.alpha = 1f;
+                        getActivity().getWindow().setAttributes(params2);
                         pw.dismiss();
                     }
                 });
+
                 List<String> datas = new ArrayList<>();
                 for (i = 0; i < str.length; i++) {
                     datas.add(str[i]);
@@ -140,12 +157,15 @@ public class ForumAnsleseFragment extends AbsBaseFragment implements VolleyResul
                         pw.dismiss();
                         recyclerView.smoothScrollToPosition(position);
                         reviewclick();
+                        WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
+                        params.alpha = 1f;
+                        getActivity().getWindow().setAttributes(params);
                     }
                 });
-
             }
 
         });
+
     }
 
     @Override
@@ -158,9 +178,9 @@ public class ForumAnsleseFragment extends AbsBaseFragment implements VolleyResul
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent  = new Intent(context, ForumAnlseseActivity.class);
-                String strid = bean.getResult().getList().get(position).getTopicid()+"";
-                intent.putExtra("id",strid);
+                Intent intent = new Intent(context, ForumAnlseseActivity.class);
+                String strid = bean.getResult().getList().get(position).getTopicid() + "";
+                intent.putExtra("id", strid);
                 startActivity(intent);
 
             }

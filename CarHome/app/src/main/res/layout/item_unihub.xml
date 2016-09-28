@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/item_unihub_small_img"
         android:layout_width="26dp"
         android:layout_height="26dp"
-        android:layout_margin="5dp"
-        android:background="@mipmap/ic_launcher" />
+        android:layout_margin="5dp" />
 
     <TextView
         android:id="@+id/item_unihub_title_tv"

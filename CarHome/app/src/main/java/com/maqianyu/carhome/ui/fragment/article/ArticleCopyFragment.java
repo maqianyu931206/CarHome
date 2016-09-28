@@ -70,8 +70,6 @@ public class ArticleCopyFragment extends AbsBaseFragment implements VolleyResult
             }
         });
     }
-
-
     @Override
     public void failure() {
 

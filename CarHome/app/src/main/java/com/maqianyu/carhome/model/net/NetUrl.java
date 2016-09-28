@@ -21,8 +21,8 @@ public class NetUrl {
     public static final String ARTICLE_CULTURE = "http://app.api.autohome.com.cn/autov4.8.8/news/newslist-pm1-c0-nt97-p1-s30-l0.json";// 文化
     public static final String ARTICLE_CONVERSION = "http://app.api.autohome.com.cn/autov4.8.8/news/newslist-pm1-c0-nt107-p1-s30-l0.json";// 改装
     public static final String ARTICLE_TRAVELNOTES = "http://app.api.autohome.com.cn/autov4.8.8/news/newslist-pm1-c0-nt100-p1-s30-l0.json";//游记
-    public static final String ARTICLE_ORIGINAL_VIDEO = "http://app.api.autohome.com.cn/autov4.8.8/news/videolist-pm1-vt8-s30-lastid0.json";//原创视频
-    public static final String ARTICLE_LOBBYIST = "http://http://app.api.autohome.com.cn/autov4.8.8/news/shuokelist-pm1-s30-lastid0.json";// 说客
+    public static final String ARTICLE_ORIGINAL_VIDEO ="http://app.api.autohome.com.cn/autov4.8.8/news/videolist-pm1-vt8-s30-lastid0.json";//原创视频
+    public static final String ARTICLE_LOBBYIST = "http://app.api.autohome.com.cn/autov4.8.8/news/shuokelist-pm1-s30-lastid0.json";// 说客
 
     public static final String ARTICLE_URLSTSART = "http://cont.app.autohome.com.cn/autov4.2.5/content/News/newscontent-a2-pm1-v4.2.5-n"; // 最新界面的详情页
     public static final String ARTICLE_URLEND = "-lz0-sp0-nt0-sa1-p0-c1-fs0-cw320.html";
@@ -55,6 +55,8 @@ public class NetUrl {
     public  static  final  String FINDER_BRAND_LV_SHOW_END ="-t1.json";
     public static final String FINDER_BRAND_CAR_NAME = "http://223.99.255.20/cars.app.autohome.com.cn/cars_v5.7.0/cars/brands-pm2-ts635966571635589297.json";// 所有 车名的网址
     public static final String FINDER_BRAND_CHIOSE = "http://cars.app.autohome.com.cn/cars_v5.8.0/cars/gethotseries-a2-pm2-v6.1.0-p1-s20.json"; // 筛选
+    public  static  final  String FINDER_INFO_START = "http://223.99.255.20/cars.app.autohome.com.cn/carinfo_v6.0.0/cars/seriessummary-pm2-s";
+    public  static  final  String FINDER_INFO_END = "-t-c210200.json";
     /**
      * 轮播图 优创界面
      */

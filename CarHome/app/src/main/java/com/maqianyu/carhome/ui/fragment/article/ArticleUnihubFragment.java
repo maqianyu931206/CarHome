@@ -48,7 +48,6 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
     private  String url;
     private ListView listView;
     private ArticleUnihubAdapter articleUnihubAdapter;
-
     private static final int TIME = 3000;
     private ViewPager viewPager;
     private LinearLayout pointLl;// 轮播状态改变的小圆点容器
@@ -80,7 +79,6 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
         listView = byView(R.id.article_uniHub_listView);
         articleUnihubAdapter = new ArticleUnihubAdapter(context);
         listView.setAdapter(articleUnihubAdapter);
-
     }
 
     @Override
@@ -189,9 +187,6 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
         ArticleUnihubBean articleUnihubBean  =gson.fromJson(resultStr,ArticleUnihubBean.class);
         List<ArticleUnihubBean.ResultBean.NewslistBean>datas = articleUnihubBean.getResult().getNewslist();
         articleUnihubAdapter.setDatas(datas);
-        Log.d("qqqq", "datas.size():" + datas.size());
-        Log.d("qqqq", resultStr);
-
     }
     @Override
     public void failure() {
@@ -224,7 +219,6 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
             }
         });
     }
-
 
     private void changePoints() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -294,6 +288,5 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
         super.onPause();
         isRotate = false;
     }
-
 
 }

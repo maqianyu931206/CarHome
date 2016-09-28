@@ -60,7 +60,7 @@ public class ArticleLetterTvGridViewAdapter extends BaseAdapter {
             Picasso.with(context).load(datas.get(position).getHeadimg()).into(viewHolder.img);
         }
         if (datas.get(position).getHeadimg() == ""){
-            viewHolder.img.setImageResource(R.mipmap.ic_launcher);
+            viewHolder.img.setImageResource(R.mipmap.morentouxiang );
             viewHolder.tv1.setText(datas.get(position).getUsername());
             viewHolder.tv2.setText(datas.get(position).getContent());
 

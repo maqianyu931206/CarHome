@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_copy_img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/item_copy_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:text="fasdfasd"
+        android:layout_toRightOf="@id/item_copy_img"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/item_copy_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/item_copy_img"
+        android:layout_below="@id/item_copy_title_tv"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:text="asdfadsf"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/item_copy_num_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/item_copy_date_tv"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:text="adsfsdaf"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>
+
+

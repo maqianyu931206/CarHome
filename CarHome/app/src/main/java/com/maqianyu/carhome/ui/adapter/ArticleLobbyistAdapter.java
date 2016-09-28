@@ -51,7 +51,7 @@ public class ArticleLobbyistAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         MyViewHolder myViewHolder =null;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_copy,parent,false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_lobbyist,parent,false);
             myViewHolder = new MyViewHolder(convertView);
             convertView.setTag(myViewHolder);
         }else {

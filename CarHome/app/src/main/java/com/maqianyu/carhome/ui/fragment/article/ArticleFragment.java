@@ -59,7 +59,7 @@ public class ArticleFragment extends AbsBaseFragment {
         datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_CONVERSION));
         datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_TRAVELNOTES));
         datas.add(ArticleMediaFragment.newInstance(NetUrl.ARTICLE_ORIGINAL_VIDEO));
-        datas.add(ArticleCopyFragment.newInstance(NetUrl.ARTICLE_USECAR));
+        datas.add(ArticleLobbyistFragment.newInstance(NetUrl.ARTICLE_LOBBYIST));
         VpAdapter vpAdapter = new VpAdapter(getChildFragmentManager(), datas);
         viewPager.setAdapter(vpAdapter);
         tabLayout.setupWithViewPager(viewPager);

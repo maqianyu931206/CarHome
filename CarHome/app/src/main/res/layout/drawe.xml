@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/finder_drawerlayout2"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="#f5f4f4"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <RadioGroup
@@ -18,6 +17,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+        <RadioButton
+            android:id="@+id/finder_brand_rb_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:button="@null"
+            android:layout_margin="5dp"
+            android:text="返回" />
             <RadioButton
                 android:id="@+id/finder_brand_rb_show2"
                 android:layout_width="0dp"
@@ -47,7 +54,8 @@
         <ListView
             android:id="@+id/finder_brand_drawer_listView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants" />
 
     </LinearLayout>
 </RelativeLayout>

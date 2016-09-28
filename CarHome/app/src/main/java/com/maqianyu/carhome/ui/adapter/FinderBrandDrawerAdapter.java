@@ -1,10 +1,12 @@
 package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.Bean.FinderBrandDrawerBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
+import com.maqianyu.carhome.ui.activity.FinderInfoActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -50,7 +53,7 @@ public class FinderBrandDrawerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         MyViewHolder myViewHolder;
         if (convertView == null){
             convertView= LayoutInflater.from(context).inflate(R.layout.item_finder_drawer_all,null);
@@ -63,6 +66,17 @@ public class FinderBrandDrawerAdapter extends BaseAdapter {
         FinderDrawerGridViewAdapter finderDrawerGridViewAdapter = new FinderDrawerGridViewAdapter(context);
         myViewHolder.gridView.setAdapter(finderDrawerGridViewAdapter);
         finderDrawerGridViewAdapter.setDatas(datas.get(position).getSerieslist());
+
+        myViewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position2, long id) {
+                String Id = datas.get(position).getSerieslist().get(position2).getId() + "";
+                Intent intent = new Intent(context, FinderInfoActivity.class);
+                intent.putExtra("id",Id);
+                context.startActivity(intent);
+            }
+        });
+
         return convertView;
     }
 
