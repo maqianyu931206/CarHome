@@ -14,6 +14,8 @@ import com.maqianyu.carhome.ui.Bean.ArticleLetterInfoBean;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by dllo on 16/9/14.
  */
@@ -62,7 +64,12 @@ public class ArticleLetterInfoAdapter extends BaseAdapter {
                 myViewHolder.newsautherTv.setText(datas.get(position).getAuthorname());
                 myViewHolder.createtimeTv.setText(datas.get(position).getPublishtime());
                 myViewHolder.summeryTv.setText(datas.get(position).getContent());
-                Picasso.with(context).load(datas.get(position).getHeadimg()).into(myViewHolder.img);
+                if (datas.get(position).getHeadimg() != "") {
+                    Picasso.with(context).load(datas.get(position).getHeadimg()).into(myViewHolder.img);
+                }
+                if (datas.get(position).getHeadimg() == "") {
+                    myViewHolder.img.setImageResource(R.mipmap.morentouxiang);
+                }
             }
             ArticleLetterImgGridViewAdapter articleLetterImgGridViewAdapter = new ArticleLetterImgGridViewAdapter(context);
             myViewHolder.gridView1.setAdapter(articleLetterImgGridViewAdapter);
@@ -78,14 +85,14 @@ public class ArticleLetterInfoAdapter extends BaseAdapter {
 
     class MyViewHolder{
         TextView newsautherTv,createtimeTv,summeryTv;
-        ImageView img;
+        CircleImageView img;
         GridView gridView1 , gridView2;
         public MyViewHolder(View view){
             super();
             newsautherTv = (TextView) view.findViewById(R.id.item_article_letter_info_author_list_tv);
             createtimeTv = (TextView) view.findViewById(R.id.item_article_letter_info_createtime_list_tv);
             summeryTv = (TextView) view.findViewById(R.id.item_article_letter_info_summary_list_tv);
-            img  = (ImageView) view.findViewById(R.id.item_article_letter_info_heading_list_img);
+            img  = (CircleImageView) view.findViewById(R.id.item_article_letter_info_heading_list_img);
             gridView1 = (GridView) view.findViewById(R.id.article_letter_info_img_gridView);
             gridView2 = (GridView) view.findViewById(R.id.article_letters_info_tv_gridView);
         }

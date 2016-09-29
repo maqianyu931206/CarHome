@@ -29,6 +29,7 @@
         <activity android:name=".ui.activity.SaveActivity" />
         <activity android:name=".ui.activity.LoginActivity"/>
         <activity android:name=".ui.activity.FinderInfoActivity"/>
+        <activity android:name=".ui.activity.FinderPhotoActivity"/>
     </application>
 
 </manifest>

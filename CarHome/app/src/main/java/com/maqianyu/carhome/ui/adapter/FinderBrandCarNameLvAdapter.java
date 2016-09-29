@@ -24,6 +24,7 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -46,9 +47,9 @@ import java.util.List;
 public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     private Context context;
     private List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas;
-    private  int a;
+    private int a;
     private ListView listView1;
-    private RadioButton radioButtonshow1, radioButtonall1,rbback;
+    private RadioButton radioButtonshow1, radioButtonall1, rbback;
     private FinderBrandDrawerAdapter finderBrandDrawerAdapter;
     private String url11;
 
@@ -95,7 +96,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
         myViewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position2, long id) {
-                View view1 = LayoutInflater.from(context).inflate(R.layout.drawe,null);
+                View view1 = LayoutInflater.from(context).inflate(R.layout.drawe, null);
                 RelativeLayout drawerLayout1;
                 drawerLayout1 = (RelativeLayout) view1.findViewById(R.id.finder_drawerlayout2);
                 listView1 = (ListView) view1.findViewById(R.id.finder_brand_drawer_listView2);
@@ -107,25 +108,29 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                 DisplayMetrics metrics = new DisplayMetrics();
                 windowManger.getDefaultDisplay().getMetrics(metrics);
                 int screenWidth = metrics.widthPixels * 3 / 4;
-                int screeHeight = metrics.heightPixels ;
+                int screeHeight = metrics.heightPixels;
                 drawerLayout1.setMinimumWidth(screenWidth);
                 drawerLayout1.setMinimumHeight(screeHeight);
-                final PopupWindow popupWindow = new PopupWindow(drawerLayout1, screenWidth,screeHeight);
+                final PopupWindow popupWindow = new PopupWindow(context);
+                popupWindow.setWidth(screenWidth);
+                popupWindow.setHeight(screeHeight);
                 popupWindow.setContentView(view1);
                 popupWindow.setFocusable(true);
-                WindowManager.LayoutParams params2 = ((Activity)context).getWindow().getAttributes();
+                WindowManager.LayoutParams params2 = ((Activity) context).getWindow().getAttributes();
                 params2.alpha = 0.3f;
-                ((Activity)context).getWindow().setAttributes(params2);
-
-                if (popupWindow.isShowing()){
-                    WindowManager.LayoutParams params = ((Activity)context).getWindow().getAttributes();
-                    params.alpha = 1f;
-                    ((Activity)context).getWindow().setAttributes(params);
-                }
+                ((Activity) context).getWindow().setAttributes(params2);
+                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        WindowManager.LayoutParams params = ((Activity) context).getWindow().getAttributes();
+                        params.alpha = 1f;
+                        ((Activity) context).getWindow().setAttributes(params);
+                    }
+                });
                 popupWindow.setBackgroundDrawable(new ColorDrawable(0));
-                popupWindow.showAtLocation(drawerLayout1, Gravity.LEFT,screenWidth, ViewGroup.LayoutParams.MATCH_PARENT);
+                popupWindow.showAtLocation(drawerLayout1, Gravity.LEFT, screenWidth, ViewGroup.LayoutParams.MATCH_PARENT);
                 listView1.setAdapter(finderBrandDrawerAdapter);
-                String middleurl = datas.get(position).getList().get(position2).getId()+"";
+                String middleurl = datas.get(position).getList().get(position2).getId() + "";
                 final String showurl = NetUrl.FINDER_BRAND_LV_SHOW_START + middleurl + NetUrl.FINDER_BRAND_LV_SHOW_END;
                 final String allurl = NetUrl.FINDER_BRAND_LV_ALL_START + middleurl + NetUrl.FINDER_BRAND_LV_ALL_END;
                 url11 = showurl;
@@ -156,14 +161,15 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         popupWindow.dismiss();
-                        WindowManager.LayoutParams params = ((Activity)context).getWindow().getAttributes();
+                        WindowManager.LayoutParams params = ((Activity) context).getWindow().getAttributes();
                         params.alpha = 1f;
-                        ((Activity)context).getWindow().setAttributes(params);
+                        ((Activity) context).getWindow().setAttributes(params);
                     }
                 });
 
                 buildlistDatas(); // 抽屉数据的加载
             }
+
             private void buildlistDatas() {
                 VolleyInstance.getInstance().startRequest(url11, new VolleyResult() {
                     @Override
@@ -173,6 +179,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                         final List<FinderBrandDrawerBean.ResultBean.FctlistBean> datas = bean.getResult().getFctlist();
                         finderBrandDrawerAdapter.setDatas(datas);
                     }
+
                     @Override
                     public void failure() {
                     }
@@ -184,7 +191,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
 
     public int indexOf(String s) {
         for (int i = 0; i < 21; i++) {
-            if ( datas.get(i).getLetter().equals(s) ) {
+            if (datas.get(i).getLetter().equals(s)) {
                 a = i;
             }
         }
@@ -195,6 +202,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     class MyViewHolder {
         TextView titleTv;
         GridView gridView;
+
         public MyViewHolder(View itemView) {
             titleTv = (TextView) itemView.findViewById(R.id.item_finder_carname_tv);
             gridView = (GridView) itemView.findViewById(R.id.item_finder_carname_gridView);

@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -57,6 +59,7 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
         middle = intent.getStringExtra("id");
         String url = NetUrl.ARTICLE_LETTER_INFO_START+ middle +NetUrl.ARTICLE_LETTER_INFO_END;
         VolleyInstance.getInstance().startRequest(url,this);
+        Log.d("ArticleLetterInfoActivi", url);
         articleLetterInfoAdapter = new ArticleLetterInfoAdapter(this);
         listView.setAdapter(articleLetterInfoAdapter);
     }
@@ -76,7 +79,12 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
         numtv.setText(newsdataBean.getNewsdata().getReviewcount() + "人浏览");
         authornametv2.setText("编辑:" + newsdataBean.getNewsdata().getNewsauthor());
         Picasso.with(this).load(newsdataBean.getNewsdata().getImg()).resize(440,200).config(Bitmap.Config.ALPHA_8).into(img);
-        Picasso.with(this).load(newsdataBean.getNewsdata().getHeadimg()).into(headingimg);
+        if (newsdataBean.getNewsdata().getHeadimg() != "") {
+            Picasso.with(this).load(newsdataBean.getNewsdata().getHeadimg()).into(headingimg);
+        }
+        if (newsdataBean.getNewsdata().getHeadimg() == "") {
+            headingimg.setImageResource(R.mipmap.morentouxiang);
+        }
     }
 
     @Override

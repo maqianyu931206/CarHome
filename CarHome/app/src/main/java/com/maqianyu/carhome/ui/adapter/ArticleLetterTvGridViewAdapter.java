@@ -14,6 +14,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by dllo on 16/9/21.
  */
@@ -70,11 +72,11 @@ public class ArticleLetterTvGridViewAdapter extends BaseAdapter {
     class  ViewHolder{
 
         TextView tv1,tv2;
-        ImageView img;
+        CircleImageView img;
         public  ViewHolder(View v){
             tv1 = (TextView) v.findViewById(R.id.item_article_letter_info_small_tv);
             tv2 = (TextView) v.findViewById(R.id.item_article_letter_info_small_content_tv);
-            img = (ImageView) v.findViewById(R.id.item_article_letter_info_small_img);
+            img = (CircleImageView) v.findViewById(R.id.item_article_letter_info_small_img);
         }
     }
 }
