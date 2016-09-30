@@ -1,27 +1,19 @@
 package com.maqianyu.carhome.ui.activity;
 
-import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
-import android.widget.TableLayout;
-
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.fragment.article.ArticleFragment;
 import com.maqianyu.carhome.ui.fragment.findercar.FinderFragment;
 import com.maqianyu.carhome.ui.fragment.forum.ForumFragment;
 import com.maqianyu.carhome.ui.fragment.my.MyFragment;
 import com.maqianyu.carhome.ui.fragment.sale.SaleFragment;
-import com.maqianyu.carhome.ui.inteface.VolleyResult;
-
 public class MainActivity extends AbsBaseActivity  {
     private FrameLayout frameLayout;
     private RadioGroup radioGroup;
-    private TableLayout tableLayout;
-    private Context context;
-    private ViewPager viewPager;
+
 
     @Override
     protected int setLayout() {

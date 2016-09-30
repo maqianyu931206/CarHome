@@ -20,7 +20,6 @@ import java.util.List;
  * 推荐
  */
 public class ArticleFragment extends AbsBaseFragment {
-    private Context context;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private int i;

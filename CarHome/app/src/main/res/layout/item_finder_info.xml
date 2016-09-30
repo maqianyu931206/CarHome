@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:layout_margin="5dp"
     android:layout_height="match_parent">
 
     <TextView
@@ -30,6 +31,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:textSize="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="50dp"
+            android:text="参考价:   " />
+
+        <TextView
+            android:id="@+id/item_finder_info_price_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#f00"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -41,29 +56,33 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:text="购车计算"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#00f"
+            android:background="@drawable/shape"
             android:gravity="center"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:text="添加对比"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#00f"
+            android:background="@drawable/shape"
             android:gravity="center"
             android:layout_height="wrap_content" />
         <TextView
+            android:background="@drawable/shape"
             android:layout_weight="1"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#00f"
             android:gravity="center"
             android:layout_width="0dp"
             android:text="询底价"
             android:layout_height="wrap_content" />
-
-
-
-
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="5dp"
+        android:background="#dcdbdb"/>
 </LinearLayout>

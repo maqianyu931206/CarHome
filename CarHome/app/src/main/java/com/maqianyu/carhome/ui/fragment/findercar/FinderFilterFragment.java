@@ -53,7 +53,6 @@ public class FinderFilterFragment extends AbsBaseFragment implements VolleyResul
         FinderchioceBean bean = gson.fromJson(resultStr,FinderchioceBean.class);
         List<FinderchioceBean.ResultBean.SeriesBean> datas = bean.getResult().getSeries();
         finderFilterAdapter.setDatas(datas);
-        Log.d("FinderFilterFragment", "datas.size():" + datas.size());
     }
 
     @Override

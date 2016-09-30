@@ -39,12 +39,12 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
     private Handler handler;
     private boolean isRotate = false;
     private Runnable rotateRunnable;
-    private String url;
+    private String urlnew;
     private ReFlashListView listView;
 
-    public static ArticleNewFragment newInstance(String url) {
+    public static ArticleNewFragment newInstance(String urlnew) {
         Bundle args = new Bundle();
-        args.putString("url", url);
+        args.putString("url", urlnew);
         ArticleNewFragment fragment = new ArticleNewFragment();
         fragment.setArguments(args);
         return fragment;
@@ -63,9 +63,9 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
     @Override
     protected void initData() {
         Bundle bundel = getArguments();
-        url = bundel.getString("url");
+        urlnew = bundel.getString("url");
         //获取网络数据
-        VolleyInstance.getInstance().startRequest(url, this);
+        VolleyInstance.getInstance().startRequest(urlnew, this);
         listTypeAdapter = new ListTypeAdapter(context);
         listView.setAdapter(listTypeAdapter);
         // 轮播图加载头布局

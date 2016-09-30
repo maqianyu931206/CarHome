@@ -15,9 +15,9 @@
        android:id="@+id/btn"
        android:text="外观"
        android:layout_margin="5dp"
-       android:background="#1896ea"
+       android:background="#18ea65"
        android:layout_width="0dp"
-       android:layout_height="wrap_content" />
+       android:layout_height="30dp" />
     <Button
         android:layout_weight="1"
         android:id="@+id/btn2"
@@ -25,7 +25,7 @@
         android:layout_margin="5dp"
         android:background="#1896ea"
         android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="30dp" />
     </LinearLayout>
     <WebView
         android:id="@+id/webview"

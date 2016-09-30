@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.activity.LoginActivity;
 import com.maqianyu.carhome.ui.activity.SaveActivity;
@@ -15,15 +16,15 @@ import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
  * 我-Fragment
  */
 public class MyFragment extends AbsBaseFragment {
-    private TextView tv,login;
+    private TextView tv, login;
     private LinearLayout linearLayoutSave;
+
     public static MyFragment newInstance() {
         Bundle args = new Bundle();
         MyFragment fragment = new MyFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     protected int setLayout() {
@@ -50,7 +51,6 @@ public class MyFragment extends AbsBaseFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(context, LoginActivity.class);
                 context.startActivity(intent);
-
 
             }
         });

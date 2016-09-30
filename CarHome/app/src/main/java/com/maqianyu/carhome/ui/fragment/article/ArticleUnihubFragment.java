@@ -45,7 +45,7 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
     private View viewview;
     private TextView textViewAll;
     private TextView textView;
-    private  String url;
+    private  String urlunihub;
     private ListView listView;
     private ArticleUnihubAdapter articleUnihubAdapter;
     private static final int TIME = 3000;
@@ -57,9 +57,9 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
     private boolean isRotate = false;
     private Runnable rotateRunnable;
 
-    public static ArticleUnihubFragment newInstance(String url) {
+    public static ArticleUnihubFragment newInstance(String urlunihub) {
         Bundle args = new Bundle();
-        args.putString("url",url);
+        args.putString("url",urlunihub);
         ArticleUnihubFragment fragment = new ArticleUnihubFragment();
         fragment.setArguments(args);
         return fragment;
@@ -84,9 +84,9 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
-        url = bundle.getString("url");
+        urlunihub = bundle.getString("url");
         PopUnihub();// 点击弹出popWindow,选择全部,优选,我的关注
-        VolleyInstance.getInstance().startRequest(url,this);
+        VolleyInstance.getInstance().startRequest(urlunihub,this);
 
         View view = LayoutInflater.from(context).inflate(R.layout.lunbophone_header, null);
         viewPager = (ViewPager) view.findViewById(R.id.rotate_vp);
@@ -95,17 +95,17 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
         listView.addHeaderView(view);
     }
     private void PopUnihub() {
-        textViewAll.setText("优选");
+        textViewAll.setText(getResources().getString(R.string.firstchoose));
         showAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.article_pop_unihub, null);
                 LinearLayout linearLayout;
                 final TextView qbtv, wdgztv, yxtv;
-                final ImageView selectetrue1,selectetrue2,selectetrue3;
-                selectetrue1 = (ImageView) view.findViewById(R.id.select_true1);
-                selectetrue2 = (ImageView) view.findViewById(R.id.select_true2);
-                selectetrue3 = (ImageView) view.findViewById(R.id.select_true3);
+                final ImageView selectetrueone,selectetruetwo,selectetruethree;
+                selectetrueone = (ImageView) view.findViewById(R.id.select_true1);
+                selectetruetwo = (ImageView) view.findViewById(R.id.select_true2);
+                selectetruethree = (ImageView) view.findViewById(R.id.select_true3);
                 linearLayout = (LinearLayout) view.findViewById(R.id.article_unihub_pop_linearLayout);
                 qbtv = (TextView) view.findViewById(R.id.qbTv);
                 wdgztv = (TextView) view.findViewById(R.id.wdgzTv);
@@ -129,10 +129,10 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
                         qbtv.setTextColor(Color.BLACK);
                         yxtv.setTextColor(Color.BLUE);
                         wdgztv.setTextColor(Color.BLACK);
-                        textViewAll.setText("优选");
-                        selectetrue1.setVisibility(View.VISIBLE);
-                        selectetrue2.setVisibility(View.GONE);
-                        selectetrue3.setVisibility(View.GONE);
+                        textViewAll.setText(getResources().getString(R.string.firstchoose));
+                        selectetrueone.setVisibility(View.VISIBLE);
+                        selectetruetwo.setVisibility(View.GONE);
+                        selectetruethree.setVisibility(View.GONE);
                     }
                 });
                 qbtv.setOnClickListener(new View.OnClickListener() {
@@ -141,10 +141,10 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
                         qbtv.setTextColor(Color.BLUE);
                         yxtv.setTextColor(Color.BLACK);
                         wdgztv.setTextColor(Color.BLACK);
-                        textViewAll.setText("全部");
-                        selectetrue2.setVisibility(View.VISIBLE);
-                        selectetrue1.setVisibility(View.GONE);
-                        selectetrue3.setVisibility(View.GONE);
+                        textViewAll.setText(getResources().getString(R.string.allall));
+                        selectetruetwo.setVisibility(View.VISIBLE);
+                        selectetrueone.setVisibility(View.GONE);
+                        selectetruethree.setVisibility(View.GONE);
                     }
                 });
                 wdgztv.setOnClickListener(new View.OnClickListener() {
@@ -153,30 +153,30 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
                         qbtv.setTextColor(Color.BLACK);
                         yxtv.setTextColor(Color.BLACK);
                         wdgztv.setTextColor(Color.BLUE);
-                        textViewAll.setText("我的关注");
-                        selectetrue3.setVisibility(View.VISIBLE);
-                        selectetrue1.setVisibility(View.GONE);
-                        selectetrue2.setVisibility(View.GONE);
+                        textViewAll.setText(getResources().getString(R.string.guanz));
+                        selectetruethree.setVisibility(View.VISIBLE);
+                        selectetrueone.setVisibility(View.GONE);
+                        selectetruetwo.setVisibility(View.GONE);
                     }
                 });
 
-                if (textViewAll.getText().equals("全部")) {
+                if (textViewAll.getText().equals(getResources().getString(R.string.allall))) {
                     qbtv.setTextColor(Color.BLUE);
-                    selectetrue1.setVisibility(View.GONE);
-                    selectetrue3.setVisibility(View.GONE);
-                    selectetrue2.setVisibility(View.VISIBLE);
+                    selectetrueone.setVisibility(View.GONE);
+                    selectetruethree.setVisibility(View.GONE);
+                    selectetruetwo.setVisibility(View.VISIBLE);
                 }
-                else if (textViewAll.getText().equals("优选")) {
+                else if (textViewAll.getText().equals(getResources().getString(R.string.firstchoose))) {
                     yxtv.setTextColor(Color.BLUE);
-                    selectetrue1.setVisibility(View.VISIBLE);
-                    selectetrue2.setVisibility(View.GONE);
-                    selectetrue3.setVisibility(View.GONE);
+                    selectetrueone.setVisibility(View.VISIBLE);
+                    selectetruetwo.setVisibility(View.GONE);
+                    selectetruethree.setVisibility(View.GONE);
                 }
-                else if (textViewAll.getText().equals("我的关注")) {
+                else if (textViewAll.getText().equals(getResources().getString(R.string.guanz))) {
                     wdgztv.setTextColor(Color.BLUE);
-                    selectetrue1.setVisibility(View.GONE);
-                    selectetrue2.setVisibility(View.GONE);
-                    selectetrue3.setVisibility(View.VISIBLE);
+                    selectetrueone.setVisibility(View.GONE);
+                    selectetruetwo.setVisibility(View.GONE);
+                    selectetruethree.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -198,10 +198,10 @@ public class ArticleUnihubFragment extends AbsBaseFragment implements VolleyResu
             public void success(String resultStr) {
                 Gson gson = new Gson();
                 ArticleUnihubBean listTypeBean = gson.fromJson(resultStr, ArticleUnihubBean.class);
-                final List<ArticleUnihubBean.ResultBean.FocusimgsBean> datas2 = listTypeBean.getResult().getFocusimgs();
+                final List<ArticleUnihubBean.ResultBean.FocusimgsBean> data = listTypeBean.getResult().getFocusimgs();
                 datas = new ArrayList<>();
-                for (int i = 0; i < datas2.size(); i++) {
-                    datas.add(new RotateBean(datas2.get(i).getImgurl()));
+                for (int i = 0; i < data.size(); i++) {
+                    datas.add(new RotateBean(data.get(i).getImgurl()));
                 }
                 vpAdapter = new RotateArticleAdapter(context);
                 vpAdapter.setDatas(datas);

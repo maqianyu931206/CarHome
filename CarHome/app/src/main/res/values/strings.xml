@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">汽车之家</string>
+    <string name="seenum">人浏览</string>
+    <string name="write">编辑:</string>
+    <string name="all">共</string>
+    <string name="sizephot">张图片</string>
+    <string name="nophoto">没有图片</string>
+    <string name="video">播放</string>
+    <string name="reply">回帖</string>
+
+    <string name="allall">全部</string>
+    <string name="guanz">我的关注</string>
+    <string name="firstchoose">优选</string>
+
 </resources>

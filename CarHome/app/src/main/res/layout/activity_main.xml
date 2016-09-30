@@ -15,7 +15,7 @@
     <View
         android:layout_width="match_parent"
         android:background="#c2baba"
-        android:layout_height="2dp"/>
+        android:layout_height="@dimen/view_height_middle"/>
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"

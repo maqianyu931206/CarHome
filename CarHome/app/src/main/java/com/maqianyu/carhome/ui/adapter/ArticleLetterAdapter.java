@@ -46,7 +46,7 @@ public class ArticleLetterAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder myViewHolder =null;
+        MyViewHolder myViewHolder ;
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_letter,parent,false);
             myViewHolder = new MyViewHolder(convertView);
@@ -58,7 +58,7 @@ public class ArticleLetterAdapter extends BaseAdapter {
         if (bean != null){
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getCreatetime());
-            myViewHolder.numTv.setText(bean.getReviewcount()+"人浏览");
+            myViewHolder.numTv.setText(bean.getReviewcount()+context.getResources().getString(R.string.seenum));
             Picasso.with(context).load(bean.getImg()).resize(680,400).into(myViewHolder.img);
         }
         return convertView;

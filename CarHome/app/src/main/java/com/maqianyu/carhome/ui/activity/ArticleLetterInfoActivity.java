@@ -76,8 +76,8 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
         timetv.setText(newsdataBean.getNewsdata().getCreatetime());
         summerytv.setText(newsdataBean.getNewsdata().getSummary());
         titletv.setText(newsdataBean.getNewsdata().getTitle());
-        numtv.setText(newsdataBean.getNewsdata().getReviewcount() + "人浏览");
-        authornametv2.setText("编辑:" + newsdataBean.getNewsdata().getNewsauthor());
+        numtv.setText(newsdataBean.getNewsdata().getReviewcount() + getResources().getString(R.string.seenum));
+        authornametv2.setText(getResources().getString(R.string.write)+ newsdataBean.getNewsdata().getNewsauthor());
         Picasso.with(this).load(newsdataBean.getNewsdata().getImg()).resize(440,200).config(Bitmap.Config.ALPHA_8).into(img);
         if (newsdataBean.getNewsdata().getHeadimg() != "") {
             Picasso.with(this).load(newsdataBean.getNewsdata().getHeadimg()).into(headingimg);

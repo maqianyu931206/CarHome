@@ -18,6 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by dllo on 16/9/14.
+ * 快报详情适配器
  */
 public class ArticleLetterInfoAdapter extends BaseAdapter {
 

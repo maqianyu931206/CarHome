@@ -47,7 +47,7 @@ public class FinderFilterAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder myViewHolder =null;
+        MyViewHolder myViewHolder ;
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_finder_filter,parent,false);
             myViewHolder = new MyViewHolder(convertView);

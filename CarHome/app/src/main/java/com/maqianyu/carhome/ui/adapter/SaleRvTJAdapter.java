@@ -53,7 +53,6 @@ public class SaleRvTJAdapter extends RecyclerView.Adapter<SaleRvTJAdapter.MyView
             holder.title.setText(datas.get(position).getTitle());
             holder.content.setText(datas.get(position).getShorttitle());
             holder.money.setText(datas.get(position).getPrice());
-//            holder.price.setText(datas.get(position).getFctprice());
             SpannableString string = new SpannableString(datas.get(position).getFctprice());
             string.setSpan(new StrikethroughSpan(),0,datas.get(position).getFctprice().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
             holder.price.setText(string);

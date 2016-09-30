@@ -47,8 +47,8 @@ public class FinderFragment extends AbsBaseFragment {
         List<Fragment> datas = new ArrayList<>();
         datas.add(FinderBrandFragment.newInstance(NetUrl.FINDER_BRAND));
         datas.add(FinderFilterFragment.newInstance(NetUrl.FINDER_BRAND_CHIOSE));
-        datas.add(FinderPriceFragment.newInstance("333"));
-        datas.add(FinderUsedcarsFragment.newInstance("444"));
+        datas.add(FinderPriceFragment.newInstance(""));
+        datas.add(FinderUsedcarsFragment.newInstance(""));
         VpAdapter vpAdapter = new VpAdapter(getChildFragmentManager(), datas);
         viewPager.setAdapter(vpAdapter);
         tabLayout.setupWithViewPager(viewPager);

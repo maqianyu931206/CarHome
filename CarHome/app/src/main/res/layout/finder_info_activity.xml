@@ -1,12 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:background="#fff">
 
     <ListView
         android:id="@+id/finder_info_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</LinearLayout>
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:background="#cacaca"
+        android:layout_height="25dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:text="收藏"
+            android:textColor="#00f" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@id/tv1"
+            android:text="分享"
+            android:textColor="#00f" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv2"
+            android:gravity="center"
+            android:text="询底价"
+            android:textColor="#00f"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
 

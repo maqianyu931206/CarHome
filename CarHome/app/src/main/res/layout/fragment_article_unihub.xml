@@ -17,7 +17,7 @@
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:layout_weight="7"
-            android:textSize="12sp" />
+            android:textSize="@dimen/textsize_big_small" />
 
         <ImageView
             android:id="@+id/article_uniHub_show_all"

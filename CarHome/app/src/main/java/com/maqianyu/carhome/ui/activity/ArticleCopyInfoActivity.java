@@ -19,7 +19,6 @@ import com.maqianyu.carhome.model.net.NetUrl;
 public class ArticleCopyInfoActivity extends AbsBaseActivity {
 
     private WebView webView;
-    private RecyclerView recyclerView;
     private  ImageView imageView;
     private String middleurl;
 

@@ -23,13 +23,13 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:button="@null"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/margin_small"
             android:text="返回" />
             <RadioButton
                 android:id="@+id/finder_brand_rb_show2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/margin_small"
                 android:layout_weight="1"
                 android:background="@null"
                 android:button="@null"
@@ -40,7 +40,7 @@
                 android:id="@+id/finder_brand_rb_all2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/margin_small"
                 android:layout_weight="1"
                 android:button="@null"
                 android:text="全部" />

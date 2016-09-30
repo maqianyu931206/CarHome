@@ -20,13 +20,13 @@ import java.util.List;
  * 推荐-复用的
  */
 public class ArticleCopyFragment extends AbsBaseFragment implements VolleyResult {
-    private  String url3;
+    private  String urlcopy;
     private ListView listView;
     private ArticleCopyAdapter articleCopyAdapter;
 
-    public static ArticleCopyFragment newInstance(String url3) {
+    public static ArticleCopyFragment newInstance(String urlcopy) {
         Bundle args = new Bundle();
-        args.putString("url",url3);
+        args.putString("url",urlcopy);
         ArticleCopyFragment fragment = new ArticleCopyFragment();
         fragment.setArguments(args);
         return fragment;
@@ -45,8 +45,8 @@ public class ArticleCopyFragment extends AbsBaseFragment implements VolleyResult
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
-        url3 = bundle.getString("url");
-        VolleyInstance.getInstance().startRequest(url3,this);
+        urlcopy = bundle.getString("url");
+        VolleyInstance.getInstance().startRequest(urlcopy,this);
         articleCopyAdapter  =new ArticleCopyAdapter(context);
         listView.setAdapter(articleCopyAdapter);
     }

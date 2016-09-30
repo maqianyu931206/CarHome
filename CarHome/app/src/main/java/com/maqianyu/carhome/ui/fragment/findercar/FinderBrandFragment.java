@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -28,6 +29,7 @@ import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
 import com.maqianyu.carhome.view.SlideBar;
+
 import java.util.List;
 
 /**
@@ -77,7 +79,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
         listView = byView(R.id.finder_brand_drawer_listView);
         textViewname = byView(R.id.item_finder_drawer_name_tv);
         radioButtonshow = byView(R.id.finder_brand_rb_show);
-        radioButtonall =  byView(R.id.finder_brand_rb_all);
+        radioButtonall = byView(R.id.finder_brand_rb_all);
         finderBrandDrawerAdapter = new FinderBrandDrawerAdapter(context);
         listView.setAdapter(finderBrandDrawerAdapter);
         // 联动数据初始化
@@ -88,7 +90,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
     @Override
     protected void initData() {
         // 热门品牌.recyclerView的加载 ,加载头布局
-        View view = LayoutInflater.from(context).inflate(R.layout.finder_header_rv,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.finder_header_rv, null);
         recyclerView = (RecyclerView) view.findViewById(R.id.finder_brand_recyclerView);
         finderBrandRvAdapter = new FinderBrandRvAdapter(context);
         hotbread();// 热门品牌
@@ -118,14 +120,14 @@ public class FinderBrandFragment extends AbsBaseFragment {
                         float_letter.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                float_letter.setVisibility(View.GONE);
+                                float_letter.setVisibility(View.VISIBLE);
                             }
                         }, 100);
                         break;
                 }
                 int position = finderBrandCarNameLvAdapter.indexOf(s);//这个array就是传给自定义Adapter的
                 int position2 = position + 1;
-                listViewLongName.smoothScrollToPositionFromTop(position2,0);//调用ListView的setSelection()方法就可实现了
+                listViewLongName.smoothScrollToPositionFromTop(position2, 0);//调用ListView的setSelection()方法就可实现了
                 finderBrandCarNameLvAdapter.notifyDataSetChanged();
             }
         });
@@ -141,6 +143,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas = bean2.getResult().getBrandlist();
                 finderBrandCarNameLvAdapter.setDatas(datas);
             }
+
             @Override
             public void failure() {
             }
@@ -179,7 +182,6 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 final String showurl = NetUrl.FINDER_BRAND_START + middleurl + NetUrl.FINDER_BRAND_END;
                 final String allurl = NetUrl.FINDER_BRAND_START_SHOW + middleurl + NetUrl.FINDER_BRAND_END_SHOW;
                 url11 = showurl;
-                Log.d("ttt", "radioButtonshow:" + radioButtonshow);
                 radioButtonshow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -208,6 +210,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
 
         });
     }
+
     private void buildlistDatas() {
         VolleyInstance.getInstance().startRequest(url11, new VolleyResult() {
             @Override

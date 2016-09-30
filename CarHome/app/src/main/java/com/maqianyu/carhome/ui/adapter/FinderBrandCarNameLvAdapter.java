@@ -49,9 +49,9 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
     private List<FinderBrandCarNameBean.ResultBean.BrandlistBean> datas;
     private int a;
     private ListView listView1;
-    private RadioButton radioButtonshow1, radioButtonall1, rbback;
+    private RadioButton radioButtonshowAd, radioButtonallAd, rbback;
     private FinderBrandDrawerAdapter finderBrandDrawerAdapter;
-    private String url11;
+    private String url;
 
 
     public FinderBrandCarNameLvAdapter(Context context) {
@@ -100,8 +100,8 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                 RelativeLayout drawerLayout1;
                 drawerLayout1 = (RelativeLayout) view1.findViewById(R.id.finder_drawerlayout2);
                 listView1 = (ListView) view1.findViewById(R.id.finder_brand_drawer_listView2);
-                radioButtonshow1 = (RadioButton) view1.findViewById(R.id.finder_brand_rb_show2);
-                radioButtonall1 = (RadioButton) view1.findViewById(R.id.finder_brand_rb_all2);
+                radioButtonshowAd = (RadioButton) view1.findViewById(R.id.finder_brand_rb_show2);
+                radioButtonallAd = (RadioButton) view1.findViewById(R.id.finder_brand_rb_all2);
                 rbback = (RadioButton) view1.findViewById(R.id.finder_brand_rb_back);
                 finderBrandDrawerAdapter = new FinderBrandDrawerAdapter(context);
                 WindowManager windowManger = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -133,26 +133,26 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
                 String middleurl = datas.get(position).getList().get(position2).getId() + "";
                 final String showurl = NetUrl.FINDER_BRAND_LV_SHOW_START + middleurl + NetUrl.FINDER_BRAND_LV_SHOW_END;
                 final String allurl = NetUrl.FINDER_BRAND_LV_ALL_START + middleurl + NetUrl.FINDER_BRAND_LV_ALL_END;
-                url11 = showurl;
-                radioButtonshow1.setTextColor(Color.BLUE);
-                radioButtonshow1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                url = showurl;
+                radioButtonshowAd.setTextColor(Color.BLUE);
+                radioButtonshowAd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked == true) {
-                            url11 = showurl;
-                            radioButtonshow1.setTextColor(Color.BLUE);
-                            radioButtonall1.setTextColor(Color.BLACK);
+                            url = showurl;
+                            radioButtonshowAd.setTextColor(Color.BLUE);
+                            radioButtonallAd.setTextColor(Color.BLACK);
                             buildlistDatas();
                         }
                     }
                 });
-                radioButtonall1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                radioButtonallAd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked == true) {
-                            url11 = allurl;
-                            radioButtonall1.setTextColor(Color.BLUE);
-                            radioButtonshow1.setTextColor(Color.BLACK);
+                            url = allurl;
+                            radioButtonallAd.setTextColor(Color.BLUE);
+                            radioButtonshowAd.setTextColor(Color.BLACK);
                             buildlistDatas();
                         }
                     }
@@ -171,7 +171,7 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
             }
 
             private void buildlistDatas() {
-                VolleyInstance.getInstance().startRequest(url11, new VolleyResult() {
+                VolleyInstance.getInstance().startRequest(url, new VolleyResult() {
                     @Override
                     public void success(String resultStr) {
                         Gson gson = new Gson();
@@ -198,7 +198,6 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
         return a;
     }
 
-
     class MyViewHolder {
         TextView titleTv;
         GridView gridView;
@@ -208,6 +207,5 @@ public class FinderBrandCarNameLvAdapter extends BaseAdapter {
             gridView = (GridView) itemView.findViewById(R.id.item_finder_carname_gridView);
         }
     }
-
 
 }

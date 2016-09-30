@@ -71,7 +71,7 @@ public class ArticleCopyAdapter extends BaseAdapter {
         if (bean != null){
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getTime());
-            myViewHolder.numTv.setText(bean.getReplycount()+"人浏览");
+            myViewHolder.numTv.setText(bean.getReplycount()+context.getResources().getString(R.string.seenum));
             Glide.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
         }
         return convertView;

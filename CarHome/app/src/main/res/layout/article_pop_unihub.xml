@@ -17,16 +17,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="优选"
-            android:textSize="12sp" />
+            android:textSize="@dimen/textsize_big_small" />
 
         <ImageView
             android:id="@+id/select_true1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/margin_small"
             android:background="@mipmap/ahlib_common_forms_icon_select_a"
-            android:padding="8dp"
+            android:padding="@dimen/margin_small_big"
             android:visibility="gone" />
     </RelativeLayout>
 
@@ -39,18 +39,18 @@
             android:id="@+id/qbTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_middle"
             android:text="全部"
-            android:textSize="12sp" />
+            android:textSize="@dimen/textsize_big_small" />
 
         <ImageView
             android:id="@+id/select_true2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/margin_small"
             android:background="@mipmap/ahlib_common_forms_icon_select_a"
-            android:padding="8dp"
+            android:padding="@dimen/margin_small_big"
             android:visibility="gone" />
     </RelativeLayout>
 
@@ -63,18 +63,18 @@
             android:id="@+id/wdgzTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_middle"
             android:text="我的关注"
-            android:textSize="12sp" />
+            android:textSize="@dimen/textsize_big_small" />
 
         <ImageView
             android:id="@+id/select_true3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/margin_middle"
             android:background="@mipmap/ahlib_common_forms_icon_select_a"
-            android:padding="8dp"
+            android:padding="@dimen/margin_small_big"
             android:visibility="gone" />
     </RelativeLayout>
 

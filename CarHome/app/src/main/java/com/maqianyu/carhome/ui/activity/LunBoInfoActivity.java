@@ -6,6 +6,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.maqianyu.carhome.R;
@@ -13,6 +14,7 @@ import com.maqianyu.carhome.model.net.NetUrl;
 
 /**
  * Created by dllo on 16/9/23.
+ * 轮播图的点击详情
  */
 public class LunBoInfoActivity extends AbsBaseActivity {
     private ImageView imageViewback;

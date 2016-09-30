@@ -58,7 +58,7 @@ public class SaleFragment extends AbsBaseFragment {
     private Handler handler;
     private ListView listView;
     private SaleLvAdapter saleLvAdapter;
-    private RecyclerView recyclerView, recyclerViewLike, recyclerViewLike2;
+    private RecyclerView recyclerView, recyclerViewLike, recyclerViewLikeTj;
     private SaleRvAdapter saleRvAdapter;
     private SaleRvLikeAdapter saleRvLikeAdapter;
     private SaleRvTJAdapter saleRvTJAdapter;
@@ -94,14 +94,14 @@ public class SaleFragment extends AbsBaseFragment {
         buildDatas();//轮播图构造数据
         recyclerView = (RecyclerView) view.findViewById(R.id.sale_recyclereView);
         recyclerViewLike = (RecyclerView) view.findViewById(R.id.sale_like_recyclereView);
-        recyclerViewLike2 = (RecyclerView) view.findViewById(R.id.sale_like_recyclereView2);
+        recyclerViewLikeTj = (RecyclerView) view.findViewById(R.id.sale_like_recyclereView2);
         saleRvAdapter = new SaleRvAdapter(context);
         saleRvLikeAdapter = new SaleRvLikeAdapter(context);
         saleRvTJAdapter = new SaleRvTJAdapter(context);
         listView.addHeaderView(view2);
         listView.addHeaderView(view);
 
-        recyclerViewLike2.setAdapter(saleRvTJAdapter);
+        recyclerViewLikeTj.setAdapter(saleRvTJAdapter);
         recyclerViewLike.setAdapter(saleRvLikeAdapter);
         recyclerView.setAdapter(saleRvAdapter);
         GridLayoutManager llManager = new GridLayoutManager(context, 4);
@@ -122,7 +122,7 @@ public class SaleFragment extends AbsBaseFragment {
         GridLayoutManager llManagerlike = new GridLayoutManager(context, 2);
         recyclerViewLike.setLayoutManager(llManagerlike);
         GridLayoutManager llManagerlike2 = new GridLayoutManager(context, 2);
-        recyclerViewLike2.setLayoutManager(llManagerlike2);
+        recyclerViewLikeTj.setLayoutManager(llManagerlike2);
         VolleyInstance.getInstance().startRequest(NetUrl.SALE_DISCOVER_LIKE, new VolleyResult() {
             @Override
             public void success(String resultStr) {
@@ -150,10 +150,10 @@ public class SaleFragment extends AbsBaseFragment {
             public void success(String resultStr) {
                 Gson gson = new Gson();
                 SaleLBBean saleLBBean = gson.fromJson(resultStr, SaleLBBean.class);
-                final List<SaleLBBean.ResultBean.ListBean> datas2 = saleLBBean.getResult().getList();
+                final List<SaleLBBean.ResultBean.ListBean> data = saleLBBean.getResult().getList();
                 datas = new ArrayList<>();
-                for (int i = 0; i < datas2.size(); i++) {
-                    datas.add(new RotateBean(datas2.get(i).getImgurl()));
+                for (int i = 0; i < data.size(); i++) {
+                    datas.add(new RotateBean(data.get(i).getImgurl()));
                 }
                 vpAdapter = new RotateArticleAdapter(context);
                 vpAdapter.setDatas(datas);

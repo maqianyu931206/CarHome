@@ -61,7 +61,7 @@ public class ArticleMediaAdapter extends BaseAdapter {
         if (bean != null){
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getTime());
-            myViewHolder.numTv.setText(bean.getReplycount()+"播放");
+            myViewHolder.numTv.setText(bean.getReplycount()+context.getResources().getString(R.string.video));
             Picasso.with(context).load(bean.getSmallimg()).into(myViewHolder.img);
         }
         return convertView;

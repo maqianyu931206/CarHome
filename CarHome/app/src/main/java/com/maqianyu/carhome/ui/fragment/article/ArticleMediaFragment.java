@@ -23,13 +23,13 @@ import java.util.List;
  * 推荐-视频
  */
 public class ArticleMediaFragment extends AbsBaseFragment implements VolleyResult {
-    private  String url2;
+    private  String urlmedia;
     private ListView listView;
     private ArticleMediaAdapter articleMediaAdapter;
 
-    public static ArticleMediaFragment newInstance(String url2) {
+    public static ArticleMediaFragment newInstance(String urlmedia) {
         Bundle args = new Bundle();
-        args.putString("url",url2);
+        args.putString("url",urlmedia);
         ArticleMediaFragment fragment = new ArticleMediaFragment();
         fragment.setArguments(args);
         return fragment;
@@ -50,8 +50,8 @@ public class ArticleMediaFragment extends AbsBaseFragment implements VolleyResul
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
-        url2 = bundle.getString("url");
-        VolleyInstance.getInstance().startRequest(url2,this);
+        urlmedia = bundle.getString("url");
+        VolleyInstance.getInstance().startRequest(urlmedia,this);
     }
 
     @Override

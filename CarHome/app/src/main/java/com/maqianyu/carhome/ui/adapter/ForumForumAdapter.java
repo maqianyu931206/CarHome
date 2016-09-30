@@ -45,32 +45,34 @@ public class ForumForumAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder myViewHolder =null;
-        if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_forum_forum,parent,false);
+        MyViewHolder myViewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_forum_forum, parent, false);
             myViewHolder = new MyViewHolder(convertView);
             convertView.setTag(myViewHolder);
-        }else {
+        } else {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
         ForumForumBean.ResultBean.ListBean bean = datas.get(position);
-        if (bean != null){
+        if (bean != null) {
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getPostdate());
-            myViewHolder.numTv.setText(bean.getReplycounts()+"回帖");
-           myViewHolder.Tv.setText(bean.getBbsname());
+            myViewHolder.numTv.setText(bean.getReplycounts() + context.getResources().getString(R.string.reply));
+            myViewHolder.Tv.setText(bean.getBbsname());
         }
         return convertView;
     }
+
     // 缓存类
-    class MyViewHolder{
-        TextView titleTv,dateTv,numTv,Tv;
-        public MyViewHolder(View view){
+    class MyViewHolder {
+        TextView titleTv, dateTv, numTv, Tv;
+
+        public MyViewHolder(View view) {
             super();
             titleTv = (TextView) view.findViewById(R.id.item_forum_forum_title_tv);
             dateTv = (TextView) view.findViewById(R.id.item_forum_forum_postdate_tv);
             numTv = (TextView) view.findViewById(R.id.item_forum_forum_num_tv);
-            Tv  = (TextView) view.findViewById(R.id.item_forum_forum_bbsName_tv);
+            Tv = (TextView) view.findViewById(R.id.item_forum_forum_bbsName_tv);
         }
     }
 }

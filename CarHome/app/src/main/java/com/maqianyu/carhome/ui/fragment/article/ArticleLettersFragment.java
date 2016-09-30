@@ -26,13 +26,13 @@ import java.util.List;
  * 推荐-快报
  */
 public class ArticleLettersFragment extends AbsBaseFragment implements VolleyResult {
-    private String url1;
+    private String urlletter;
     private ArticleLetterAdapter articleLetterAdapter;
     private ListView listView;
 
-    public static ArticleLettersFragment newInstance(String url1) {
+    public static ArticleLettersFragment newInstance(String urlletter) {
         Bundle args = new Bundle();
-        args.putString("url", url1);
+        args.putString("url", urlletter);
         ArticleLettersFragment fragment = new ArticleLettersFragment();
         fragment.setArguments(args);
         return fragment;
@@ -53,8 +53,8 @@ public class ArticleLettersFragment extends AbsBaseFragment implements VolleyRes
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
-        url1 = bundle.getString("url");
-        VolleyInstance.getInstance().startRequest(url1, this);
+        urlletter = bundle.getString("url");
+        VolleyInstance.getInstance().startRequest(urlletter, this);
     }
 
     @Override

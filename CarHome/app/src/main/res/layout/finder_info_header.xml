@@ -10,17 +10,17 @@
 
         <ImageView
             android:id="@+id/finder_info_back_img"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/height_middle_small"
+            android:layout_height="@dimen/height_middle_small"
             android:layout_centerVertical="true"
             android:background="@mipmap/back"
-            android:padding="5dp" />
+            android:padding="@dimen/margin_small" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/finder_info_back_img"
-            android:padding="5dp"
+            android:padding="@dimen/margin_small"
             android:text="返回" />
 
         <TextView
@@ -28,13 +28,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:padding="5dp" />
+            android:padding="@dimen/margin_small" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:padding="5dp"
+            android:padding="@dimen/margin_small"
             android:text="对比" />
 
     </RelativeLayout>
@@ -56,10 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:padding="10dp"
-            android:text="2222张"
+            android:padding="@dimen/margin_middle"
             android:textColor="#c0ffffff"
-            android:textSize="12sp" />
+            android:textSize="@dimen/textsize_big_small" />
     </RelativeLayout>
 
     <TextView
@@ -81,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="10sp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/margin_middle"
             android:text="厂商指导价:   " />
 
         <TextView
@@ -94,6 +93,10 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="@dimen/margin_small"
         android:background="#dedede"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/finder_info_recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

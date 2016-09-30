@@ -48,7 +48,7 @@ public class FinderDrawerGridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder ;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_finder_drawer,parent,false);
             viewHolder = new ViewHolder(convertView);

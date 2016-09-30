@@ -47,7 +47,7 @@ public class SlideBar extends View {
         }
         // 画字母
         for (int i = 0; i < letters.length; i++) {
-            paint.setColor(Color.BLACK);
+            paint.setColor(Color.BLUE);
             // 设置字体格式
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setAntiAlias(true);

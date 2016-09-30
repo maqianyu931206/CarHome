@@ -25,13 +25,13 @@ import java.util.List;
  * 推荐-说客
  */
 public class ArticleLobbyistFragment extends AbsBaseFragment implements VolleyResult {
-    private  String url3;
+    private  String urllobbyist;
     private ListView listView;
     private ArticleLobbyistAdapter articleLobbyistAdapter;
 
-    public static ArticleLobbyistFragment newInstance(String url3) {
+    public static ArticleLobbyistFragment newInstance(String urllobbyist) {
         Bundle args = new Bundle();
-        args.putString("url",url3);
+        args.putString("url",urllobbyist);
         ArticleLobbyistFragment fragment = new ArticleLobbyistFragment();
         fragment.setArguments(args);
         return fragment;
@@ -50,8 +50,8 @@ public class ArticleLobbyistFragment extends AbsBaseFragment implements VolleyRe
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
-        url3 = bundle.getString("url");
-        VolleyInstance.getInstance().startRequest(url3,this);
+        urllobbyist = bundle.getString("url");
+        VolleyInstance.getInstance().startRequest(urllobbyist,this);
         articleLobbyistAdapter  =new ArticleLobbyistAdapter(context);
         listView.setAdapter(articleLobbyistAdapter);
     }

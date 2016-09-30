@@ -21,8 +21,6 @@ import java.util.List;
 public class ListTypeAdapter extends BaseAdapter {
     private List<ListTypeBean.ResultBean.NewslistBean> datas;
     private Context context;
-    private static final int TYPR_ALL = 0;
-    private static final int TYPR_ONR_IMG = 1;
     private LayoutInflater inflater;
 
     public void setDatas(List<ListTypeBean.ResultBean.NewslistBean> datas) {
@@ -55,7 +53,7 @@ public class ListTypeAdapter extends BaseAdapter {
 //    pu
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder myViewHolder =null;
+        MyViewHolder myViewHolder;
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_one_img,parent,false);
             myViewHolder = new MyViewHolder(convertView);
@@ -67,7 +65,7 @@ public class ListTypeAdapter extends BaseAdapter {
         if (bean != null){
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getTime());
-            myViewHolder.numTv.setText(bean.getReplycount()+"人浏览");
+            myViewHolder.numTv.setText(bean.getReplycount()+context.getResources().getString(R.string.seenum));
             Glide.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
         }
         return convertView;

@@ -26,8 +26,6 @@ import java.util.List;
 public class SaleLvAdapter extends BaseAdapter {
     private List<SaleLikeBean.ResultBean.GoodslistBean.ListBean> datas;
     private Context context;
-    private static final int TYPR_ALL = 0;
-    private static final int TYPR_ONR_IMG = 1;
     private LayoutInflater inflater;
 
     public void setDatas(List<SaleLikeBean.ResultBean.GoodslistBean.ListBean> datas) {
@@ -60,7 +58,7 @@ public class SaleLvAdapter extends BaseAdapter {
 //    pu
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder myViewHolder =null;
+        MyViewHolder myViewHolder;
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_sale_lv,parent,false);
             myViewHolder = new MyViewHolder(convertView);
@@ -74,7 +72,7 @@ public class SaleLvAdapter extends BaseAdapter {
             myViewHolder.priceTv.setText(bean.getPrice());
             SpannableString string = new SpannableString(datas.get(position).getFctprice());
             string.setSpan(new StrikethroughSpan(),0,datas.get(position).getFctprice().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-            myViewHolder.priceTv2.setText(string);
+            myViewHolder.priceTvlong.setText(string);
             myViewHolder.contentTv.setText(bean.getAdinfo());
             Glide.with(context).load(bean.getLogo()).into(myViewHolder.img);
         }
@@ -82,14 +80,14 @@ public class SaleLvAdapter extends BaseAdapter {
     }
     // 缓存类
     class MyViewHolder{
-        TextView titleTv,contentTv,priceTv,priceTv2;
+        TextView titleTv,contentTv,priceTv,priceTvlong;
         ImageView img;
         public MyViewHolder(View view){
             super();
             titleTv = (TextView) view.findViewById(R.id.item_sale_tilte_tv);
             contentTv = (TextView) view.findViewById(R.id.item_sale_content_tv);
             priceTv = (TextView) view.findViewById(R.id.item_sale_price_tv);
-            priceTv2 = (TextView) view.findViewById(R.id.item_sale_price2_tv);
+            priceTvlong = (TextView) view.findViewById(R.id.item_sale_price2_tv);
             img = (ImageView) view.findViewById(R.id.item_sale_img);
 
         }

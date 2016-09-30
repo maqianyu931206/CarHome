@@ -52,16 +52,19 @@ public class FinderInfoAdapter extends BaseAdapter{
         }else {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
-            myViewHolder.tv.setText(datas.get(position).getName());
-            myViewHolder.tv2.setText(datas.get(position).getPrice() + "");
+            myViewHolder.titletv.setText(datas.get(position).getName());
+            myViewHolder.pricetv.setText(datas.get(position).getPrice() + "");
+            myViewHolder.priceTv.setText(datas.get(position).getMinprice() + "");
         return convertView;
+
     }
 
     class MyViewHolder{
-        private TextView tv,tv2;
+        private TextView titletv,pricetv,priceTv;
         public  MyViewHolder(View view){
-            tv = (TextView) view.findViewById(R.id.item_finder_title_tv);
-            tv2 = (TextView) view.findViewById(R.id.item_finder_info_price_tv);
+            titletv = (TextView) view.findViewById(R.id.item_finder_title_tv);
+            pricetv = (TextView) view.findViewById(R.id.item_finder_info_price_tv);
+            priceTv = (TextView) view.findViewById(R.id.item_finder_info_price_tv2);
         }
     }
 
