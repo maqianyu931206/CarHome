@@ -62,7 +62,6 @@ public class FinderInfoActivity extends AbsBaseActivity {
     @Override
     protected void initDatas() {
         final Intent intent = getIntent();
-        Log.d("fff", NetUrl.FINDER_INFO_START + intent.getStringExtra("id") + NetUrl.FINDER_INFO_END);
         VolleyInstance.getInstance().startRequest(NetUrl.FINDER_INFO_START + intent.getStringExtra("id") + NetUrl.FINDER_INFO_END, new VolleyResult() {
             @Override
             public void success(String resultStr) {

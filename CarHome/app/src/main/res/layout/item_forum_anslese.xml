@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@id/item_forum_bbsName_tv"
            android:text="sdafasdf"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:padding="5dp" />
     </RelativeLayout>
 </LinearLayout>

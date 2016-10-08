@@ -2,6 +2,8 @@ package com.maqianyu.carhome.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ public class FinderInfoRVAdapter extends RecyclerView.Adapter<FinderInfoRVAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tabtitlt.setText(datas.get(position).getTabtitle());
-        holder.tabsubtitle.setText(datas.get(position).getTabsubtitle());
+        holder.tabsubtitle.setText(Html.fromHtml(datas.get(position).getTabsubtitle()));
 
     }
 

@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/9.
- * 推荐-新闻
+ * 推荐-最新
  */
 public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult, ReFlashListView.IReflashListener {
     private static final int TIME = 3000;

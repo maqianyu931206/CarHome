@@ -1,6 +1,7 @@
 package com.maqianyu.carhome.ui.fragment.findercar;
 
 import android.graphics.Color;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,11 +11,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -29,7 +30,6 @@ import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.ForumIntance;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
 import com.maqianyu.carhome.view.SlideBar;
-
 import java.util.List;
 
 /**
@@ -110,25 +110,36 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 float_letter.setText(s);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        float_letter.setVisibility(View.GONE);
+                        float_letter.setVisibility(View.VISIBLE);
                         break;
                     case MotionEvent.ACTION_MOVE:
                         float_letter.setVisibility(View.VISIBLE);
                         break;
                     case MotionEvent.ACTION_UP:
+                        float_letter.setVisibility(View.GONE);
                     default:
                         float_letter.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                float_letter.setVisibility(View.VISIBLE);
+                                float_letter.setVisibility(View.GONE);
                             }
-                        }, 100);
+                        }, 200);
                         break;
                 }
-                int position = finderBrandCarNameLvAdapter.indexOf(s);//这个array就是传给自定义Adapter的
-                int position2 = position + 1;
-                listViewLongName.smoothScrollToPositionFromTop(position2, 0);//调用ListView的setSelection()方法就可实现了
-                finderBrandCarNameLvAdapter.notifyDataSetChanged();
+                final int position = finderBrandCarNameLvAdapter.indexOf(s);
+                final int position2 = position + 1;
+                Log.d("zzz", "position2:" + position2);
+                listViewLongName.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        listViewLongName.setSelection(position);
+//                        RectF
+//                        listViewLongName.setSelectionFromTop();
+                        listViewLongName.smoothScrollToPositionFromTop(position2, 0);
+                    }
+                });
+//                listViewLongName.smoothScrollToPositionFromTop(position2, 0);
+//                finderBrandCarNameLvAdapter.notifyDataSetChanged();
             }
         });
     }

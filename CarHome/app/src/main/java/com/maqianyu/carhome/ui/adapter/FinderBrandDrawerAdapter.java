@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/9/19.
- * 抽屉的lisview 适配器
+ * 抽屉的listView 适配器
  */
 public class FinderBrandDrawerAdapter extends BaseAdapter {
 

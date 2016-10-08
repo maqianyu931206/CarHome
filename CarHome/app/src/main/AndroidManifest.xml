@@ -13,11 +13,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.app.MyApp"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,9 +33,10 @@
         <activity android:name=".ui.activity.LunBoInfoActivity" />
         <activity android:name=".ui.activity.WelcomeActivity" />
         <activity android:name=".ui.activity.SaveActivity" />
-        <activity android:name=".ui.activity.LoginActivity"/>
-        <activity android:name=".ui.activity.FinderInfoActivity"/>
-        <activity android:name=".ui.activity.FinderPhotoActivity"/>
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.FinderInfoActivity" />
+        <activity android:name=".ui.activity.FinderPhotoActivity" />
+        <activity android:name=".ui.activity.MySetActivity"/>
     </application>
 
 </manifest>
