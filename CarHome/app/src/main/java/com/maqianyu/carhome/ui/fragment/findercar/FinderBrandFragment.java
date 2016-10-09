@@ -1,5 +1,6 @@
 package com.maqianyu.carhome.ui.fragment.findercar;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -23,6 +25,7 @@ import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.FinderBrandCarNameBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandDrawerBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
+import com.maqianyu.carhome.ui.activity.SaveActivity;
 import com.maqianyu.carhome.ui.adapter.FinderBrandCarNameLvAdapter;
 import com.maqianyu.carhome.ui.adapter.FinderBrandDrawerAdapter;
 import com.maqianyu.carhome.ui.adapter.FinderBrandRvAdapter;
@@ -31,6 +34,7 @@ import com.maqianyu.carhome.ui.inteface.ForumIntance;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
 import com.maqianyu.carhome.view.SlideBar;
 import java.util.List;
+import java.util.logging.Handler;
 
 /**
  * Created by dllo on 16/9/10.
@@ -53,6 +57,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
     private String url11;
     private SlideBar slideBar;
     private TextView float_letter;
+    private ImageView imageViewsave;
 
     public static FinderBrandFragment newInstance(String url) {
         Bundle args = new Bundle();
@@ -92,6 +97,14 @@ public class FinderBrandFragment extends AbsBaseFragment {
         // 热门品牌.recyclerView的加载 ,加载头布局
         View view = LayoutInflater.from(context).inflate(R.layout.finder_header_rv, null);
         recyclerView = (RecyclerView) view.findViewById(R.id.finder_brand_recyclerView);
+        imageViewsave = (ImageView) view.findViewById(R.id.img1);
+        imageViewsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, SaveActivity.class);
+                startActivity(intent);
+            }
+        });
         finderBrandRvAdapter = new FinderBrandRvAdapter(context);
         hotbread();// 热门品牌
         listViewLongName.addHeaderView(view);
@@ -128,18 +141,7 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 }
                 final int position = finderBrandCarNameLvAdapter.indexOf(s);
                 final int position2 = position + 1;
-                Log.d("zzz", "position2:" + position2);
-                listViewLongName.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        listViewLongName.setSelection(position);
-//                        RectF
-//                        listViewLongName.setSelectionFromTop();
-                        listViewLongName.smoothScrollToPositionFromTop(position2, 0);
-                    }
-                });
-//                listViewLongName.smoothScrollToPositionFromTop(position2, 0);
-//                finderBrandCarNameLvAdapter.notifyDataSetChanged();
+                listViewLongName.smoothScrollToPositionFromTop(position2, 0);
             }
         });
     }

@@ -1,11 +1,6 @@
 package com.maqianyu.carhome.ui.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,11 +8,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.maqianyu.carhome.R;
-import com.maqianyu.carhome.model.db.SQHelper;
+import com.maqianyu.carhome.model.db.LiteOrmInstance;
 import com.maqianyu.carhome.model.net.NetUrl;
-import com.maqianyu.carhome.ui.inteface.VolleyResult;
+import com.maqianyu.carhome.ui.Bean.LiteOrmBean;
 
 /**
  * Created by dllo on 16/9/13.
@@ -27,11 +23,9 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
 
     private WebView webView;
     private ImageView imageView;
-    private String middleurl;
-    private  ImageView imageViewsave;
-    private SQLiteDatabase sqLiteDatabase;
-    private SQHelper sqHelper;
-    private boolean is =false;
+    private String middleurl,title,img,price;
+    private ImageView imageViewsave;
+    private boolean a = false;
 
     @Override
     protected int setLayout() {
@@ -44,16 +38,21 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
         imageView = byView(R.id.include_back_img2);
         imageViewsave = byView(R.id.save);
     }
+
     @Override
     protected void initDatas() {
         final Intent intent = getIntent();
         middleurl = intent.getStringExtra("id");
+        title = intent.getStringExtra("title");
+        img = intent.getStringExtra("img");
+        price = intent.getStringExtra("price");
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
+
             @Override
             public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
                 return super.shouldOverrideKeyEvent(view, event);
@@ -73,28 +72,31 @@ public class ArticleNewInfoActivity extends AbsBaseActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                finish();
             }
         });
         imageViewsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentValues cv = new ContentValues();
-                cv.put("name",intent.getStringExtra("title"));
-                cv.put("name2",intent.getStringExtra("price"));
-                sqHelper = new SQHelper(ArticleNewInfoActivity.this,"carhome.dp",null,1);
-                sqLiteDatabase = sqHelper.getReadableDatabase();
-                sqLiteDatabase.insert("carHome",null,cv);
-                cv.clear();
-                if (is = false) {
+                if (a == false) {
+                    LiteOrmBean liteOrmBean = new LiteOrmBean(title, price, img);
+                    LiteOrmInstance.getIntance().insertOne(liteOrmBean);
                     imageViewsave.setImageResource(R.mipmap.save2);
-                    is =true;
-                }else {
+                    Toast.makeText(ArticleNewInfoActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    a = true;
+                } else {
+                    LiteOrmInstance.getIntance().deleteOne(title);
                     imageViewsave.setImageResource(R.mipmap.save);
-                    is =false;
+                    Toast.makeText(ArticleNewInfoActivity.this, "取消收藏", Toast.LENGTH_SHORT).show();
+                    a = false;
                 }
+
             }
         });
+        if (LiteOrmInstance.getIntance().queryOne(title).size() > 0){
+            imageViewsave.setImageResource(R.mipmap.save2);
+            a = true;
+        }
 
     }
 }
