@@ -1,6 +1,8 @@
 package com.maqianyu.carhome.ui.fragment.findercar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.FinderBrandCarNameBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandDrawerBean;
 import com.maqianyu.carhome.ui.Bean.FinderBrandHotBean;
+import com.maqianyu.carhome.ui.activity.LoginActivity;
 import com.maqianyu.carhome.ui.activity.SaveActivity;
 import com.maqianyu.carhome.ui.adapter.FinderBrandCarNameLvAdapter;
 import com.maqianyu.carhome.ui.adapter.FinderBrandDrawerAdapter;
@@ -101,8 +104,16 @@ public class FinderBrandFragment extends AbsBaseFragment {
         imageViewsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(context, SaveActivity.class);
-                startActivity(intent);
+                SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+                String s = sharedPreferences.getString("name","默认");
+                if (!s.isEmpty()) {
+                    Intent intent = new Intent(context, SaveActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    startActivityForResult(intent,100);
+
+                }
             }
         });
         finderBrandRvAdapter = new FinderBrandRvAdapter(context);

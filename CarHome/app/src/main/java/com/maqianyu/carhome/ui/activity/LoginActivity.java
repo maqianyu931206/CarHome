@@ -55,6 +55,7 @@ public class LoginActivity extends AbsBaseActivity {
                 editor.putString("password",stpassword);
                 editor.commit();
 
+
                 Intent intent = new Intent();
                 setResult(200,intent);
                 SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
@@ -63,9 +64,11 @@ public class LoginActivity extends AbsBaseActivity {
                 finish();
             }
         });
-
-
-
+        SharedPreferences sp = getSharedPreferences("login",MODE_PRIVATE);
+        String ss = sp.getString("name","默认");
+        editText.setText(ss);
 
     }
+
+
 }

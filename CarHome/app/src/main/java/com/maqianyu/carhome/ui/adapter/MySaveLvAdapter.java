@@ -45,7 +45,7 @@ public class MySaveLvAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder myViewHolder =null;
+        MyViewHolder myViewHolder ;
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_my_save,parent,false);
             myViewHolder = new MyViewHolder(convertView);
@@ -60,7 +60,7 @@ public class MySaveLvAdapter extends BaseAdapter {
             if (!bean.getImgUrl().isEmpty()) {
                 Picasso.with(context).load(bean.getImgUrl()).into(myViewHolder.img);
             }else {
-                myViewHolder.img.setImageResource(R.mipmap.zhanghao);
+                myViewHolder.img.setImageResource(R.mipmap.csrhome);
             }
         }
         return convertView;
@@ -76,6 +76,10 @@ public class MySaveLvAdapter extends BaseAdapter {
             img = (ImageView) view.findViewById(R.id.item_my_save_img);
 
         }
+    }
+    public void remove(LiteOrmBean liteOrmBean){
+        datas.remove(liteOrmBean);
+        notifyDataSetChanged();
     }
 
 }

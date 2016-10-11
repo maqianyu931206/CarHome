@@ -20,9 +20,7 @@ public class SlideBar extends View {
     // 选中的项
     private int choose = -1;
     // 准备好的A~Z的字母数组
-    public static String[] letters = { "#", "A", "B", "C", "D", "F", "G",
-            "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
-            "U", "V", "W", "X", "Y", "Z" };
+    public static String[] letters = { "#", "A", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z" };
 
     // 构造方法
     public SlideBar(Context context) {
