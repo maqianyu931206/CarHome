@@ -1,5 +1,6 @@
 package com.maqianyu.carhome.ui.fragment.findercar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -109,9 +110,11 @@ public class FinderBrandFragment extends AbsBaseFragment {
                 if (!s.isEmpty()) {
                     Intent intent = new Intent(context, SaveActivity.class);
                     startActivity(intent);
+                    ((Activity)context).overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
                 }else {
                     Intent intent = new Intent(context, LoginActivity.class);
                     startActivityForResult(intent,100);
+                    ((Activity)context).overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
 
                 }
             }

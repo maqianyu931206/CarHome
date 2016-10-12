@@ -7,7 +7,9 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.maqianyu.carhome.R;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -30,7 +32,7 @@ public class WelcomeActivity extends AbsBaseActivity {
 
     @Override
     protected void initViews() {
-        welcomeImg  =byView(R.id.welcome_img);
+        welcomeImg = byView(R.id.welcome_img);
         welcomeTimeTv = byView(R.id.welcome_time_tv);
         welcomeTv = byView(R.id.welcome_tv);
 
@@ -38,30 +40,34 @@ public class WelcomeActivity extends AbsBaseActivity {
 
     @Override
     protected void initDatas() {
-        new ImageTask().execute("http://desk.fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/0F/02/ChMkJlfIAnuIMoqdAAY6fwamaIQAAU5ygEHsOgABjqX331.jpg");
-        MyTask myTask =new MyTask();
+        new ImageTask().execute("http://www.appjzy.com/UploadFiles/Images/AppCutPic/Android/2014/09/68096700.jpg");
+        final MyTask myTask = new MyTask();
         myTask.execute(0);
 
         welcomeTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=  new Intent(WelcomeActivity.this,MainActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
+                myTask.cancel(true);
+                finish();
             }
         });
     }
-    public class  ImageTask extends AsyncTask<String ,Integer,Bitmap>{
+
+    public class ImageTask extends AsyncTask<String, Integer, Bitmap> {
 
         @Override
         protected Bitmap doInBackground(String... params) {
-        String imgurl = params[0];
-            HttpURLConnection connection= null;
+            String imgurl = params[0];
+            HttpURLConnection connection = null;
             InputStream is = null;
             Bitmap bitmap = null;
             try {
                 URL url = new URL(imgurl);
-                connection= (HttpURLConnection) url.openConnection();
-                if (connection.getResponseCode() == 200){
+                connection = (HttpURLConnection) url.openConnection();
+                if (connection.getResponseCode() == 200) {
                     is = connection.getInputStream();
                     bitmap = BitmapFactory.decodeStream(is);
                 }
@@ -69,22 +75,17 @@ public class WelcomeActivity extends AbsBaseActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }finally {
-                if (is != null){
+            } finally {
+                if (is != null) {
                     try {
                         is.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                if (connection != null){
+                if (connection != null) {
                     connection.disconnect();
                 }
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
             return bitmap;
         }
@@ -94,13 +95,14 @@ public class WelcomeActivity extends AbsBaseActivity {
             welcomeImg.setImageBitmap(bitmap);
         }
     }
-    public class MyTask extends AsyncTask<Integer,Integer,String>{
+
+    public class MyTask extends AsyncTask<Integer, Integer, String> {
 
         @Override
         protected String doInBackground(Integer... params) {
             int all = params[0];
             int now = 5;
-            while (now > all){
+            while (now > all) {
                 publishProgress(now);
                 now--;
                 try {
@@ -115,7 +117,7 @@ public class WelcomeActivity extends AbsBaseActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            welcomeTimeTv.setText(values[0]+ "");
+            welcomeTimeTv.setText(values[0] + "");
         }
 
         @Override
@@ -124,6 +126,7 @@ public class WelcomeActivity extends AbsBaseActivity {
             welcomeTimeTv.setText(s);
             Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
             finish();
         }
     }

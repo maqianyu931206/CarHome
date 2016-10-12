@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -22,6 +23,7 @@ import com.maqianyu.carhome.ui.adapter.RotateArticleAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
 import com.maqianyu.carhome.view.ReFlashListView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,9 +97,10 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
                 Intent intent = new Intent(context, ArticleNewInfoActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("id", middle);
-                intent.putExtra("price",bean.getTime());
-                intent.putExtra("img",bean.getSmallpic());
+                intent.putExtra("price", bean.getTime());
+                intent.putExtra("img", bean.getSmallpic());
                 startActivity(intent);
+
             }
         });
     }

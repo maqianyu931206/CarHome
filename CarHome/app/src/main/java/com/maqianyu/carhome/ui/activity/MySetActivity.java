@@ -1,9 +1,14 @@
 package com.maqianyu.carhome.ui.activity;
 
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.utils.DataCleanManger;
@@ -11,7 +16,8 @@ import com.maqianyu.carhome.utils.DataCleanManger;
 public class MySetActivity extends AbsBaseActivity {
 
     private ImageView backimg;
-    private TextView textViewcache,deltecache;
+    private TextView textViewcache,deltecache,update;
+    private AlertDialog dialog;
 
     @Override
     protected int setLayout() {
@@ -23,6 +29,7 @@ public class MySetActivity extends AbsBaseActivity {
         backimg = byView(R.id.my_set_back);
         textViewcache=byView(R.id.cache_tv);
         deltecache = byView(R.id.delete_cache);
+        update = byView(R.id.update);
     }
 
     @Override
@@ -52,5 +59,22 @@ public class MySetActivity extends AbsBaseActivity {
             }
         });
 
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MySetActivity.this);
+                View view = getLayoutInflater().inflate(R.layout.update,null);
+                builder.setView(view);
+                dialog = builder.create();
+                dialog.show();
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        Toast.makeText(MySetActivity.this, "请等待下次更新", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.show();
+            }
+        });
     }
 }

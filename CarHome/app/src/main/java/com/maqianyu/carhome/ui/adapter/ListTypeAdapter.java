@@ -50,7 +50,7 @@ public class ListTypeAdapter extends BaseAdapter {
 
     // 根据position位置获取数据的集合
     // 返回行布局的类型
-//    pu
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MyViewHolder myViewHolder;
@@ -66,7 +66,12 @@ public class ListTypeAdapter extends BaseAdapter {
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getTime());
             myViewHolder.numTv.setText(bean.getReplycount()+context.getResources().getString(R.string.seenum));
-            Glide.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
+            if (bean.getSmallpic() != "") {
+                Glide.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
+            }else
+            {
+                myViewHolder.img.setImageResource(R.mipmap.csrhome);
+            }
         }
         return convertView;
     }

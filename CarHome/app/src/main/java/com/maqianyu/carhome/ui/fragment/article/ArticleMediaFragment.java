@@ -5,17 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.VolleyInstance;
 import com.maqianyu.carhome.ui.Bean.ArticleMediaBean;
 import com.maqianyu.carhome.ui.activity.ArticleMediaActivity;
-import com.maqianyu.carhome.ui.activity.ForumForumActivity;
 import com.maqianyu.carhome.ui.adapter.ArticleMediaAdapter;
 import com.maqianyu.carhome.ui.fragment.AbsBaseFragment;
 import com.maqianyu.carhome.ui.inteface.VolleyResult;
-
 import java.util.List;
 
 /**
@@ -68,6 +65,7 @@ public class ArticleMediaFragment extends AbsBaseFragment implements VolleyResul
                 String strid = bean.getResult().getList().get(position).getId() + "";
                 intent.putExtra("id",strid);
                 startActivity(intent);
+
             }
         });
     }

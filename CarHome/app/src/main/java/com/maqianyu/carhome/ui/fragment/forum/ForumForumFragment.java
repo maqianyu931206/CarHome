@@ -1,5 +1,6 @@
 package com.maqianyu.carhome.ui.fragment.forum;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,6 +70,7 @@ public class ForumForumFragment extends AbsBaseFragment implements VolleyResult 
                 String strid = bean.getResult().getList().get(position).getTopicid() + "";
                 intent.putExtra("id",strid);
                 startActivity(intent);
+                ((Activity)context).overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
 
             }
         });

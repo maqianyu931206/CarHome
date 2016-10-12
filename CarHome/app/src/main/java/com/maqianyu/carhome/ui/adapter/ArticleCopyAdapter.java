@@ -52,16 +52,7 @@ public class ArticleCopyAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         MyViewHolder myViewHolder =null;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_copy,parent,false);
-            // 加载完行布局设置其高度
-            // 方法1:设置其最小高度
-            // 方法2:通过布局参数修改参数
-            int height = ScressSizeUtil.getScreenSize(context,1);
-            int width = ScressSizeUtil.getScreenSize(context,2);
-            ViewGroup.LayoutParams params = convertView.getLayoutParams();
-            params.width = width;
-            params.height = height / 5;
-            convertView.setLayoutParams(params);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_media,parent,false);
             myViewHolder = new MyViewHolder(convertView);
             convertView.setTag(myViewHolder);
         }else {
@@ -72,7 +63,7 @@ public class ArticleCopyAdapter extends BaseAdapter {
             myViewHolder.titleTv.setText(bean.getTitle());
             myViewHolder.dateTv.setText(bean.getTime());
             myViewHolder.numTv.setText(bean.getReplycount()+context.getResources().getString(R.string.seenum));
-            Glide.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
+            Picasso.with(context).load(bean.getSmallpic()).into(myViewHolder.img);
         }
         return convertView;
     }

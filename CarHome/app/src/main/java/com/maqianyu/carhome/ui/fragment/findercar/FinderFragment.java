@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -61,5 +62,14 @@ public class FinderFragment extends AbsBaseFragment {
         tabLayout.setSelectedTabIndicatorColor(Color.BLUE);
         tabLayout.setSelectedTabIndicatorHeight(5);
 
+        viewPager.setPageTransformer(true, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View view, float position) {
+                if (position >= -1 && position <= 1) {
+                    view.setPivotX(position < 0 ? view.getWidth() : 0);
+                    view.setRotationY(90 * position);
+                }
+            }
+        });
     }
 }

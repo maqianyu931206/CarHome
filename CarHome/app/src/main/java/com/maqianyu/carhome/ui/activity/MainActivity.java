@@ -1,13 +1,11 @@
 package com.maqianyu.carhome.ui.activity;
 
-import android.os.Handler;
+import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.ui.fragment.article.ArticleFragment;
 import com.maqianyu.carhome.ui.fragment.findercar.FinderFragment;
@@ -78,7 +76,7 @@ public class MainActivity extends AbsBaseActivity {
 
     public void exit() {
         if ((System.currentTimeMillis() - exitTime) > 2000) {
-            T.shortMag("再按一次退出礼物说");
+            T.shortMag("再按一次退出汽车之家");
             exitTime = System.currentTimeMillis();
         } else {
             finish();

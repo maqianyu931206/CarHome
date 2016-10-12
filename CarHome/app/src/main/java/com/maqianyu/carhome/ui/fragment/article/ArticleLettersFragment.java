@@ -1,5 +1,6 @@
 package com.maqianyu.carhome.ui.fragment.article;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -72,6 +73,7 @@ public class ArticleLettersFragment extends AbsBaseFragment implements VolleyRes
                 intent.putExtra("title", title);
                 intent.putExtra("id", bean.getId() + "");
                 startActivity(intent);
+                ((Activity)context).overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
             }
         });
 

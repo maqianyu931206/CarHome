@@ -1,5 +1,6 @@
 package com.maqianyu.carhome.ui.fragment.my;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -69,6 +70,7 @@ public class MyFragment extends AbsBaseFragment {
                 if (!s.isEmpty()) {
                     Intent intent = new Intent(context, SaveActivity.class);
                     startActivity(intent);
+
                 } else {
                     Intent intent = new Intent(context, LoginActivity.class);
                     startActivityForResult(intent, 100);
@@ -81,6 +83,8 @@ public class MyFragment extends AbsBaseFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(context, LoginActivity.class);
                 startActivityForResult(intent, 100);
+                ((Activity)context).overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
+
             }
         });
 
@@ -89,6 +93,7 @@ public class MyFragment extends AbsBaseFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(context, MySetActivity.class);
                 context.startActivity(intent);
+
             }
         });
         imgqqlogin.setOnClickListener(new View.OnClickListener() {
