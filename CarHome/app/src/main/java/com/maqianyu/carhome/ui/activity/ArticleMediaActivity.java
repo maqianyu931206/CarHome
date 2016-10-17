@@ -18,6 +18,8 @@ import com.maqianyu.carhome.model.net.NetUrl;
 public class ArticleMediaActivity extends AbsBaseActivity {
     private WebView webView;
     private ImageView imageView;
+
+
     @Override
     protected int setLayout() {
         return R.layout.activity_forum_anlsese;

@@ -16,6 +16,7 @@ import android.widget.Scroller;
 
 /**
  * Created by dllo on 16/10/10.
+ * 侧滑删除的ListView
  */
 public class DeleteListView extends ListView {
     /**

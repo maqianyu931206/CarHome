@@ -64,8 +64,8 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
 
     @Override
     protected void initData() {
-        Bundle bundel = getArguments();
-        urlnew = bundel.getString("url");
+        Bundle bundle = getArguments();
+        urlnew = bundle.getString("url");
         //获取网络数据
         VolleyInstance.getInstance().startRequest(urlnew, this);
         listTypeAdapter = new ListTypeAdapter(context);
@@ -160,7 +160,6 @@ public class ArticleNewFragment extends AbsBaseFragment implements VolleyResult,
                     iv.setImageResource(R.mipmap.point_grey);
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
             }

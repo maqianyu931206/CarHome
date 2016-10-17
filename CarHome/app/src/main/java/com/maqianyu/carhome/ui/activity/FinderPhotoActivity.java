@@ -19,7 +19,6 @@ import com.maqianyu.carhome.ui.inteface.VolleyResult;
  */
 public class FinderPhotoActivity extends AbsBaseActivity {
 
-
     private Button btn, btn2;
     private WebView webview;
     private String id,id2;

@@ -5,6 +5,7 @@ package com.maqianyu.carhome.model.net;
  * Created by dllo on 16/9/14.
  */
 public class NetUrl {
+    public static final String WELCOME ="http://a1.qpic.cn/psb?/30d800fa-f7cd-4ae7-9937-b40726bbec2c/OBm3vc2ttKLBwcBTzN986xu3ECwuSAqDcmudbz9IjCo!/b/dHwBAAAAAAAA&bo=gALiAwAAAAADB0E!&rf=viewer_4";
     /**
      * 推荐界面
      */

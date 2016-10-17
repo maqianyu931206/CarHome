@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maqianyu.carhome.R;
+import com.maqianyu.carhome.model.net.NetUrl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,18 +41,16 @@ public class WelcomeActivity extends AbsBaseActivity {
 
     @Override
     protected void initDatas() {
-        new ImageTask().execute("http://www.appjzy.com/UploadFiles/Images/AppCutPic/Android/2014/09/68096700.jpg");
+        new ImageTask().execute(NetUrl.WELCOME);
         final MyTask myTask = new MyTask();
         myTask.execute(0);
 
         welcomeTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
-                myTask.cancel(true);
+                goTo(WelcomeActivity.this, MainActivity.class);
                 finish();
+                myTask.cancel(true);
             }
         });
     }
@@ -123,10 +122,7 @@ public class WelcomeActivity extends AbsBaseActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            welcomeTimeTv.setText(s);
-            Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.msg_anim_translate_in, R.anim.msg_anim_translate_out);
+            goTo(WelcomeActivity.this, MainActivity.class);
             finish();
         }
     }

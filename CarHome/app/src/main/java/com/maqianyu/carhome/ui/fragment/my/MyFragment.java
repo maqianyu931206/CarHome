@@ -68,8 +68,7 @@ public class MyFragment extends AbsBaseFragment {
                 SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
                 String s = sharedPreferences.getString("name", "默认");
                 if (!s.isEmpty()) {
-                    Intent intent = new Intent(context, SaveActivity.class);
-                    startActivity(intent);
+                    goTo(SaveActivity.class);
 
                 } else {
                     Intent intent = new Intent(context, LoginActivity.class);
@@ -91,9 +90,7 @@ public class MyFragment extends AbsBaseFragment {
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MySetActivity.class);
-                context.startActivity(intent);
-
+                goTo(MySetActivity.class);
             }
         });
         imgqqlogin.setOnClickListener(new View.OnClickListener() {

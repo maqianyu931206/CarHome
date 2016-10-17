@@ -1,19 +1,12 @@
 package com.maqianyu.carhome.ui.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.maqianyu.carhome.R;
 import com.maqianyu.carhome.model.net.NetUrl;
@@ -59,14 +52,12 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
         middle = intent.getStringExtra("id");
         String url = NetUrl.ARTICLE_LETTER_INFO_START+ middle +NetUrl.ARTICLE_LETTER_INFO_END;
         VolleyInstance.getInstance().startRequest(url,this);
-        Log.d("ArticleLetterInfoActivi", url);
         articleLetterInfoAdapter = new ArticleLetterInfoAdapter(this);
         listView.setAdapter(articleLetterInfoAdapter);
     }
     @Override
     public void success(String resultStr) {
         Gson gson = new Gson();
-        Log.d("ggg", resultStr);
         ArticleLetterInfoBean articleLetterInfoBean = gson.fromJson(resultStr,ArticleLetterInfoBean.class);
         List<ArticleLetterInfoBean.ResultBean.MessagelistBean> datas = articleLetterInfoBean.getResult().getMessagelist();
         ArticleLetterInfoBean.ResultBean newsdataBean = articleLetterInfoBean.getResult();
@@ -89,6 +80,6 @@ public class ArticleLetterInfoActivity extends AbsBaseActivity implements Volley
 
     @Override
     public void failure() {
-        Toast.makeText(this, "sss", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show();
     }
 }
